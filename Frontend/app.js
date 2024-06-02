@@ -154,6 +154,7 @@ function showProducts(categoryName) {
                 <p>${item.description}</p>
                 <p class="text-lg font-bold">$${item.price}</p>
             </div>
+            <button class="btn btn-primary" onclick="addItemToCart('${item.name}')">Add to Cart</button>
         `;
     productList.appendChild(productCard);
   });
@@ -177,6 +178,54 @@ function showRegister() {
 
 function searchItems(query) {
   alert("Search functionality to be implemented.");
+}
+
+let cart = [];
+
+function addToCart(categoryName, productName) {
+  const category = categories.find((cat) => cat.name === categoryName);
+  const product = category.items.find((item) => item.name === productName);
+
+  cart.push(product);
+  updateCart();
+  closeProductModal();
+  renderCart();
+}
+
+function removeFromCart(productName) {
+  const index = cart.findIndex((item) => item.name === productName);
+  if (index !== -1) {
+    cart.splice(index, 1);
+    updateCart();
+    renderCart();
+  }
+}
+
+function toggleCart() {
+  const cartOverlay = document.getElementById("cartOverlay");
+  cartOverlay.classList.toggle("hidden");
+}
+
+function renderCart() {
+  const cartList = document.getElementById("cartList");
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartList.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item) => {
+    total += item.price;
+    const cartItem = document.createElement("div");
+    cartItem.className = "flex justify-between items-center mb-2 text-white";
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>$${item.price}</span>
+      <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button>
+    `;
+    cartList.appendChild(cartItem);
+  });
+
+  cartTotal.textContent = total.toFixed(2);
 }
 
 // Initialisierung

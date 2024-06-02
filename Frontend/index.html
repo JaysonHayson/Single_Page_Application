@@ -19,6 +19,7 @@
 
     <body class="bg-gray-900 text-white">
       <!-- Navigation Bar -->
+
       <div class="navbar bg-base-300 mb-4">
         <div class="flex-1 px-2 lg:flex:none">
           <a class="text-lg font-bold">OTTO</a>
@@ -29,15 +30,19 @@
             <a class="btn btn-ghost rounded-btn" onclick="showRegister()"
               >Register</a
             >
+            <button class="btn btn-secondary ml-auto" onclick="toggleCart()">
+              Cart
+            </button>
+
             <div class="dropdown dropdown-end">
               <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">
                 Menu
               </div>
+
               <ul
                 tabindex="0"
                 class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
               >
-                <li><a href="#">Main Page</a></li>
                 <li>
                   <input
                     type="text"
@@ -52,13 +57,37 @@
         </div>
       </div>
 
+      <div
+        id="cartOverlay"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
+      >
+        <div
+          class="max-w-md mx-auto p-4 bg-gray-900 rounded shadow-lg absolute inset-0 m-auto"
+        >
+          <h2 class="text-xl font-bold mb-4 text-white">Shopping Cart</h2>
+          <div id="cartList" class="mb-4"></div>
+          <p class="text-lg font-bold text-white">
+            Total: $<span id="cartTotal">0.00</span>
+          </p>
+          <button class="btn btn-primary mt-4" onclick="checkout()">
+            Checkout
+          </button>
+          <button class="btn btn-secondary mt-4 ml-2" onclick="toggleCart()">
+            Close
+          </button>
+        </div>
+      </div>
+
       <div class="container mx-auto p-4 grid place-items-center gap-x-40">
-        <!-- Category List -->
+        <!-- Category Liste -->
+
         <div
           id="categoryList"
           class="sm: mx-auto grid grid-cols-1 md:mx-auto grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
         ></div>
+
         <!-- Product Details -->
+
         <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
           <div id="productDetails" class="hidden lg:w-full">
             <button
