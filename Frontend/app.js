@@ -258,4 +258,7 @@ function renderCart() {
   console.log("Cart:", cart);
 }
 
+function updateCart() {}
+
+// Initialize
 renderCategories();
