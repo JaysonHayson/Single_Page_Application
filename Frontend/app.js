@@ -258,9 +258,4 @@ function renderCart() {
   console.log("Cart:", cart);
 }
 
-function updateCart() {
-  // This function can be used to update the cart state or UI as needed
-}
-
-// Initialize
 renderCategories();
