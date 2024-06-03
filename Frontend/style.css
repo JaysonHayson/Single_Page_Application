@@ -2,3 +2,13 @@ body {
   background-color: #1a202c;
   color: #edf2f7;
 }
+
+.hover-effect {
+  border-radius: 16px;
+}
+
+.hover-effect:hover {
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3),
+    0 6px 6px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}

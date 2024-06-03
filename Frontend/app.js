@@ -119,19 +119,22 @@ function createElement(tag, className, innerHTML) {
 function createCategoryCard(category) {
   const categoryCard = createElement("div", "card-container h-96");
   const imageSrc = category.foto;
+  const categoryLink = `javascript:showProducts('${category.name}')`;
 
   categoryCard.innerHTML = `
-    <div class="card card-compact w-96 bg-base-100 shadow-xl h-full">
-      <figure class="h-2/3 overflow-hidden">
-        <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
-      </figure>
-      <div class="card-body h-1/3 flex flex-col justify-between">
-        <h2 class="card-title">${category.name}</h2>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary" onclick="showProducts('${category.name}')">View Products</button>
+    <a href="${categoryLink}" class="block h-full hover-effect">
+      <div class="card card-compact w-96 bg-base-100 shadow-xl h-full hover:shadow-white transition-shadow">
+        <figure class="h-2/3 overflow-hidden">
+          <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
+        </figure>
+        <div class="card-body h-1/3 flex flex-col justify-between">
+          <h2 class="card-title">${category.name}</h2>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" onclick="showProducts('${category.name}')">View Products</button>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   `;
   return categoryCard;
 }
@@ -148,7 +151,7 @@ function renderCategories() {
 function createProductCard(item, categoryName) {
   const productCard = createElement(
     "div",
-    "card card-compact w-96 bg-base-100 shadow-xl"
+    "card card-compact w-96 bg-base-100 shadow-xl hover:shadow-white transition-shadow"
   );
 
   productCard.innerHTML = `
