@@ -109,27 +109,59 @@ const categories = [
   },
 ];
 
+function createElement(tag, className, innerHTML) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (innerHTML) element.innerHTML = innerHTML;
+  return element;
+}
+
+function createCategoryCard(category) {
+  const categoryCard = createElement("div", "card-container h-96");
+  const imageSrc = category.foto;
+
+  categoryCard.innerHTML = `
+    <div class="card card-compact w-96 bg-base-100 shadow-xl h-full">
+      <figure class="h-2/3 overflow-hidden">
+        <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
+      </figure>
+      <div class="card-body h-1/3 flex flex-col justify-between">
+        <h2 class="card-title">${category.name}</h2>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary" onclick="showProducts('${category.name}')">View Products</button>
+        </div>
+      </div>
+    </div>
+  `;
+  return categoryCard;
+}
+
 function renderCategories() {
   const categoryList = document.getElementById("categoryList");
   categoryList.innerHTML = "";
-
   categories.forEach((category) => {
-    const categoryCard = document.createElement("div");
-    categoryCard.className = "card-container h-96"; // Feste Höhe mit Tailwind-Klasse h-96
-    const imageSrc = category.foto;
-    categoryCard.innerHTML = `
-            <div class="card card-compact w-96 bg-base-100 shadow-xl h-full">
-                <figure class="h-2/3 overflow-hidden"><img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/></figure>
-                <div class="card-body h-1/3 flex flex-col justify-between">
-                    <h2 class="card-title">${category.name}</h2>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary" onclick="showProducts('${category.name}')">View Products</button>
-                    </div>
-                </div>
-            </div>
-        `;
+    const categoryCard = createCategoryCard(category);
     categoryList.appendChild(categoryCard);
   });
+}
+
+function createProductCard(item, categoryName) {
+  const productCard = createElement(
+    "div",
+    "card card-compact w-96 bg-base-100 shadow-xl"
+  );
+
+  productCard.innerHTML = `
+    <figure><img src="${item.image}" alt="${item.name}" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">${item.name}</h2>
+      <p>${item.description}</p>
+      <p class="text-lg font-bold">$${item.price}</p>
+    </div>
+    <button class="btn btn-primary" onclick="addToCart('${categoryName}', '${item.name}')">Add to Cart</button>
+  `;
+
+  return productCard;
 }
 
 function showProducts(categoryName) {
@@ -145,17 +177,7 @@ function showProducts(categoryName) {
 
   productList.innerHTML = "";
   category.items.forEach((item) => {
-    const productCard = document.createElement("div");
-    productCard.className = "card card-compact w-96 bg-base-100 shadow-xl";
-    productCard.innerHTML = `
-            <figure><img src="${item.image}" alt="${item.name}" /></figure>
-            <div class="card-body">
-                <h2 class="card-title">${item.name}</h2>
-                <p>${item.description}</p>
-                <p class="text-lg font-bold">$${item.price}</p>
-            </div>
-            <button class="btn btn-primary" onclick="addItemToCart('${item.name}')">Add to Cart</button>
-        `;
+    const productCard = createProductCard(item, categoryName);
     productList.appendChild(productCard);
   });
 }
@@ -186,9 +208,14 @@ function addToCart(categoryName, productName) {
   const category = categories.find((cat) => cat.name === categoryName);
   const product = category.items.find((item) => item.name === productName);
 
+  if (!product) {
+    console.error("Product not found:", productName);
+    return;
+  }
+
+  console.log("Adding to cart:", product);
   cart.push(product);
   updateCart();
-  closeProductModal();
   renderCart();
 }
 
@@ -215,18 +242,25 @@ function renderCart() {
 
   cart.forEach((item) => {
     total += item.price;
-    const cartItem = document.createElement("div");
-    cartItem.className = "flex justify-between items-center mb-2 text-white";
-    cartItem.innerHTML = `
+    const cartItem = createElement(
+      "div",
+      "cart-item grid grid-cols-3 gap-4 mb-2",
+      `
       <span>${item.name}</span>
       <span>$${item.price}</span>
       <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button>
-    `;
+    `
+    );
     cartList.appendChild(cartItem);
   });
 
   cartTotal.textContent = total.toFixed(2);
+  console.log("Cart:", cart);
 }
 
-// Initialisierung
+function updateCart() {
+  // This function can be used to update the cart state or UI as needed
+}
+
+// Initialize
 renderCategories();
