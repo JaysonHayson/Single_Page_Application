@@ -222,6 +222,27 @@ function addToCart(categoryName, productName) {
   renderCart();
 }
 
+function decreaseQuantity(productName) {
+  const productIndex = cart.findIndex((item) => item.name === productName);
+  if (productIndex !== -1) {
+    cart.splice(productIndex, 1);
+    updateCart();
+    renderCart();
+  }
+}
+
+function increaseQuantity(productName) {
+  const category = categories.find((cat) =>
+    cat.items.some((item) => item.name === productName)
+  );
+  if (category) {
+    const product = category.items.find((item) => item.name === productName);
+    cart.push(product);
+    updateCart();
+    renderCart();
+  }
+}
+
 function removeFromCart(productName) {
   const index = cart.findIndex((item) => item.name === productName);
   if (index !== -1) {
@@ -231,16 +252,15 @@ function removeFromCart(productName) {
   }
 }
 
+function removeAllFromCart() {
+  cart = [];
+  updateCart();
+  renderCart();
+}
+
 function toggleCart() {
   const cartOverlay = document.getElementById("cartOverlay");
   cartOverlay.classList.toggle("hidden");
-}
-
-function createElement(tag, className, innerHTML) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (innerHTML) element.innerHTML = innerHTML;
-  return element;
 }
 
 function renderCart() {
@@ -289,14 +309,28 @@ function renderCart() {
         <span>Quantity: ${product.quantity}</span>
       </div>
       <div class="flex items-center justify-end">
-        <span class="text-lg font-bold">$${
+        <span class="text-lg font-bold">$${(
           product.price * product.quantity
-        }</span>
-        <button class="btn btn-danger btn-sm ml-2" onclick="removeFromCart('${productName}')">Remove</button>
+        ).toFixed(2)}</span>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="decreaseQuantity('${productName}')">-</button>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity('${productName}')">+</button>
       </div>
     `;
     cartList.appendChild(cartItem);
   });
+
+  // Add button to remove all products if the cart is not empty
+  if (cart.length > 0) {
+    const removeButton = createElement(
+      "button",
+      "btn btn-danger mt-4",
+      "Remove All"
+    );
+    removeButton.onclick = removeAllFromCart;
+    const buttonContainer = createElement("div", "flex justify-center");
+    buttonContainer.appendChild(removeButton);
+    cartList.appendChild(buttonContainer);
+  }
 
   // Update the total price
   cartTotal.textContent = total.toFixed(2);
@@ -312,9 +346,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
   }
+  // Retrieve cart from localStorage
+  const storedCart = JSON.parse(localStorage.getItem("cart"));
+  if (storedCart) {
+    cart = storedCart;
+    renderCart();
+  }
+  renderCategories();
 });
 
-function updateCart() {}
-
-// Initialize
-renderCategories();
+function updateCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
