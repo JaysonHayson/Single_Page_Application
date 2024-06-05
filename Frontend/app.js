@@ -236,29 +236,70 @@ function toggleCart() {
   cartOverlay.classList.toggle("hidden");
 }
 
+function createElement(tag, className, innerHTML) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (innerHTML) element.innerHTML = innerHTML;
+  return element;
+}
+
 function renderCart() {
   const cartList = document.getElementById("cartList");
   const cartTotal = document.getElementById("cartTotal");
 
-  cartList.innerHTML = "";
+  cartList.innerHTML = ""; // Clear previous content
+
   let total = 0;
+
+  // Create an object to summarize the products in the cart
+  const cartSummary = {};
 
   cart.forEach((item) => {
     total += item.price;
+
+    // If the product already exists in the cart summary, increment its quantity
+    if (cartSummary[item.name]) {
+      cartSummary[item.name].quantity++;
+    } else {
+      // Otherwise, add the product to the cart summary with quantity 1
+      cartSummary[item.name] = {
+        quantity: 1,
+        price: item.price,
+        image: item.image,
+      };
+    }
+  });
+
+  // Iterate over the products in the cart summary to render them in the cart list
+  Object.keys(cartSummary).forEach((productName) => {
+    const product = cartSummary[productName];
     const cartItem = createElement(
       "div",
-      "cart-item grid grid-cols-3 gap-4 mb-2",
-      `
-      <span>${item.name}</span>
-      <span>$${item.price}</span>
-      <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button>
-    `
+      "cart-item grid grid-cols-4 gap-4 mb-2"
     );
+
+    cartItem.innerHTML = `
+      <div>
+        <img src="${
+          product.image
+        }" alt="${productName}" class="w-16 h-16 object-cover rounded">
+      </div>
+      <div class="col-span-2">
+        <span>${productName}</span>
+        <span>Quantity: ${product.quantity}</span>
+      </div>
+      <div class="flex items-center justify-end">
+        <span class="text-lg font-bold">$${
+          product.price * product.quantity
+        }</span>
+        <button class="btn btn-danger btn-sm ml-2" onclick="removeFromCart('${productName}')">Remove</button>
+      </div>
+    `;
     cartList.appendChild(cartItem);
   });
 
+  // Update the total price
   cartTotal.textContent = total.toFixed(2);
-  console.log("Cart:", cart);
 }
 
 function toggleDarkMode() {
