@@ -1,0 +1,50 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #1a73e8;
+  --secondary-color: #e8eaf6;
+  --card-background-color: #f8f9fa;
+}
+
+.dark-mode {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #bb86fc;
+  --secondary-color: #333;
+  --card-background-color: #1f1f1f;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.navbar {
+  background-color: var(--primary-color);
+}
+
+.card {
+  background-color: var(--card-background-color);
+  color: var(--text-color);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.input-bordered {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.hover-effect {
+  border-radius: 16px;
+}
+
+.hover-effect:hover {
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3),
+    0 6px 6px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.1s ease-in-out;
+}

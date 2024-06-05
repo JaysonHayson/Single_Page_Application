@@ -123,14 +123,14 @@ function createCategoryCard(category) {
 
   categoryCard.innerHTML = `
     <a href="${categoryLink}" class="block h-full hover-effect">
-      <div class="card card-compact w-96 bg-base-100 shadow-xl h-full hover:shadow-white transition-shadow">
+      <div class="card card-compact w-96 shadow-xl h-full hover:shadow-white transition-shadow">
         <figure class="h-2/3 overflow-hidden">
           <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
         </figure>
         <div class="card-body h-1/3 flex flex-col justify-between">
           <h2 class="card-title">${category.name}</h2>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary" onclick="showProducts('${category.name}')">View Products</button>
+            <button class="btn" onclick="showProducts('${category.name}')">View Products</button>
           </div>
         </div>
       </div>
@@ -151,7 +151,7 @@ function renderCategories() {
 function createProductCard(item, categoryName) {
   const productCard = createElement(
     "div",
-    "card card-compact w-96 bg-base-100 shadow-xl hover:shadow-white transition-shadow"
+    "card card-compact w-96 shadow-xl hover:shadow-white transition-shadow"
   );
 
   productCard.innerHTML = `
@@ -260,6 +260,18 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
   console.log("Cart:", cart);
 }
+
+function toggleDarkMode() {
+  const body = document.body;
+  const isDarkMode = body.classList.toggle("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark-mode");
+  }
+});
 
 function updateCart() {}
 

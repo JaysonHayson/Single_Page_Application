@@ -1,110 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Simple Shop</title>
-      <link rel="stylesheet" href="style.css" />
-      <link
-        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-        rel="stylesheet"
-      />
-      <link
-        href="https://cdn.jsdelivr.net/npm/daisyui@2.1.0/dist/full.css"
-        rel="stylesheet"
-      />
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Shop</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="color-schemes.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.1.0/dist/full.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="text-white">
+    <!-- Navigation Bar -->
+    <div class="navbar bg-base-300 mb-4">
+      <div class="flex-1 px-2 lg:flex:none">
+        <a class="text-lg font-bold">OTTO</a>
+      </div>
+      <div class="flex justify-end flex-1 px-2">
+        <div class="flex items-stretch">
+          <a class="btn btn-ghost rounded-btn" onclick="showLogin()">Login</a>
+          <a class="btn btn-ghost rounded-btn" onclick="showRegister()"
+            >Register</a
+          >
+          <button class="btn btn-ghost ml-auto" onclick="toggleCart()">
+            Cart
+          </button>
 
-    <body class="bg-gray-900 text-white">
-      <!-- Navigation Bar -->
-
-      <div class="navbar bg-base-300 mb-4">
-        <div class="flex-1 px-2 lg:flex:none">
-          <a class="text-lg font-bold">OTTO</a>
-        </div>
-        <div class="flex justify-end flex-1 px-2">
-          <div class="flex items-stretch">
-            <a class="btn btn-ghost rounded-btn" onclick="showLogin()">Login</a>
-            <a class="btn btn-ghost rounded-btn" onclick="showRegister()"
-              >Register</a
-            >
-            <button class="btn btn-secondary ml-auto" onclick="toggleCart()">
-              Cart
-            </button>
-
-            <div class="dropdown dropdown-end">
-              <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">
-                Menu
-              </div>
-
-              <ul
-                tabindex="0"
-                class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
-              >
-                <li>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    class="input input-bordered w-full"
-                    oninput="searchItems(this.value)"
-                  />
-                </li>
-              </ul>
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">
+              Menu
             </div>
+            <ul
+              tabindex="0"
+              class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+            >
+              <li>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  class="input input-bordered w-full"
+                  oninput="searchItems(this.value)"
+                />
+              </li>
+              <div class="form-control">
+                <label class="label cursor-pointer">
+                  <span class="label-text">Contrast</span>
+                  <input
+                    type="checkbox"
+                    class="toggle"
+                    onclick="toggleDarkMode()"
+                  />
+                </label>
+              </div>
+            </ul>
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- Main content -->
+    <div id="cartOverlay" class="fixed inset-0 overflow-y-auto z-50 hidden">
       <div
-        id="cartOverlay"
-        class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
+        class="max-w-md mx-auto p-4 bg-gray-900 rounded absolute inset-0 m-auto flex flex-col items-center justify-center"
       >
-        <div
-          class="max-w-md mx-auto p-4 bg-gray-900 rounded shadow-lg absolute inset-0 m-auto"
-        >
-          <h2 class="text-xl font-bold mb-4 text-white">Shopping Cart</h2>
-          <div id="cartList" class="mb-4"></div>
-          <p class="text-lg font-bold text-white">
-            Total: $<span id="cartTotal">0.00</span>
-          </p>
-          <button class="btn btn-primary mt-4" onclick="checkout()">
+        <h2 class="text-xl font-bold mb-4 text-white">Shopping Cart</h2>
+        <div id="cartList" class="mb-4"></div>
+        <p class="text-lg font-bold text-white">
+          Total: $<span id="cartTotal">0.00</span>
+        </p>
+        <div class="btn-group">
+          <button class="btn btn-danger mt-4 mr-2" onclick="checkout()">
             Checkout
           </button>
-          <button class="btn btn-secondary mt-4 ml-2" onclick="toggleCart()">
+          <button class="btn btn-danger mt-4 ml-2" onclick="toggleCart()">
             Close
           </button>
         </div>
       </div>
+    </div>
+    <div class="container mx-auto p-4 grid place-items-center gap-x-40">
+      <!-- Category List -->
+      <div
+        id="categoryList"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
+      ></div>
 
-      <div class="container mx-auto p-4 grid place-items-center gap-x-40">
-        <!-- Category Liste -->
-
-        <div
-          id="categoryList"
-          class="sm: mx-auto grid grid-cols-1 md:mx-auto grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
-        ></div>
-
-        <!-- Product Details -->
-
-        <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
-          <div id="productDetails" class="hidden lg:w-full">
-            <button
-              onclick="hideProductDetails()"
-              class="mx-auto bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Back
-            </button>
-            <div
-              id="productList"
-              class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
-            ></div>
-          </div>
+      <!-- Product Details -->
+      <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
+        <div id="productDetails" class="hidden lg:w-full">
+          <button
+            onclick="hideProductDetails()"
+            class="mx-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+          >
+            Back
+          </button>
+          <div
+            id="productList"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
+          ></div>
         </div>
       </div>
+    </div>
 
-      <script src="app.js"></script>
-    </body>
-  </html>
+    <script src="app.js"></script>
+  </body>
 </html>
