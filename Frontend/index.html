@@ -22,72 +22,75 @@
 
   <body class="text-white">
     <!-- Navigation Bar -->
-  <header class="mb-4 pt-2 rounded-b-2xl">
-    <div class="navbar">
-      <div class="flex-1 px-2 lg:flex:none">
-        <a class="text-2xl font-bold pl-5">OTTO</a>
-      </div>
-      <div class="flex justify-end flex-1 px-2">
-        <div class="flex items-stretch">
+    <header class="mb-4 pt-2">
+      <div class="navbar">
+        <div class="flex-1 px-2 lg:flex:none">
+          <a class="text-2xl font-bold pl-5">OTTO</a>
+        </div>
+        <div class="flex justify-end flex-1 px-2">
+          <div class="flex items-stretch">
+            <!-- TO-DO Searchbutton -->
 
-          <!-- TO-DO Searchbutton -->
-
-          <button class="w-12 h-12 pt-1 rounded-full bg-pink-400 mx-5" onclick="toggleCart()">
-            <span class="material-symbols-outlined">
-              shopping_cart
-              </span>
-          </button>
-
-          <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="mx-10">
-              <div class="bg-gray-500 rounded-full w-12 h-12 p-3">
-                <span class="material-symbols-outlined">
-                  person
-                  </span> 
-              </div>
-            </div>
-
-            <ul
-              tabindex="0"
-              class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4"
+            <button
+              class="w-12 h-12 pt-1 rounded-full bg-pink-400 mx-5"
+              onclick="toggleCart()"
             >
-              <li>
-                <a class="btn btn-ghost rounded-btn" onclick="showLogin()">Login</a>
-              </li>
-              <li>
-                <a class="btn btn-ghost rounded-btn" onclick="showRegister()">Register</a>
-              </li>
-              <li>
-                <div class="form-control">
-                  <label class="label cursor-pointer">
-                    <span class="dark">Dark</span> &nbsp
-                    <input
-                      type="checkbox"
-                      class="toggle"
-                      onclick="toggleDarkMode()"
-                    />
-                  </label>
+              <span class="material-symbols-outlined"> shopping_cart </span>
+            </button>
+
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="mx-10">
+                <div class="bg-gray-500 rounded-full w-12 h-12 p-3">
+                  <span class="material-symbols-outlined"> person </span>
                 </div>
-              </li>
-            </ul>
+              </div>
+
+              <ul
+                tabindex="0"
+                class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4"
+              >
+                <li>
+                  <a class="btn btn-ghost rounded-btn" onclick="showLogin()"
+                    >Login</a
+                  >
+                </li>
+                <li>
+                  <a class="btn btn-ghost rounded-btn" onclick="showRegister()"
+                    >Register</a
+                  >
+                </li>
+                <li>
+                  <div class="form-control">
+                    <label class="label cursor-pointer">
+                      <span class="dark">Dark</span> &nbsp
+                      <input
+                        type="checkbox"
+                        class="toggle"
+                        onclick="toggleDarkMode()"
+                      />
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="flex justify-center flex-1 px-32 pb-4 pt-3">
-      <input
-      type="text"
-      placeholder="Search"
-      class="input input-bordered w-full "
-      oninput="searchItems(this.value)"
-    />
-    </div>
-  </header>
+      <div class="flex justify-center flex-1 px-32 pb-4 pt-3">
+        <input
+          type="text"
+          placeholder="Search"
+          class="input input-bordered w-full"
+          oninput="searchItems(this.value)"
+        />
+      </div>
+    </header>
 
     <!-- Main content -->
     <div
-    id="cartOverlay"
-    class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden">
+      id="cartOverlay"
+      class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
+    >
       <div
         class="shoppingCart max-w-md mx-auto p-4 rounded absolute inset-0 m-auto flex flex-col items-center justify-center"
       >
@@ -108,42 +111,42 @@
       </div>
     </div>
 
-  <main>
-    <div class="container mx-auto p-4 grid place-items-center gap-x-40">
-      <!-- Category List -->
-      <div
-        id="categoryList"
-        class="grid grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
-      ></div>
+    <main>
+      <div class="container mx-auto p-4 grid place-items-center gap-x-40">
+        <!-- Category List -->
+        <div
+          id="categoryList"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
+        ></div>
 
-      <!-- Product Details -->
-      <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
-        <div id="productDetails" class="hidden lg:w-full">
-          <button
-            onclick="hideProductDetails()"
-            class="mx-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-          >
-            Back
-          </button>
-          <div
-            id="productList"
-            class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
-          ></div>
+        <!-- Product Details -->
+        <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
+          <div id="productDetails" class="hidden lg:w-full">
+            <button
+              onclick="hideProductDetails()"
+              class="mx-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              Back
+            </button>
+            <div
+              id="productList"
+              class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
+            ></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <script src="app.js"></script>
-  </main>
-  
-  <footer class="mt-20 rounded-t-2xl">
-    <div class="navbar">
-      <div class="flex flex-1 justify-center ">
-        <a class="btn btn-ghost rounded-btn mx-10" onclick="">Impressum</a>
-        <a class="btn btn-ghost rounded-btn mx-10" onclick="">AGB</a>
-        <a class="btn btn-ghost rounded-btn mx-10" onclick="">Contact</a>
+      <script src="app.js"></script>
+    </main>
+
+    <footer class="mt-20 rounded-t-2xl">
+      <div class="navbar">
+        <div class="flex flex-1 justify-center">
+          <a class="btn btn-ghost rounded-btn mx-10" onclick="">Impressum</a>
+          <a class="btn btn-ghost rounded-btn mx-10" onclick="">AGB</a>
+          <a class="btn btn-ghost rounded-btn mx-10" onclick="">Contact</a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
   </body>
 </html>
