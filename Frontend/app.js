@@ -267,7 +267,7 @@ function renderCart() {
   const cartList = document.getElementById("cartList");
   const cartTotal = document.getElementById("cartTotal");
 
-  cartList.innerHTML = ""; // Clear previous content
+  cartList.innerHTML = "";
 
   let total = 0;
 
@@ -277,11 +277,9 @@ function renderCart() {
   cart.forEach((item) => {
     total += item.price;
 
-    // If the product already exists in the cart summary, increment its quantity
     if (cartSummary[item.name]) {
       cartSummary[item.name].quantity++;
     } else {
-      // Otherwise, add the product to the cart summary with quantity 1
       cartSummary[item.name] = {
         quantity: 1,
         price: item.price,
@@ -336,6 +334,7 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
 }
 
+//ToggleDarkMode
 function toggleDarkMode() {
   const body = document.body;
   const isDarkMode = body.classList.toggle("dark-mode");
