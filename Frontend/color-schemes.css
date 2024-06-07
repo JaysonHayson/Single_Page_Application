@@ -1,17 +1,21 @@
 :root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --primary-color: #1a73e8;
-  --secondary-color: #e8eaf6;
-  --card-background-color: #f8f9fa;
+  --background-color: rgb(210, 235, 255);
+  --text-color: rgb(80, 80, 80);
+  --primary-color: rgba(140, 90, 255,0.9);
+  --secondary-color: rgb(200, 200, 200);
+  --card-background-color: rgb(250, 250, 250);
+  --button-background-color: rgba(140, 90, 255, 1);
+  --button-bg-hover: rgba(140, 90, 255, 0.8);
 }
 
 .dark-mode {
-  --background-color: #121212;
-  --text-color: #e0e0e0;
-  --primary-color: #bb86fc;
-  --secondary-color: #333;
-  --card-background-color: #1f1f1f;
+  --background-color: rgb(6, 20, 30);
+  --text-color: rgb(235, 235, 235);
+  --primary-color: rgba(70, 35, 160, 0.9);
+  --secondary-color: rgb(70, 70, 70);
+  --card-background-color: rgb(40, 40, 40);
+  --button-background-color: rgba(105, 60, 195, 0.8);
+  --button-bg-hover: rgba(105, 60, 195, 1);
 }
 
 body {
@@ -19,18 +23,41 @@ body {
   color: var(--text-color);
 }
 
-.navbar {
+header {
   background-color: var(--primary-color);
+}
+
+footer{
+  background-color: var(--secondary-color);
+}
+
+.menu{
+  background-color: var(--secondary-color);
+}
+
+span.dark, a.btn{
+  color: var(--text-color)
+}
+
+div.shoppingCart{
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .card {
   background-color: var(--card-background-color);
   color: var(--text-color);
+  border: solid 2px var(--primary-color)
 }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+button.btn {
+  background-color: var(--button-background-color);
+  border: none;
+}
+
+button.btn:hover {
+  background-color: var(--button-bg-hover);
+  border: none;
 }
 
 .input-bordered {
@@ -44,7 +71,7 @@ body {
 }
 
 .hover-effect:hover {
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3),
-    0 6px 6px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(140, 90, 255, 0.3),
+    0 6px 6px rgba(255, 255, 255, 0.2);
   transition: box-shadow 0.1s ease-in-out;
 }
