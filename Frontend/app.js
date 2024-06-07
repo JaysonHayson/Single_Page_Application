@@ -343,7 +343,7 @@ function toggleDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("darkMode") === "enabled") {
+  if (localStorage.getItem("darkMode") === "disabled") {
     document.body.classList.add("dark-mode");
   }
   // Retrieve cart from localStorage
