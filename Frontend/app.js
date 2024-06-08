@@ -352,7 +352,19 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
+
+function toggleSearch() {
+  var searchBar = document.getElementById("searchBar");
+  searchBar.classList.toggle("hidden");
+}
+
+function togglePersonMenu() {
+  var personDropdown = document.querySelector(".dropdown-content");
+  personDropdown.classList.toggle("hidden");
+}
+
 //TODO functions need wo be implemented
+
 function showLogin() {
   alert("Login functionality to be implemented.");
 }
