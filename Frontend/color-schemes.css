@@ -9,13 +9,13 @@
 }
 
 .dark-mode {
-  --background-color: rgb(6, 20, 30);
-  --text-color: rgb(206, 206, 206);
-  --primary-color: rgba(70, 35, 160, 0.9);
+  --background-color: #312f30;
+  --text-color: #fffdfa;
+  --primary-color: #70613f;
   --secondary-color: rgb(70, 70, 70);
   --card-background-color: rgb(40, 40, 40);
-  --button-background-color: rgba(105, 60, 195, 0.8);
-  --button-bg-hover: rgba(105, 60, 195, 1);
+  --button-background-color: #70613f;
+  --button-bg-hover: #7e6f4c;
 }
 
 body {
