@@ -19,35 +19,32 @@
       rel="stylesheet"
     />
   </head>
-
-  <body class="text-white">
+  <body class="text-white min-h-screen flex flex-col">
     <!-- Navigation Bar -->
     <header class="mb-4 pt-2">
-      <div class="navbar">
-        <div class="flex-1 px-2 lg:flex:none">
-          <a class="text-2xl font-bold pl-5">OTTO</a>
+      <div class="navbar px-4 py-2">
+        <div class="flex-1 px-2 lg:flex-none">
+          <a class="text-2xl font-bold">OTTO</a>
         </div>
         <div class="flex justify-end flex-1 px-2">
-          <div class="flex items-stretch">
-            <!-- TO-DO Searchbutton -->
-
+          <div class="flex items-center space-x-4">
             <button
-              class="w-12 h-12 pt-1 rounded-full bg-pink-400 mx-5"
+              class="w-12 h-12 pt-1 rounded-full bg-primary mx-5"
               onclick="toggleCart()"
             >
               <span class="material-symbols-outlined"> shopping_cart </span>
             </button>
-
             <div class="dropdown dropdown-end">
-              <div tabindex="0" role="button" class="mx-10">
-                <div class="bg-gray-500 rounded-full w-12 h-12 p-3">
+              <div tabindex="0" role="button">
+                <div
+                  class="bg-primary rounded-full w-12 h-12 p-3 flex items-center justify-center"
+                >
                   <span class="material-symbols-outlined"> person </span>
                 </div>
               </div>
-
               <ul
                 tabindex="0"
-                class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4"
+                class="menu dropdown-content z-[1] p-2 shadow bg-primary rounded-box w-52 mt-4 text-primary-content"
               >
                 <li>
                   <a class="btn btn-ghost rounded-btn" onclick="showLogin()"
@@ -62,10 +59,10 @@
                 <li>
                   <div class="form-control">
                     <label class="label cursor-pointer">
-                      <span class="dark">Dark</span> &nbsp
+                      <span class="dark">Dark</span>
                       <input
                         type="checkbox"
-                        class="toggle"
+                        class="toggle ml-2"
                         onclick="toggleDarkMode()"
                       />
                     </label>
@@ -76,55 +73,55 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-center flex-1 px-4 sm:px-32 pb-4 pt-3">
+      <div class="flex justify-center px-4 sm:px-32 pb-4 pt-3">
         <input
           type="text"
           placeholder="Search"
-          class="input input-bordered w-full min-w-full sm:min-w-0 sm:min-w-md"
+          class="input input-bordered w-full sm:max-w-md"
           oninput="searchItems(this.value)"
         />
       </div>
     </header>
 
     <!-- Main content -->
-    <div
-      id="cartOverlay"
-      class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
-    >
+    <main class="flex-grow">
       <div
-        class="shoppingCart max-w-md mx-auto p-4 rounded absolute inset-0 m-auto flex flex-col items-center justify-center"
+        id="cartOverlay"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
       >
-        <h2 class="text-xl font-bold mb-2">Shopping Cart</h2>
-        <div id="cartList" class="mb-4"></div>
-        <p class="border-solid border my-2 w-full"></p>
-        <p class="text-lg font-bold my-2">
-          Total: $<span id="cartTotal">0.00</span>
-        </p>
-        <div class="btn-group">
-          <button class="btn btn-danger mt-4 mr-2" onclick="checkout()">
-            Checkout
-          </button>
-          <button class="btn btn-danger mt-4 ml-2" onclick="toggleCart()">
-            Close
-          </button>
+        <div
+          class="shoppingCart max-w-md mx-auto p-4 rounded flex flex-col items-center justify-center bg-white"
+        >
+          <h2 class="text-xl font-bold mb-2">Shopping Cart</h2>
+          <div id="cartList" class="mb-4"></div>
+          <p class="border-t w-full my-2"></p>
+          <p class="text-lg font-bold my-2">
+            Total: $<span id="cartTotal">0.00</span>
+          </p>
+          <div class="btn-group mt-4">
+            <button class="btn btn-danger mr-2" onclick="checkout()">
+              Checkout
+            </button>
+            <button class="btn btn-danger ml-2" onclick="toggleCart()">
+              Close
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <main>
-      <div class="container mx-auto p-4 grid place-items-center gap-x-40">
+      <div class="container mx-auto p-4 grid place-items-center gap-10">
         <!-- Category List -->
         <div
           id="categoryList"
-          class="grid grid-cols-1 lg:grid-cols-2 gap-y-20 md:gap-x-4 lg:gap-x-4"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-10"
         ></div>
 
         <!-- Product Details -->
-        <div id="app" class="grid grid-cols-1 lg:grid-cols-1">
-          <div id="productDetails" class="hidden lg:w-full">
+        <div id="app" class="w-full">
+          <div id="productDetails" class="hidden">
             <button
               onclick="hideProductDetails()"
-              class="btn mx-auto bg-primary text-white px-4 py-2 rounded"
+              class="btn bg-primary text-white px-4 py-2 rounded"
             >
               Back
             </button>
@@ -135,18 +132,17 @@
           </div>
         </div>
       </div>
-
-      <script src="app.js"></script>
     </main>
 
-    <footer class="mt-20 rounded-t-2xl">
-      <div class="navbar">
-        <div class="flex flex-1 justify-center">
-          <a class="btn btn-ghost rounded-btn mx-10" onclick="">Impressum</a>
-          <a class="btn btn-ghost rounded-btn mx-10" onclick="">AGB</a>
-          <a class="btn btn-ghost rounded-btn mx-10" onclick="">Contact</a>
-        </div>
+    <footer class="bg-primary mt-20 py-4">
+      <div class="flex justify-center space-x-10">
+        <a class="btn btn-ghost rounded-btn" onclick="showImpressum()"
+          >Impressum</a
+        >
+        <a class="btn btn-ghost rounded-btn" onclick="showAGB()">AGB</a>
+        <a class="btn btn-ghost rounded-btn" onclick="showContact()">Contact</a>
       </div>
     </footer>
+    <script src="app.js"></script>
   </body>
 </html>

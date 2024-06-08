@@ -201,18 +201,6 @@ function hideProductDetails() {
   categoryList.classList.remove("hidden");
 }
 
-function showLogin() {
-  alert("Login functionality to be implemented.");
-}
-
-function showRegister() {
-  alert("Register functionality to be implemented.");
-}
-
-function searchItems(query) {
-  alert("Search functionality to be implemented.");
-}
-
 let cart = [];
 
 function addToCart(categoryName, productName) {
@@ -346,7 +334,6 @@ function renderCart() {
 function toggleDarkMode() {
   const body = document.body;
   const isDarkMode = body.classList.toggle("dark-mode");
-  localStorage.setItem("darkMode", isDarkMode ? "disabled" : "enabled");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -364,4 +351,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
+}
+//TODO functions need wo be implemented
+function showLogin() {
+  alert("Login functionality to be implemented.");
+}
+
+function showRegister() {
+  alert("Register functionality to be implemented.");
+}
+
+function searchItems(query) {
+  alert("Search functionality to be implemented.");
+}
+
+function showImpressum() {
+  alert("Impressum functionality to be implemented.");
+}
+
+function showAGB() {
+  alert("AGB functionality to be implemented.");
+}
+
+function showContact() {
+  alert("Contact functionality to be implemented.");
+}
+
+function checkout() {
+  alert("Checkout functionality to be implemented.");
 }

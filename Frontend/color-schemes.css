@@ -1,7 +1,7 @@
 :root {
   --background-color: rgb(210, 235, 255);
   --text-color: rgb(80, 80, 80);
-  --primary-color: rgba(140, 90, 255,0.9);
+  --primary-color: rgba(140, 90, 255, 0.9);
   --secondary-color: rgb(200, 200, 200);
   --card-background-color: rgb(250, 250, 250);
   --button-background-color: rgba(140, 90, 255, 1);
@@ -10,7 +10,7 @@
 
 .dark-mode {
   --background-color: rgb(6, 20, 30);
-  --text-color: rgb(235, 235, 235);
+  --text-color: rgb(206, 206, 206);
   --primary-color: rgba(70, 35, 160, 0.9);
   --secondary-color: rgb(70, 70, 70);
   --card-background-color: rgb(40, 40, 40);
@@ -27,19 +27,20 @@ header {
   background-color: var(--primary-color);
 }
 
-footer{
+footer {
   background-color: var(--secondary-color);
 }
 
-.menu{
+.menu {
   background-color: var(--secondary-color);
 }
 
-span.dark, a.btn{
-  color: var(--text-color)
+span.dark,
+a.btn {
+  color: var(--text-color);
 }
 
-div.shoppingCart{
+div.shoppingCart {
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -47,7 +48,7 @@ div.shoppingCart{
 .card {
   background-color: var(--card-background-color);
   color: var(--text-color);
-  border: solid 2px var(--primary-color)
+  border: solid 2px var(--primary-color);
 }
 
 button.btn {
