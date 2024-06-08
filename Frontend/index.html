@@ -76,11 +76,11 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-center flex-1 px-32 pb-4 pt-3">
+      <div class="flex justify-center flex-1 px-4 sm:px-32 pb-4 pt-3">
         <input
           type="text"
           placeholder="Search"
-          class="input input-bordered w-full"
+          class="input input-bordered w-full min-w-full sm:min-w-0 sm:min-w-md"
           oninput="searchItems(this.value)"
         />
       </div>
@@ -124,7 +124,7 @@
           <div id="productDetails" class="hidden lg:w-full">
             <button
               onclick="hideProductDetails()"
-              class="mx-auto bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              class="btn mx-auto bg-primary text-white px-4 py-2 rounded"
             >
               Back
             </button>

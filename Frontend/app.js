@@ -117,20 +117,22 @@ function createElement(tag, className, innerHTML) {
 }
 
 function createCategoryCard(category) {
-  const categoryCard = createElement("div", "card-container h-96");
+  const categoryCard = document.createElement("div");
+  categoryCard.className = "card-container h-96";
+
   const imageSrc = category.foto;
   const categoryLink = `javascript:showProducts('${category.name}')`;
 
   categoryCard.innerHTML = `
-    <a href="${categoryLink}" class="block h-full hover-effect">
-      <div class="card card-compact w-80 shadow-xl h-full hover:shadow-white transition-shadow">
+    <a href="${categoryLink}" class="block h-full hover:shadow-lg transition-shadow w-full">
+      <div class="card card-compact w-full shadow-xl h-full transition-shadow">
         <figure class="h-2/3 overflow-hidden">
           <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
         </figure>
-        <div class="card-body h-1/3 flex flex-col justify-between">
-          <h2 class="card-title">${category.name}</h2>
+        <div class="card-body h-1/3 flex flex-col justify-between p-4">
+          <h2 class="card-title text-xl font-semibold">${category.name}</h2>
           <div class="card-actions justify-end">
-            <button class="btn" onclick="showProducts('${category.name}')">View Products</button>
+            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="showProducts('${category.name}')">View Products</button>
           </div>
         </div>
       </div>
@@ -149,21 +151,27 @@ function renderCategories() {
 }
 
 function createProductCard(item, categoryName) {
-  const productCard = createElement(
-    "div",
-    "card card-compact w-80 shadow-xl hover:shadow-white transition-shadow"
-  );
+  const productCard = document.createElement("div");
+  productCard.className =
+    "card-container h-96 flex flex-col justify-between mb-40";
 
   productCard.innerHTML = `
-    <figure><img src="${item.image}" alt="${item.name}" /></figure>
-    <div class="card-body">
-      <h2 class="card-title">${item.name}</h2>
-      <p>${item.description}</p>
-      <p class="text-lg font-bold">$${item.price}</p>
-      <button class="btn" onclick="addToCart('${categoryName}', '${item.name}')">Add to Cart</button>
+    <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
+      <div class="card card-compact w-full shadow-xl h-full transition-shadow">
+        <figure class="h-2/3 overflow-hidden">
+          <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full"/>
+        </figure>
+        <div class="card-body h-1/3 flex flex-col justify-between p-4">
+          <h2 class="card-title text-xl font-semibold">${item.name}</h2>
+          <p>${item.description}</p>
+          <p class="text-lg font-bold">$${item.price}</p>
+        </div>
+      </div>
+    </a>
+    <div class="flex justify-center p-4">
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${categoryName}', '${item.name}')">Add to Cart</button>
     </div>
   `;
-
   return productCard;
 }
 

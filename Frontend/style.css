@@ -30,3 +30,13 @@ body {
 .btn {
   flex: 1;
 }
+
+#menuItems {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  #menuItems {
+    display: flex;
+  }
+}
