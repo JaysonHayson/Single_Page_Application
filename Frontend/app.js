@@ -330,22 +330,25 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
 }
 
-//ToggleDarkMode
+// ToggleDarkMode
 function toggleDarkMode() {
   const body = document.body;
   const isDarkMode = body.classList.toggle("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("darkMode") === "disabled") {
+  if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
   }
+
   // Retrieve cart from localStorage
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
     cart = storedCart;
     renderCart();
   }
+
   renderCategories();
 });
 
@@ -354,16 +357,16 @@ function updateCart() {
 }
 
 function toggleSearch() {
-  var searchBar = document.getElementById("searchBar");
-  searchBar.classList.toggle("hidden");
+  const searchBar = document.getElementById("searchBar");
+  searchBar.classList.toggle("show");
 }
 
 function togglePersonMenu() {
-  var personDropdown = document.querySelector(".dropdown-content");
+  const personDropdown = document.querySelector(".dropdown-content");
   personDropdown.classList.toggle("hidden");
 }
 
-//TODO functions need wo be implemented
+// TODO: Functions to be implemented
 
 function showLogin() {
   alert("Login functionality to be implemented.");

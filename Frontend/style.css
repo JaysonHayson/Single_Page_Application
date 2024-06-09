@@ -47,8 +47,11 @@ body {
 }
 
 #searchBar {
-  position: absolute;
-  top: 4%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  max-height: 0;
+  transition: max-height 0.4s ease-out;
+  color: var(--text-color);
+}
+
+#searchBar.show {
+  max-height: 100px;
 }

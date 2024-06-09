@@ -21,18 +21,10 @@
   </head>
   <body class="text-white min-h-screen flex flex-col">
     <!-- Navigation Bar -->
-    <header class="mb-4 pt-2">
+    <header class="mb-4">
       <div class="navbar px-4 py-2 flex justify-between items-center">
         <div class="flex items-center">
           <a class="text-2xl font-bold mr-8">OTTO</a>
-
-          <div class="hidden" id="searchBar">
-            <input
-              type="text"
-              placeholder="Search"
-              class="input input-bordered w-full sm:max-w-md"
-            />
-          </div>
         </div>
         <div class="flex items-center">
           <button
@@ -86,6 +78,18 @@
         </div>
       </div>
     </header>
+
+    <!-- Search Bar -->
+    <div
+      class="transition-all duration-300 ease-in-out overflow-hidden max-h-0"
+      id="searchBar"
+    >
+      <input
+        type="text"
+        placeholder="Search"
+        class="input input-bordered w-full sm:max-w-md mx-auto block"
+      />
+    </div>
 
     <!-- Main content -->
     <main class="flex-grow">

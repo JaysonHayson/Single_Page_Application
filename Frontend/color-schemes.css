@@ -1,6 +1,7 @@
 :root {
   --background-color: rgb(210, 235, 255);
   --text-color: rgb(80, 80, 80);
+  --text-color2: #fffdfa;
   --primary-color: rgba(140, 90, 255, 0.9);
   --secondary-color: rgb(200, 200, 200);
   --card-background-color: rgb(250, 250, 250);
@@ -11,6 +12,7 @@
 .dark-mode {
   --background-color: #312f30;
   --text-color: #fffdfa;
+  --text-color2: #fffdfa;
   --primary-color: #70613f;
   --secondary-color: rgb(70, 70, 70);
   --card-background-color: rgb(40, 40, 40);
@@ -75,4 +77,17 @@ button.btn:hover {
   box-shadow: 0 10px 20px rgba(140, 90, 255, 0.3),
     0 6px 6px rgba(255, 255, 255, 0.2);
   transition: box-shadow 0.1s ease-in-out;
+}
+
+#searchBar input {
+  color: var(--text-color2);
+  border: var(--primary-color);
+  border-radius: 12px;
+  padding: 10px;
+  width: 100vh;
+  box-sizing: border-box;
+}
+
+#searchBar input::placeholder {
+  color: var(--text-color2);
 }
