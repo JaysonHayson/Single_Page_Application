@@ -3,6 +3,9 @@
     define('DBCONFFILEPATH', '/etc/php/DB_Conf.php');
     require DBCONFFILEPATH;
 
-    echo "Config File Reporting In.";
+    $DBHost = 'localhost';
+    $DB_DBName = 'spa_shop';
+    $DBTableName1 = 'Customers';
+    $DBTableName2 = 'Products';
 
 ?>
