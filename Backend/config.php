@@ -1,5 +1,5 @@
 <?php
 
-    echo "Config File Reporting In.\n";
+    echo "Config File Reporting In.";
 
 ?>

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require './DB_Module.php';
 
-echo "DB_Module Sucessfully Loaded.\n";
+echo "<br>DB_Module Sucessfully Loaded.<br>";
 
 
 echo "EOF";
