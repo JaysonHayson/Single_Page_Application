@@ -24,8 +24,17 @@
         echo 'Error: Unexpected result:' . $e->getMessage();
     }
 
-
-    function selectWithWhereCondition($pdo,$table, $condition) {
+    /**
+     * selectWithWhereCondition
+     * Prepares and executes a 'Select * from $table WHERE KEY = Value'
+     *                                                    from $condition
+     * 
+     * @param  PDO      $pdo        PDO Handle
+     * @param  string   $table      Name of Table in DB
+     * @param  Array    $condition  Assoc Array KEY:Value Paired.
+     * @return Array    Associative Multidimensional Array with results.
+     */
+    function selectWithWhereCondition(&$pdo,$table, $condition) {
         if (empty($table)) {
             throw new Exception("Table name cannot be empty.");
         }
