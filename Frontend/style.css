@@ -61,3 +61,6 @@ body {
   border: none;
   cursor: pointer;
 }
+#overlayMenu {
+  z-index: 999;
+}

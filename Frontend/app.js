@@ -395,3 +395,13 @@ function showContact() {
 function checkout() {
   alert("Checkout functionality to be implemented.");
 }
+
+// Hamburger-Menü
+document.addEventListener('DOMContentLoaded', function () {
+  const menuBtn = document.getElementById('menuBtn');
+  const overlayMenu = document.getElementById('overlayMenu');
+  
+  menuBtn.addEventListener('click', function () {
+    overlayMenu.classList.toggle('-translate-x-full');
+  });
+});
