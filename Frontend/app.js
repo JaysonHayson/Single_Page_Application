@@ -224,13 +224,13 @@ function addToCart(categoryName, productName) {
 function addToCartAnimation() {
   var animation = document.querySelector(".animation");
 
-  // Füge die Klasse 'animation-show' hinzu, um die Animation zu starten
+  
   animation.classList.add("animation-show");
 
-  // Verstecke die Animation nach einer Verzögerung wieder
+  
   setTimeout(function() {
       animation.classList.remove("animation-show");
-  }, 1000); // Animation bleibt für 1 Sekunde sichtbar
+  }, 1000); 
 }
     
 
