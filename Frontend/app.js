@@ -366,6 +366,19 @@ function togglePersonMenu() {
   personDropdown.classList.toggle("hidden");
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  // After DOM is fully loaded
+  setTimeout(function () {
+    var loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+      loadingScreen.style.opacity = "0";
+      setTimeout(function () {
+        loadingScreen.style.display = "none"; // Hide loading screen after fade out
+      }, 1500); // Wait 1 second after fade out
+    }
+  }, 2000); // Fade out after 3 seconds (adjust as needed)
+});
+
 // TODO: Functions to be implemented
 
 function showLogin() {

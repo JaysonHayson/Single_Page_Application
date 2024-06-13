@@ -18,11 +18,19 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="loading.css">
   </head>
   <body class="text-white min-h-screen flex flex-col">
+    <div id="loading-screen">
+      <div class="loading-content">
+        <img src="Logo.png" alt="Logo" class="logo">
+      </div>
+    </div>
+
     <!-- Navigation Bar -->
+    <div id="main-content">
     <header class="mb-4">
-      <div class="navbar px-4 py-2 flex justify-between items-center">
+      
         <div class="navbar px-4 py-2 flex justify-between items-center">
           <div class="flex items-center">
             <button class="hamburger-btn px-4 py-2">
@@ -77,7 +85,6 @@
             </ul>
           </div>
         </div>
-      </div>
     </header>
 
     <!-- Search Bar -->
@@ -152,6 +159,7 @@
         <a class="btn btn-ghost rounded-btn" onclick="showContact()">Contact</a>
       </div>
     </footer>
+  </div>
     <script src="app.js"></script>
   </body>
 </html>
