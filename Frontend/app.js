@@ -373,10 +373,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (loadingScreen) {
       loadingScreen.style.opacity = "0";
       setTimeout(function () {
-        loadingScreen.style.display = "none"; // Hide loading screen after fade out
-      }, 1500); // Wait 1 second after fade out
+        loadingScreen.style.display = "none";
+      }, 1500);
     }
-  }, 2000); // Fade out after 3 seconds (adjust as needed)
+  }, 2000);
 });
 
 // TODO: Functions to be implemented
