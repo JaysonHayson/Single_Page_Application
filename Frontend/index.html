@@ -30,9 +30,13 @@
           <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleSearch()">
             <span class="material-symbols-outlined"> search </span>
           </button>
-          <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleCart()">
-            <span class="material-symbols-outlined"> shopping_cart </span>
-          </button>
+          <button class="w-12 h-12 pt-1 rounded-full p-0" onclick="toggleCart()">
+            <div id="container">
+                <div class="animation"></div>
+            </div>
+            <span class="material-symbols-outlined"> shopping_cart </span><!-- Hier der Button-Text -->
+        </button>
+          
           <div class="dropdown dropdown-end" id="personDropdown">
             <div tabindex="0" role="button" onclick="togglePersonMenu()">
               <div
