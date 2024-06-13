@@ -18,13 +18,28 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="loading.css">
   </head>
   <body class="text-white min-h-screen flex flex-col">
+    <div id="loading-screen">
+      <div class="loading-content">
+        <img src="Logo.png" alt="Logo" class="logo">
+      </div>
+    </div>
+
     <!-- Navigation Bar -->
+    <div id="main-content">
     <header class="mb-4">
-      <div class="navbar px-4 py-2 flex justify-between items-center">
-        <div class="flex items-center">
-          <img class="px-4 py-2 h-20" src="https://i.postimg.cc/d1YJYF13/OIG3-removebg-preview.png" alt="TeamLogo">
+      
+        <div class="navbar px-4 py-2 flex justify-between items-center">
+          <div class="flex items-center">
+            <button class="hamburger-btn px-4 py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </div>
+        <div class="flex items-center justify-center flex-grow">
         </div>
         <div class="flex items-center">
           <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleSearch()">
@@ -62,7 +77,7 @@
               <li>
                 <div class="form-control">
                   <label class="label cursor-pointer">
-                    <span class="dark">Contrast</span>
+                    <span class="dark">Theme</span>
                     <input
                       type="checkbox"
                       class="toggle ml-2"
@@ -74,7 +89,6 @@
             </ul>
           </div>
         </div>
-      </div>
     </header>
 
     <!-- Search Bar -->
@@ -149,6 +163,7 @@
         <a class="btn btn-ghost rounded-btn" onclick="showContact()">Contact</a>
       </div>
     </footer>
+  </div>
     <script src="app.js"></script>
   </body>
 </html>
