@@ -55,3 +55,9 @@ body {
 #searchBar.show {
   max-height: 100px;
 }
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
