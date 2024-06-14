@@ -119,3 +119,17 @@ body {
 .hamburger-icon:after {
   top: 0.55em;
 }
+#drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px; /* Breite des Drawers */
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+}
+#drawer.open {
+  transform: translateX(0);}
