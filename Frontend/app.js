@@ -206,7 +206,7 @@ let cart = [];
 function addToCart(categoryName, productName) {
   const category = categories.find((cat) => cat.name === categoryName);
   const product = category.items.find((item) => item.name === productName);
-
+ 
   if (!product) {
     console.error("Product not found:", productName);
     return;
@@ -216,7 +216,25 @@ function addToCart(categoryName, productName) {
   cart.push(product);
   updateCart();
   renderCart();
+
+  addToCartAnimation();
 }
+
+    
+function addToCartAnimation() {
+  var animation = document.querySelector(".animation");
+
+  
+  animation.classList.add("animation-show");
+
+  
+  setTimeout(function() {
+      animation.classList.remove("animation-show");
+  }, 1000); 
+}
+    
+
+
 
 function decreaseQuantity(productName) {
   const productIndex = cart.findIndex((item) => item.name === productName);

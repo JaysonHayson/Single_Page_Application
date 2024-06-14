@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
     <title>Simple Shop</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="color-schemes.css" />
@@ -44,9 +44,13 @@
           <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleSearch()">
             <span class="material-symbols-outlined"> search </span>
           </button>
-          <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleCart()">
-            <span class="material-symbols-outlined"> shopping_cart </span>
-          </button>
+          <button class="w-12 h-12 pt-1 rounded-full p-0" onclick="toggleCart()">
+            <div id="container">
+                <div class="animation"></div>
+            </div>
+            <span class="material-symbols-outlined"> shopping_cart </span><!-- Hier der Button-Text -->
+        </button>
+          
           <div class="dropdown dropdown-end" id="personDropdown">
             <div tabindex="0" role="button" onclick="togglePersonMenu()">
               <div
@@ -72,7 +76,7 @@
               <li>
                 <div class="form-control">
                   <label class="label cursor-pointer">
-                    <span class="dark">Contrast</span>
+                    <span class="dark">Theme</span>
                     <input
                       type="checkbox"
                       class="toggle ml-2"
@@ -91,13 +95,13 @@
     </div>
     <!-- Search Bar -->
     <div
-      class="transition-all duration-300 ease-in-out overflow-hidden max-h-0"
+      class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 w-7/12 mx-auto"
       id="searchBar"
     >
       <input
         type="text"
         placeholder="Search"
-        class="input input-bordered w-full sm:max-w-md mx-auto block"
+        class="input input-bordered block w-full mx-auto"
       />
     </div>
 

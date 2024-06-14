@@ -84,7 +84,6 @@ button.btn:hover {
   border: var(--primary-color);
   border-radius: 12px;
   padding: 10px;
-  width: 100vh;
   box-sizing: border-box;
 }
 

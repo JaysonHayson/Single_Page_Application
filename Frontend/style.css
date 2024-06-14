@@ -39,6 +39,29 @@ body {
 #menuItems {
   display: none;
 }
+#container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.animation {
+  position: absolute;
+  top: -20px; /* Startposition oberhalb des Containers */
+  left: 19px;
+  background-color: rgb(255, 255, 255);
+  height: 10px;
+  width: 10px;
+  border-radius: 50%; /* Rundes Element */
+  transition: opacity 0.2s ease-in-out, top 1s ease-in-out; /* Übergänge für Opazität und Position */
+  opacity: 0; /* Starte mit einer Opazität von 0 */
+}
+
+.animation-show {
+  opacity: 1; /* Zeige das Element */
+  top: 2px; /* Bewege das Element nach unten */
+}
+
 
 @media (min-width: 1024px) {
   #menuItems {
@@ -55,6 +78,7 @@ body {
 #searchBar.show {
   max-height: 100px;
 }
+
 
 .hamburger-btn {
   background: none;
