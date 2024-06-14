@@ -62,7 +62,6 @@ body {
   top: 2px; /* Bewege das Element nach unten */
 }
 
-
 @media (min-width: 1024px) {
   #menuItems {
     display: flex;
@@ -78,7 +77,6 @@ body {
 #searchBar.show {
   max-height: 100px;
 }
-
 
 .hamburger-btn {
   background: none;
@@ -125,11 +123,13 @@ body {
   left: 0;
   width: 300px; /* Breite des Drawers */
   height: 100%;
-  background-color: white;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 999;
+  background-color: var(--primary-color);
+  color: var(--text-color2);
 }
 #drawer.open {
-  transform: translateX(0);}
+  transform: translateX(0);
+}

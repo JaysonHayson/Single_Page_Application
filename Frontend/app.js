@@ -206,7 +206,7 @@ let cart = [];
 function addToCart(categoryName, productName) {
   const category = categories.find((cat) => cat.name === categoryName);
   const product = category.items.find((item) => item.name === productName);
- 
+
   if (!product) {
     console.error("Product not found:", productName);
     return;
@@ -220,21 +220,15 @@ function addToCart(categoryName, productName) {
   addToCartAnimation();
 }
 
-    
 function addToCartAnimation() {
   var animation = document.querySelector(".animation");
 
-  
   animation.classList.add("animation-show");
 
-  
-  setTimeout(function() {
-      animation.classList.remove("animation-show");
-  }, 1000); 
+  setTimeout(function () {
+    animation.classList.remove("animation-show");
+  }, 1000);
 }
-    
-
-
 
 function decreaseQuantity(productName) {
   const productIndex = cart.findIndex((item) => item.name === productName);
@@ -397,6 +391,36 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 2000);
 });
 
+// Hamburger-Menü
+document.addEventListener("DOMContentLoaded", () => {
+  const drawerOpener = document.getElementById("drawerOpener");
+  const drawer = document.getElementById("drawer");
+  const drawerCloseButton = document.getElementById("drawerCloseButton");
+
+  if (drawerOpener && drawer && drawerCloseButton) {
+    drawerOpener.addEventListener("click", () => {
+      drawer.classList.toggle("open");
+    });
+
+    drawerCloseButton.addEventListener("click", () => {
+      drawer.classList.remove("open");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        !drawer.contains(event.target) &&
+        !drawerOpener.contains(event.target)
+      ) {
+        drawer.classList.remove("open");
+      }
+    });
+  } else {
+    console.error(
+      'Elemente mit den IDs "drawerOpener" und/oder "drawer" und/oder "drawerCloseButton" wurden nicht gefunden.'
+    );
+  }
+});
+
 // TODO: Functions to be implemented
 
 function showLogin() {
@@ -426,17 +450,3 @@ function showContact() {
 function checkout() {
   alert("Checkout functionality to be implemented.");
 }
-
-// Hamburger-Menü
-document.addEventListener('DOMContentLoaded', () => {
-  const drawerOpener = document.getElementById('drawerOpener');
-  const drawer = document.getElementById('drawer');
-
-  if (drawerOpener && drawer) {
-      drawerOpener.addEventListener('click', () => {
-          drawer.classList.toggle('open');
-      });
-  } else {
-      console.error('Elemente mit den IDs "drawerOpener" und/oder "drawer" wurden nicht gefunden.');
-  }
-});
