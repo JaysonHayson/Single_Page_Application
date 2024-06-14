@@ -61,6 +61,37 @@ body {
   border: none;
   cursor: pointer;
 }
-#overlayMenu {
-  z-index: 999;
+
+.hamburger-icon-container {
+  color: red;
+  height: 1.7em;
+  width: 1.7em;
+  position: relative;
+  cursor: pointer;
+  background: currentColor;
+  border: 10px solid currentColor;
+  border-radius: 3px;
+}
+
+.hamburger-icon,
+.hamburger-icon:before,
+.hamburger-icon:after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 1.7em;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.hamburger-icon {
+  top: 0.75em;
+}
+
+.hamburger-icon:before {
+  top: -0.55em;
+}
+
+.hamburger-icon:after {
+  top: 0.55em;
 }
