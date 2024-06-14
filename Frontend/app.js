@@ -386,9 +386,9 @@ document.addEventListener("DOMContentLoaded", function () {
       loadingScreen.style.opacity = "0";
       setTimeout(function () {
         loadingScreen.style.display = "none";
-      }, 1500);
+      }, 500);
     }
-  }, 2000);
+  }, 500);
 });
 
 // Hamburger-Menü
