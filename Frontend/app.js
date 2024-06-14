@@ -410,11 +410,15 @@ function checkout() {
 }
 
 // Hamburger-Menü
-document.addEventListener('DOMContentLoaded', function () {
-  const menuBtn = document.getElementById('menuBtn');
-  const overlayMenu = document.getElementById('overlayMenu');
-  
-  menuBtn.addEventListener('click', function () {
-    overlayMenu.classList.toggle('-translate-x-full');
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const drawerOpener = document.getElementById('drawerOpener');
+  const drawer = document.getElementById('drawer');
+
+  if (drawerOpener && drawer) {
+      drawerOpener.addEventListener('click', () => {
+          drawer.classList.toggle('open');
+      });
+  } else {
+      console.error('Elemente mit den IDs "drawerOpener" und/oder "drawer" wurden nicht gefunden.');
+  }
 });
