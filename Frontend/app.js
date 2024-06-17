@@ -149,7 +149,21 @@ function renderCategories() {
     categoryList.appendChild(categoryCard);
   });
 }
-
+function fetchDataAndRender() {
+  fetch('/api/categories') //apiPoint
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); // json return
+    })
+    .then(categories => {
+      renderCategories(categories); // call render categories
+    })
+    .catch(error => {
+      console.error('Error fetching categories:', error);
+    });
+}
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className =
@@ -361,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCart();
   }
 
-  renderCategories();
+  fetchDataAndRender();
 });
 
 function updateCart() {

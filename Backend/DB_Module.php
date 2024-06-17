@@ -44,6 +44,16 @@
         }
 
         $whereClause = "";
+
+        if (!empty($condition)) {
+            $whereClause = "WHERE ";
+            $conditions = [];
+            foreach($condition as $key => $value) {
+                $conditions[] = "`$key` = :$key";
+            }
+            $whereClause .= implode(" AND ", $conditions);
+        }
+
         foreach($condition as $Arr){
             foreach ($Arr as $key => $value) {
                 $whereClause = "`$key` = '$value'";

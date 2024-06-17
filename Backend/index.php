@@ -1,4 +1,7 @@
 <?php
+    require 'dbModule.php';
+    require 'config.php';
+
 
     $requestUri = $_SERVER['REQUEST_URI'];
     $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -17,8 +20,22 @@
     echo '<pre/>';
 
     switch ($requestUri) {
-        case 'GetAllCategories':
-                echo 'GetAllCategories';
+        case 'api/categories':
+            
+            if ($requestMethod === 'GET') {
+                try {
+                    $condition = []; // Empty condition to fetch all categories
+                    $categories = selectWithWhereCondition($pdo, 'categories', $condition);
+                    echo json_encode($categories);
+                } catch (Exception $e) {
+                    http_response_code(500);
+                    echo json_encode(['error' => 'Failed to fetch categories: ' . $e->getMessage()]);
+                }
+            } else {
+                http_response_code(405); // Method Not Allowed
+                echo json_encode(['error' => 'Method not allowed']);
+            }
+                
             break;
         case 'GetProductForCategorie':
                 echo 'GetProductForCategorie';
