@@ -158,7 +158,8 @@ function fetchDataAndRender() {
       return response.json(); // json return
     })
     .then(categories => {
-      renderCategories(categories); // call render categories
+      console.log(categories);
+      // renderCategories(); // call render categories
     })
     .catch(error => {
       console.error('Error fetching categories:', error);
@@ -374,8 +375,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cart = storedCart;
     renderCart();
   }
-
   fetchDataAndRender();
+  renderCategories();
 });
 
 function updateCart() {
