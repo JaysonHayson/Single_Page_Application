@@ -105,18 +105,18 @@
 
     }
     function updateDatasetWithWhereIDCondition($pdo, $type, $data, $id) {
-        // Typevalidate
+        // typeValidate
         $validTypes = ['product', 'category', 'user'];
         if (empty($type) || !in_array($type, $validTypes)) {
             throw new Exception("Type name cannot be empty! Choose 'product', 'category' or 'user'");
         }
     
-        // Datavalidate
+        // dataValidate
         if (empty($data) || !is_array($data)) {
             throw new Exception("Data must be a non-empty associative array");
         }
     
-        //IDvalidate
+        //IDValidate
         if (empty($id)) {
             throw new Exception("ID cannot be empty");
         }
@@ -145,6 +145,30 @@
         $stmt->bindValue(":id", $id);
     
         //execute statement
+        return $stmt->execute();
+    }
+    function deleteDatasetById($pdo, $type, $id) {
+        // typeValidate
+        $validTypes = ['product', 'category', 'user'];
+        if (empty($type) || !in_array($type, $validTypes)) {
+            throw new Exception("Type name cannot be empty! Choose 'product', 'category' or 'user'");
+        }
+    
+        //IDvalidate
+        if (empty($id)) {
+            throw new Exception("ID cannot be empty");
+        }
+    
+        //build SQL
+        $sql = "DELETE FROM $type WHERE id = :id";
+    
+        // prepare Statement
+        $stmt = $pdo->prepare($sql);
+    
+        // bind placeholders
+        $stmt->bindValue(":id", $id);
+    
+        // execute Statement
         return $stmt->execute();
     }
 
