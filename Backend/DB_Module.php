@@ -103,7 +103,50 @@
     // Ausführen der vorbereiteten SQL-Anweisung und Rückgabe des Ergebnisses
     return $stmt->execute(); // Gibt true zurück, wenn die Ausführung erfolgreich war, ansonsten false
 
- }
+    }
+    function updateDatasetWithWhereIDCondition($pdo, $type, $data, $id) {
+        // Typevalidate
+        $validTypes = ['product', 'category', 'user'];
+        if (empty($type) || !in_array($type, $validTypes)) {
+            throw new Exception("Type name cannot be empty! Choose 'product', 'category' or 'user'");
+        }
+    
+        // Datavalidate
+        if (empty($data) || !is_array($data)) {
+            throw new Exception("Data must be a non-empty associative array");
+        }
+    
+        //IDvalidate
+        if (empty($id)) {
+            throw new Exception("ID cannot be empty");
+        }
+    
+        //name must be at least in cause every model got a name
+        if (!array_key_exists('name', $data)) {
+            throw new Exception("Data array must contain a 'name' key");
+        }
+    
+        // Setting SQL Query
+        $setClause = [];
+        foreach ($data as $key => $value) {
+            $setClause[] = "$key = :$key";
+        }
+        $setClauseString = implode(", ", $setClause);
+        
+        $sql = "UPDATE $type SET $setClauseString WHERE id = :id";
+    
+        // prepare SQL
+        $stmt = $pdo->prepare($sql);
+    
+        // binding the values to placeholders
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+        $stmt->bindValue(":id", $id);
+    
+        //execute statement
+        return $stmt->execute();
+    }
 
  //##################
  //##################
