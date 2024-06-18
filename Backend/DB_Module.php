@@ -182,6 +182,24 @@
         return $stmt->execute();
     }
 
+    /**
+     * selectAllFromTable
+     * Prepares and executes a 'Select * from $table;'
+     * 
+     * @param  PDO      $pdo        PDO Handle
+     * @param  string   $table      Name of Table in DB
+     * @return Array    Associative Multidimensional Array with results.
+     */
+    function selectAllFromTable(&$pdo,$table){
+        // Constructing the SQL query
+        $sql = "SELECT * FROM $table";
+        // Preparing and executing the statement
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        // Fetching all rows of the results
+        return $stmt->fetchall(PDO::FETCH_ASSOC);
+    }
  //##################
  //##################
  //##################
