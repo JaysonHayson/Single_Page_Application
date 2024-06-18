@@ -71,7 +71,7 @@
                   <a
                     class="btn btn-ghost btn-xl w-full"
                     href="#"
-                    onclick="placeholderFunction()"
+                    onclick="xInnerHtmlAndCallback(renderHero)"
                     >Startseite</a
                   >
                 </li>
@@ -79,7 +79,7 @@
                   <a
                     class="btn btn-ghost btn-xl w-full"
                     href="#"
-                    onclick="placeholderFunction()"
+                    onclick="xInnerHtmlAndCallback(renderCategories)"
                     >Produkte</a
                   >
                 </li>
@@ -95,8 +95,8 @@
                   <a
                     class="btn btn-ghost btn-xl w-full"
                     href="#"
-                    onclick="placeholderFunction()"
-                    >FAQ</a
+                    onclick="xInnerHtmlAndCallback(renderLoginForm)"
+                    >Login</a
                   >
                 </li>
               </ul>
@@ -132,7 +132,7 @@
                 class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4 text-primary-content"
               >
                 <li>
-                  <a class="btn btn-ghost rounded-btn" onclick="showLogin()"
+                  <a class="btn btn-ghost rounded-btn" onclick="xInnerHtmlAndCallback(renderLoginForm)"
                     >Login</a
                   >
                 </li>
@@ -197,51 +197,18 @@
     <!-- Main content -->
     <main class="spaConfig flex-grow">
    
-
       <!-- Hero with overlay image-->
-      <div id="heroComp" class=""></div>
-      <!-- <div class="hero min-h-screen relative overflow-hidden">
-        <video
-          id="backgroundVideo"
-          autoplay
-          loop
-          muted
-          playsinline
-          class="video-filter absolute w-full h-full object-cover"
-        >
-          <source src="hero.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div class="hero-overlay bg-opacity-60 absolute inset-0"></div>
-        <div
-          class="hero-content text-center text-neutral-content relative z-10"
-        >
-          <div class="max-w-md">
-            <h1 class="mb-20 text-7xl font-bold">WELCOME</h1>
-            <button
-              id="scrollButton"
-              class="btn btn-primary"
-              onClick="scrollToCategories()"
-            >
-              BROWSE OFFERS NOW
-            </button>
-          </div>
-        </div>
-      </div> -->
-
+      <div id="heroComp"></div>
       
-        <!-- Category List -->
-        <div
-          id="categoryList"
-          class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-2/5 mx-auto mt-5"
-        ></div>
+      <!-- Category List -->
+      <div id="categoryList" class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-2/5 mx-auto mt-5"></div>
       
-        <!-- Product Details -->
-        <div id="productDetailsID" class="w-3/5 mx-auto mt-5"></div>
+      <!-- Product Details -->
+      <div id="productDetailsID" class="w-3/5 mx-auto mt-5"></div>
        
-
       <!--Login-->
-      <div id="loginForm" class="flex flex-col mt-4"></div>
+      <div id="loginForm" class="flex flex-col mx-auto my-10"></div>
+
     </main>
 
     <footer class="mt-20 py-4">

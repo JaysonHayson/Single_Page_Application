@@ -388,7 +388,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchDataAndRender();
   renderProductDetails();
   renderLoginForm();
-  renderCategories();
   renderHero();
 });
 
@@ -454,7 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
-  loginForm.className = "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto";
+  loginForm.className = "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto mt-10";
 
   loginForm.innerHTML = `
       <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -509,8 +508,7 @@ function createHero(){
                         <h1 class="mb-20 text-7xl font-bold">WELCOME</h1>
                         <button
                           id="scrollButton"
-                          class="btn btn-primary"
-                          onClick="scrollToCategories()">
+                          class="btn btn-primary" onclick="renderCategories()>
                           BROWSE OFFERS NOW
                         </button>
                       </div>
@@ -552,6 +550,17 @@ function renderProductDetails(){
   proDetails.innerHTML = "";
   const detailsItem = createProductDetails();
   proDetails.appendChild(detailsItem);
+}
+function xInnerHtmlAndCallback(callback){
+  const spaConfig = document.querySelector(".spaConfig");
+  
+  if (spaConfig) {
+    const divs = spaConfig.querySelectorAll("div");
+    divs.forEach(div => {
+      div.innerHTML = "";
+    });
+  }
+  callback();
 }
 // TODO: Functions to be implemented
 
