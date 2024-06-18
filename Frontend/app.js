@@ -441,6 +441,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+//Hero Button-> Scroll to categories
+function scrollToCategories(){
+  document.getElementById('scrollID').scrollIntoView();
+}
+
 // TODO: Functions to be implemented
 
 function showLogin() {
