@@ -150,24 +150,23 @@ function renderCategories() {
   });
 }
 function fetchDataAndRender() {
-  fetch('/Backend/index.php')
-    .then(response => {
+  fetch("/Backend/index.php")
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(categories => {
+    .then((categories) => {
       const categoriesObj = {};
-      categories.forEach(category => {
+      categories.forEach((category) => {
         categoriesObj[category.id] = category;
       });
 
-      
       //renderCategories() should be implemented here?
     })
-    .catch(error => {
-      console.error('Error fetching categories:', error);
+    .catch((error) => {
+      console.error("Error fetching categories:", error);
     });
 }
 function createProductCard(item, categoryName) {
@@ -194,6 +193,8 @@ function createProductCard(item, categoryName) {
   `;
   return productCard;
 }
+
+
 
 function showProducts(categoryName) {
   const category = categories.find((cat) => cat.name === categoryName);
@@ -366,12 +367,11 @@ function renderCart() {
 function toggleDarkMode() {
   const body = document.body;
   const isDarkMode = body.classList.toggle("dark-mode");
-  localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
 }
 
 function toggleColorInversion() {
-  const video = document.getElementById('backgroundVideo');
-  video.classList.toggle('video-invert');
+  const video = document.getElementById("backgroundVideo");
+  video.classList.toggle("video-invert");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -386,6 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCart();
   }
   fetchDataAndRender();
+  renderLoginForm();
   renderCategories();
 });
 
@@ -447,9 +448,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //Hero Button-> Scroll to categories
-function scrollToCategories(){
-  document.getElementById('scrollID').scrollIntoView();
+function scrollToCategories() {
+  document.getElementById("scrollID").scrollIntoView();
 }
+
+//loginform
+function createLoginForm() {
+  const loginForm = document.createElement("div");
+  loginForm.className = "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto";
+
+  loginForm.innerHTML = `
+      <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
+      <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" class="input input-bordered w-full" placeholder="Enter your email">
+      </div>
+      <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input type="password" class="input input-bordered w-full" placeholder="Enter your password">
+      </div>
+      <div class="flex items-center mb-2 mt-2">
+          <input type="checkbox" class="checkbox mr-2">
+          <label class="text-sm text-gray-700">Remember me</label>
+          <a href="#" class="text-sm text-blue-600 ml-auto">Forgot password?</a>
+      </div>
+      
+      <button class="btn btn-primary w-full mb-4">Login</button>
+      <div class="text-center">
+          <p class="text-sm text-gray-700">If you are not registered yet <a href="#" class="text-blue-600">register</a></p>
+      </div>
+  `;
+
+  return loginForm;
+}
+function renderLoginForm(){
+  const loginForm = document.getElementById("loginForm");
+  loginForm.innerHTML = "";
+  const loginFormItem = createLoginForm();
+  loginForm.appendChild(loginFormItem);
+}
+//loginform end
 
 // TODO: Functions to be implemented
 
