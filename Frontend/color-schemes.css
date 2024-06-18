@@ -90,3 +90,6 @@ button.btn:hover {
 #searchBar input::placeholder {
   color: var(--text-color2);
 }
+.checkbox{
+  background-color: var(--text-color);
+}

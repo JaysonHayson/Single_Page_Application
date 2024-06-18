@@ -149,6 +149,7 @@ function renderCategories() {
     categoryList.appendChild(categoryCard);
   });
 }
+
 function fetchDataAndRender() {
   fetch('/Backend/index.php')
     .then(response => {
@@ -194,7 +195,42 @@ function createProductCard(item, categoryName) {
   `;
   return productCard;
 }
+//loginform
+function createLoginForm() {
+  const loginForm = document.createElement("div");
+  loginForm.className = "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto";
 
+  loginForm.innerHTML = `
+      <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
+      <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" class="input input-bordered w-full" placeholder="Enter your email">
+      </div>
+      <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input type="password" class="input input-bordered w-full" placeholder="Enter your password">
+      </div>
+      <div class="flex items-center mb-2 mt-2">
+          <input type="checkbox" class="checkbox mr-2">
+          <label class="text-sm text-gray-700">Remember me</label>
+          <a href="#" class="text-sm text-blue-600 ml-auto">Forgot password?</a>
+      </div>
+      
+      <button class="btn btn-primary w-full mb-4">Login</button>
+      <div class="text-center">
+          <p class="text-sm text-gray-700">If you are not registered yet <a href="#" class="text-blue-600">register</a></p>
+      </div>
+  `;
+
+  return loginForm;
+}
+function renderLoginForm(){
+  const loginForm = document.getElementById("loginForm");
+  loginForm.innerHTML = "";
+  const loginFormItem = createLoginForm();
+  loginForm.appendChild(loginFormItem);
+}
+//loginform end
 function showProducts(categoryName) {
   const category = categories.find((cat) => cat.name === categoryName);
   if (!category) return;
@@ -283,6 +319,7 @@ function removeFromCart(productName) {
 function removeAllFromCart() {
   cart = [];
   updateCart();
+  renderLoginForm();
   renderCart();
 }
 
@@ -381,6 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCart();
   }
   fetchDataAndRender();
+  renderLoginForm();
   renderCategories();
 });
 
