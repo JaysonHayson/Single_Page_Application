@@ -93,9 +93,9 @@ button.btn:hover {
   color: var(--text-color2);
 }
 
-.hero h1{
+.hero h1 {
   color: var(--hero-color);
 }
-.checkbox{
+.checkbox {
   background-color: var(--text-color);
 }
