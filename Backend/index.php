@@ -5,13 +5,13 @@
 
     $requestUri = $_SERVER['REQUEST_URI'];
     $requestMethod = $_SERVER['REQUEST_METHOD'];
-    $requestArray[]= '';
+    $requestArray= [];
 
     #Remove Preceding /
     $requestUri = ltrim($requestUri," /");
     $requestArray = explode('/', $requestUri);
     #Check if Last Array Element is Empty, then remove it.
-    if(is_null($requestArray[count($requestArray)])){
+    if(empty($requestArray[count($requestArray)-1])){
         array_pop($requestArray);
     }
 
