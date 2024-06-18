@@ -6,11 +6,12 @@
     $requestMethod = $_SERVER['REQUEST_METHOD'];
     $requestArray= $_POST;
 
+    header('Content-Type: application/json');
+
     if ($requestMethod != 'POST'){
         echo json_encode(['error' => 'Method not allowed']);
+        return;    
     }
-
-    header('Content-Type: application/json');
 
     switch ($requestArray['Command']) {
         case 'GetProductsForCategorie':
