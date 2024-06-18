@@ -368,6 +368,10 @@ function toggleDarkMode() {
   const isDarkMode = body.classList.toggle("dark-mode");
   localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
 }
+function toggleInvert() {
+  const video = document.getElementById('backgroundVideo');
+  video.classList.toggle('invert');
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("darkMode") === "enabled") {
