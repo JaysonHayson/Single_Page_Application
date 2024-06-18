@@ -386,8 +386,10 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCart();
   }
   fetchDataAndRender();
+  renderProductDetails();
   renderLoginForm();
   renderCategories();
+  renderHero();
 });
 
 function updateCart() {
@@ -447,10 +449,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//Hero Button-> Scroll to categories
-function scrollToCategories() {
-  document.getElementById("scrollID").scrollIntoView();
-}
+
 
 //loginform
 function createLoginForm() {
@@ -488,7 +487,72 @@ function renderLoginForm(){
   loginForm.appendChild(loginFormItem);
 }
 //loginform end
+//hero
+function createHero(){
+  const hero = document.createElement("div");
+  hero.className = "";
 
+  hero.innerHTML =`<div class="hero min-h-screen relative overflow-hidden"><video
+                      id="backgroundVideo"
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      class="video-filter absolute w-full h-full object-cover">
+                      <source src="hero.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    <div class="hero-overlay bg-opacity-60 absolute inset-0"></div>
+                    <div
+                      class="hero-content text-center text-neutral-content relative z-10">
+                      <div class="max-w-md">
+                        <h1 class="mb-20 text-7xl font-bold">WELCOME</h1>
+                        <button
+                          id="scrollButton"
+                          class="btn btn-primary"
+                          onClick="scrollToCategories()">
+                          BROWSE OFFERS NOW
+                        </button>
+                      </div>
+                    </div>
+                    </div>`
+  return hero;
+}
+function renderHero(){
+  const hero = document.getElementById("heroComp");
+  hero.innerHTML = "";
+  const heroItem = createHero();
+  hero.appendChild(heroItem);
+}
+//hero end
+//productDetails
+function createProductDetails(){
+  const proDetails = document.createElement("div");
+  proDetails.className = "";
+
+  proDetails.innerHTML = `
+  <div id="app" class="w-full">
+          <div id="productDetails" class="hidden">
+            <button
+              onclick="hideProductDetails()"
+              class="btn bg-primary text-white px-4 py-2 rounded"
+            >
+              Back
+            </button>
+            <div
+              id="productList"
+              class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
+            ></div>
+          </div>
+        </div>`
+  return proDetails;
+}
+function renderProductDetails(){
+  const proDetails = document.getElementById("productDetailsID");
+  proDetails.innerHTML = "";
+  const detailsItem = createProductDetails();
+  proDetails.appendChild(detailsItem);
+}
 // TODO: Functions to be implemented
 
 function showLogin() {
