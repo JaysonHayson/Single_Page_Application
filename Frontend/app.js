@@ -116,64 +116,10 @@ function createElement(tag, className, innerHTML) {
   return element;
 }
 
-function createCategoryCard(category) {
-  const categoryCard = document.createElement("div");
-  categoryCard.className = "card-container h-96";
-
-  const imageSrc = category.foto;
-  const categoryLink = `javascript:showProducts('${category.name}')`;
-
-  categoryCard.innerHTML = `
-    <a href="${categoryLink}" class="block h-full hover:shadow-lg transition-shadow w-full">
-      <div class="card card-compact w-full shadow-xl h-full transition-shadow">
-        <figure class="h-2/3 overflow-hidden">
-          <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
-        </figure>
-        <div class="card-body h-1/3 flex flex-col justify-between p-4">
-          <h2 class="card-title text-xl font-semibold">${category.name}</h2>
-          <div class="card-actions justify-end">
-            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="showProducts('${category.name}')">View Products</button>
-          </div>
-        </div>
-      </div>
-    </a>
-  `;
-  return categoryCard;
-}
-
-function renderCategories() {
-  const categoryList = document.getElementById("categoryList");
-  categoryList.innerHTML = "";
-  categories.forEach((category) => {
-    const categoryCard = createCategoryCard(category);
-    categoryList.appendChild(categoryCard);
-  });
-}
-function fetchDataAndRender() {
-  fetch("/Backend/index.php")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((categories) => {
-      const categoriesObj = {};
-      categories.forEach((category) => {
-        categoriesObj[category.id] = category;
-      });
-
-      //renderCategories() should be implemented here?
-    })
-    .catch((error) => {
-      console.error("Error fetching categories:", error);
-    });
-}
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className =
     "card-container h-96 flex flex-col justify-between mb-40";
-
   productCard.innerHTML = `
     <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
       <div class="card card-compact w-full shadow-xl h-full transition-shadow">
@@ -194,32 +140,78 @@ function createProductCard(item, categoryName) {
   return productCard;
 }
 
-
-
-function showProducts(categoryName) {
+function renderProducts(categoryName) {
+  console.log("Rendering products for category:", categoryName); // Debugging
   const category = categories.find((cat) => cat.name === categoryName);
-  if (!category) return;
+  if (!category) {
+    console.error("Category not found:", categoryName); // Debugging
+    return;
+  }
 
-  const categoryList = document.getElementById("categoryList");
-  const productDetails = document.getElementById("productDetails");
   const productList = document.getElementById("productList");
-
-  categoryList.classList.add("hidden");
-  productDetails.classList.remove("hidden");
-
+  console.log("Product list element:", productList); // Debugging
   productList.innerHTML = "";
   category.items.forEach((item) => {
+    console.log("Creating product card for item:", item); // Debugging
     const productCard = createProductCard(item, categoryName);
     productList.appendChild(productCard);
   });
 }
 
-function hideProductDetails() {
-  const categoryList = document.getElementById("categoryList");
-  const productDetails = document.getElementById("productDetails");
+function createCategoryCard(category) {
+  const categoryCard = document.createElement("div");
+  categoryCard.className = "card-container h-96";
 
-  productDetails.classList.add("hidden");
-  categoryList.classList.remove("hidden");
+  const imageSrc = category.foto;
+
+  categoryCard.innerHTML = `
+    <div class="block h-full hover:shadow-lg transition-shadow w-full">
+      <div class="card card-compact w-full shadow-xl h-full transition-shadow">
+        <figure class="h-2/3 overflow-hidden">
+          <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
+        </figure>
+        <div class="card-body h-1/3 flex flex-col justify-between p-4">
+          <h2 class="card-title text-xl font-semibold">${category.name}</h2>
+          <div class="card-actions justify-end">
+            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => renderProducts('${category.name}'))">View Products</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  return categoryCard;
+}
+
+function renderCategories() {
+  const categoryList = document.getElementById("categoryList");
+  categoryList.innerHTML = "";
+  categories.forEach((category) => {
+    const categoryCard = createCategoryCard(category);
+    categoryList.appendChild(categoryCard);
+  });
+}
+function fetchDataAndRender() {
+  fetch("/Backend/index.php")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Fetched data:", data); // Debugging
+
+      // Assuming data is the categories array
+      if (Array.isArray(data)) {
+        categories = data;
+        renderCategories();
+      } else {
+        console.error("Fetched data is not an array:", data); // Debugging
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching categories:", error);
+    });
 }
 
 let cart = [];
@@ -385,9 +377,11 @@ document.addEventListener("DOMContentLoaded", () => {
     cart = storedCart;
     renderCart();
   }
+
+  // Fetch data and render categories
   fetchDataAndRender();
-  renderProductDetails();
-  renderLoginForm();
+
+  // Render hero section
   renderHero();
 });
 
@@ -448,12 +442,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-
 //loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
-  loginForm.className = "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto mt-10";
+  loginForm.className =
+    "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto mt-10";
 
   loginForm.innerHTML = `
       <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -479,7 +472,7 @@ function createLoginForm() {
 
   return loginForm;
 }
-function renderLoginForm(){
+function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
   loginForm.innerHTML = "";
   const loginFormItem = createLoginForm();
@@ -487,11 +480,11 @@ function renderLoginForm(){
 }
 //loginform end
 //hero
-function createHero(){
+function createHero() {
   const hero = document.createElement("div");
   hero.className = "";
 
-  hero.innerHTML =`<div class="hero min-h-screen relative overflow-hidden"><video
+  hero.innerHTML = `<div class="hero min-h-screen relative overflow-hidden"><video
                       id="backgroundVideo"
                       autoplay
                       loop
@@ -513,50 +506,23 @@ function createHero(){
                         </button>
                       </div>
                     </div>
-                    </div>`
+                    </div>`;
   return hero;
 }
-function renderHero(){
+function renderHero() {
   const hero = document.getElementById("heroComp");
   hero.innerHTML = "";
   const heroItem = createHero();
   hero.appendChild(heroItem);
 }
 //hero end
-//productDetails
-function createProductDetails(){
-  const proDetails = document.createElement("div");
-  proDetails.className = "";
 
-  proDetails.innerHTML = `
-  <div id="app" class="w-full">
-          <div id="productDetails" class="hidden">
-            <button
-              onclick="hideProductDetails()"
-              class="btn bg-primary text-white px-4 py-2 rounded"
-            >
-              Back
-            </button>
-            <div
-              id="productList"
-              class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4"
-            ></div>
-          </div>
-        </div>`
-  return proDetails;
-}
-function renderProductDetails(){
-  const proDetails = document.getElementById("productDetailsID");
-  proDetails.innerHTML = "";
-  const detailsItem = createProductDetails();
-  proDetails.appendChild(detailsItem);
-}
-function xInnerHtmlAndCallback(callback){
+function xInnerHtmlAndCallback(callback) {
   const spaConfig = document.querySelector(".spaConfig");
-  
+
   if (spaConfig) {
     const divs = spaConfig.querySelectorAll("div");
-    divs.forEach(div => {
+    divs.forEach((div) => {
       div.innerHTML = "";
     });
   }
