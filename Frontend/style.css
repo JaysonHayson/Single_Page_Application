@@ -183,3 +183,14 @@ body {
     cursor: pointer;
     color: var(--text-color2);
   }
+  .logo-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 100px;           
+  }
+  
+  .logo {
+    max-width: 100px; 
+    height: auto;     
+  }
