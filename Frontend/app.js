@@ -501,7 +501,7 @@ function createHero() {
                         <h1 class="mb-20 text-7xl font-bold">WELCOME</h1>
                         <button
                           id="scrollButton"
-                          class="btn btn-primary" onclick="renderCategories()>
+                          class="btn btn-primary" onclick="xInnerHtmlAndCallback(renderCategories)">
                           BROWSE OFFERS NOW
                         </button>
                       </div>
