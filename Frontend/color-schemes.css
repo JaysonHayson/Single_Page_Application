@@ -8,7 +8,6 @@
   --button-background-color: rgba(140, 90, 255, 1);
   --button-bg-hover: rgba(140, 90, 255, 0.8);
   --hero-color: rgb(148, 150, 153);
-  
 }
 
 .dark-mode {
@@ -21,7 +20,6 @@
   --button-background-color: #70613f;
   --button-bg-hover: #7e6f4c;
   --hero-color: rgb(21, 23, 27);
-  
 }
 
 body {
@@ -97,4 +95,7 @@ button.btn:hover {
 
 .hero h1{
   color: var(--hero-color);
+}
+.checkbox{
+  background-color: var(--text-color);
 }
