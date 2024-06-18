@@ -149,50 +149,72 @@ body {
   right: 10px;
   color: var(--text-color2);
 }
-  body {
-    font-family: 'Lato', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  #drawer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#drawer li {
+  margin-bottom: 1rem;
+}
+#drawer a {
+  display: block;
+  padding: 1rem;
+  background-color: var(--background-color);
+  text-align: middle;
+  text-decoration: none;
+  color: var(--text-color);
+  width: 285px;
+}
+#drawer a:hover {
+  background-color: var(--background-color);
+}
+#drawerCloseButton {
+  position: absolute;
+  top: -350px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-color2);
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
 
+.logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.video-filter {
+  filter: grayscale(100%) invert(100%);
+  transition: filter 0.5s ease-in-out;
+}
+
+.video-invert {
+  filter: grayscale(100%) invert(0%);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  #drawer li {
-    margin-bottom: 1rem;
+  100% {
+    opacity: 1;
   }
-  #drawer a {
-    display: block;
-    padding: 1rem;
-    background-color: var(--background-color);
-    text-align: middle;
-    text-decoration: none;
-    color: var(--text-color);
-    width: 285px;
-  }
-  #drawer a:hover {
-    background-color: var(--background-color);
-  }
-  #drawerCloseButton {
-    position: absolute;
-    top: -350px; 
-    right: 15px; 
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-color2);
-  }
-  .logo-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    height: 100px;           
-  }
-  
-  .logo {
-    max-width: 100px; 
-    height: auto;     
-  }
+}
+
+#scrollButton {
+  opacity: 0;
+  animation: fadeIn 4s ease-in 4s forwards;
+}
