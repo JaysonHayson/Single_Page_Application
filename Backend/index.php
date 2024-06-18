@@ -15,8 +15,8 @@
 
     switch ($requestArray['Command']) {
         case 'GetProductsForCategorie':
-            $cat_condition[] = ['id' => $requestArray['CatNr']];
-            $db_results = selectWithWhereCondition($pdo,'categories',$cat_condition);
+            $cat_condition[] = ['category_id' => $requestArray['CatNr']];
+            $db_results = selectWithWhereCondition($pdo,'Items',$cat_condition);
             echo json_encode($db_results);
             break;
         case 'GetAllCategories':
