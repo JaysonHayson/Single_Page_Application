@@ -150,16 +150,21 @@ function renderCategories() {
   });
 }
 function fetchDataAndRender() {
-  fetch('/api/categories') //apiPoint
+  fetch('/Backend/index.php')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json(); // json return
+      return response.json();
     })
     .then(categories => {
-      console.log(categories);
-      // renderCategories(); // call render categories
+      const categoriesObj = {};
+      categories.forEach(category => {
+        categoriesObj[category.id] = category;
+      });
+
+      
+      //renderCategories() should be implemented here?
     })
     .catch(error => {
       console.error('Error fetching categories:', error);
