@@ -29,8 +29,8 @@
 
     <!-- Navigation Bar -->
     <div id="main-content">
-    <header class>
-        <div class="navbar  px-4 py-2 flex justify-between items-center">
+    <header class="">
+        <div class="navbar absolute px-4 py-2 flex justify-between items-center">
           <div class="flex items-center">
             <button id="drawerOpener" class="hamburger-btn px-4 py-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,17 +38,17 @@
               </svg>
             </button>
           </div>
-          <div id="drawer" class="fixed top-0 left-0 h-full w-72 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out">
+          <div id="drawer" class="top-0 left-0 h-full w-72 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out">
             <div class="p-4 relative">
               <button id="drawerCloseButton" class="absolute top-2 right-2">X</button>
               <h2 class="logo-container">
                 <img src="Logo.png" alt="Logo" class="logo"> </h2>
               <ul>
                 <!--Habe hier mal ein <a> mit classen belegt um look und feel dem Rest der App anzupassen-->
-                <li><a class="bg-black btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Startseite</a></li>
-                <li><a class="bg-black btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Produkte</a></li>
-                <li><a class="bg-black btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Über Uns</a></li>
-                <li><a class="bg-black btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">FAQ</a></li>
+                <li><a class="btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Startseite</a></li>
+                <li><a class="btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Produkte</a></li>
+                <li><a class="btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">Über Uns</a></li>
+                <li><a class="btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">FAQ</a></li>
               </ul>
             </div>
           </div>
