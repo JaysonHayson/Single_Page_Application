@@ -222,7 +222,7 @@ function renderCategories(data) {
     categoryList.appendChild(categoryCard);
   });
 }
-function fetchCategorys() {
+function fetchCategories() {
   fetch('../Backend/index.php', {
     method: 'POST',
     body: new URLSearchParams({
