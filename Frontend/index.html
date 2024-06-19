@@ -24,195 +24,136 @@
     <link rel="stylesheet" href="loading.css" />
   </head>
   <body class="text-white min-h-screen flex flex-col">
+    <!-- Loading Screen -->
     <div id="loading-screen">
-      <div class="loading-content">
-        <img src="Logo.png" alt="Logo" class="logo" />
-      </div>
+        <div class="loading-content">
+            <img src="Logo.png" alt="Logo" class="logo" />
+        </div>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Main Content -->
     <div id="main-content">
-      <header class="">
-        <div class="navbar px-4 py-2 flex justify-between items-center z-50">
-          <div class="flex items-center">
-            <button id="drawerOpener" class="hamburger-btn px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                ></path>
-              </svg>
-            </button>
-          </div>
-          <div
-            id="drawer"
-            class="top-0 left-0 h-full w-72 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out"
-          >
-            <div class="p-4 relative">
-              <button
-                id="drawerCloseButton"
-                class="absolute top-2 right-2"
-              ></button>
-              <h2 class="logo-container">
-                <img src="Logo.png" alt="Logo" class="logo" />
-              </h2>
-              <ul>
-                <li>
-                  <a
-                    class="btn btn-ghost btn-xl w-full"
-                    href="#"
-                    onclick="xInnerHtmlAndCallback(renderHero)"
-                    >Startseite</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="btn btn-ghost btn-xl w-full"
-                    href="#"
-                    onclick="xInnerHtmlAndCallback(renderCategories)"
-                    >Produkte</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="btn btn-ghost btn-xl w-full"
-                    href="#"
-                    onclick="placeholderFunction()"
-                    >Über Uns</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="btn btn-ghost btn-xl w-full"
-                    href="#"
-                    onclick="xInnerHtmlAndCallback(renderLoginForm)"
-                    >Login</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="flex items-center justify-center flex-grow"></div>
-          <div class="flex items-center">
-            <button
-              class="w-12 h-12 pt-1 rounded-full"
-              onclick="toggleSearch()"
-            >
-              <span class="material-symbols-outlined"> search </span>
-            </button>
-            <button
-              class="w-12 h-12 pt-1 rounded-full p-0"
-              onclick="toggleCart()"
-            >
-              <div id="container">
-                <div class="animation"></div>
-              </div>
-              <span class="material-symbols-outlined"> shopping_cart </span>
-            </button>
-            <div class="dropdown dropdown-end" id="personDropdown">
-              <div tabindex="0" role="button" onclick="togglePersonMenu()">
-                <div
-                  class="rounded-full w-12 h-12 p-3 flex items-center justify-center"
-                >
-                  <span class="material-symbols-outlined"> person </span>
+        <!-- Navigation Bar -->
+        <header class="">
+            <div class="navbar px-4 py-2 flex justify-between items-center z-50">
+                <div class="flex items-center">
+                    <!-- Hamburger Menu Button -->
+                    <button id="drawerOpener" class="hamburger-btn px-4 py-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
                 </div>
-              </div>
-              <ul
-                tabindex="0"
-                class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4 text-primary-content"
-              >
-                <li>
-                  <a
-                    class="btn btn-ghost rounded-btn"
-                    onclick="xInnerHtmlAndCallback(renderLoginForm)"
-                    >Login</a
-                  >
-                </li>
-                <li>
-                  <a class="btn btn-ghost rounded-btn" onclick="showRegister()"
-                    >Register</a
-                  >
-                </li>
-                <li>
-                  <div class="form-control">
-                    <label class="label cursor-pointer">
-                      <span class="dark">Theme</span>
-                      <input
-                        type="checkbox"
-                        class="toggle ml-2"
-                        onclick="toggleDarkMode(), toggleColorInversion()"
-                      />
-                    </label>
-                  </div>
-                </li>
-              </ul>
+
+                <!-- Side Drawer -->
+                <div id="drawer" class="top-0 left-0 h-full w-72 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out">
+                    <div class="p-4 relative">
+                        <button id="drawerCloseButton" class="absolute top-2 right-2"></button>
+                        <h2 class="logo-container">
+                            <img src="Logo.png" alt="Logo" class="logo" />
+                        </h2>
+                        <!-- Navigation Links -->
+                        <ul>
+                            <li>
+                                <a class="btn btn-ghost btn-xl w-full" href="#" onclick="xInnerHtmlAndCallback(renderHero)">Homepage</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-ghost btn-xl w-full" href="#" onclick="xInnerHtmlAndCallback(renderCategories)">Products</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-ghost btn-xl w-full" href="#" onclick="placeholderFunction()">About Us</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-ghost btn-xl w-full" href="#" onclick="xInnerHtmlAndCallback(renderLoginForm)">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Spacer -->
+                <div class="flex items-center justify-center flex-grow"></div>
+
+                <!-- Search and Cart Buttons -->
+                <div class="flex items-center">
+                    <!-- Search Button -->
+                    <button class="w-12 h-12 pt-1 rounded-full" onclick="toggleSearch()">
+                        <span class="material-symbols-outlined"> search </span>
+                    </button>
+                    
+                    <!-- Cart Button -->
+                    <button class="w-12 h-12 pt-1 rounded-full p-0" onclick="toggleCart()">
+                        <div id="container">
+                            <div class="animation"></div>
+                        </div>
+                        <span class="material-symbols-outlined"> shopping_cart </span>
+                    </button>
+
+                    <!-- Person Dropdown Menu -->
+                    <div class="dropdown dropdown-end" id="personDropdown">
+                        <div tabindex="0" role="button" onclick="togglePersonMenu()">
+                            <div class="rounded-full w-12 h-12 p-3 flex items-center justify-center">
+                                <span class="material-symbols-outlined"> person </span>
+                            </div>
+                        </div>
+                        <!-- Dropdown Content -->
+                        <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow rounded-box w-52 mt-4 text-primary-content">
+                            <li>
+                                <a class="btn btn-ghost rounded-btn" onclick="xInnerHtmlAndCallback(renderLoginForm)">Login</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-ghost rounded-btn" onclick="showRegister()">Register</a>
+                            </li>
+                            <li>
+                                <!-- Dark Mode Toggle -->
+                                <div class="form-control">
+                                    <label class="label cursor-pointer">
+                                        <span class="dark">Theme</span>
+                                        <input type="checkbox" class="toggle ml-2" onclick="toggleDarkMode(), toggleColorInversion()" />
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </header>
+        </header>
     </div>
 
     <!-- Search Bar -->
-    <div
-      class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 w-7/12 mx-auto"
-      id="searchBar"
-    >
-      <input
-        type="text"
-        placeholder="Search"
-        class="input input-bordered block w-full mx-auto"
-      />
+    <div class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 w-7/12 mx-auto" id="searchBar">
+        <input type="text" placeholder="Search" class="input input-bordered block w-full mx-auto" />
     </div>
-    <div
-      id="cartOverlay"
-      class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden"
-    >
-      <div
-        class="shoppingCart max-w-md mx-auto p-4 rounded flex flex-col items-center justify-center"
-      >
-        <h2 class="text-xl font-bold mb-2">Shopping Cart</h2>
-        <div id="cartList" class="mb-4"></div>
-        <p class="border-t w-full my-2"></p>
-        <p class="text-lg font-bold my-2">
-          Total: $<span id="cartTotal">0.00</span>
-        </p>
-        <div class="btn-group mt-4">
-          <button class="btn btn-danger mr-2" onclick="checkout()">
-            Checkout
-          </button>
-          <button class="btn btn-danger ml-2" onclick="toggleCart()">
-            Close
-          </button>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto z-50 hidden">
+        <div class="shoppingCart max-w-md mx-auto p-4 rounded flex flex-col items-center justify-center">
+            <h2 class="text-xl font-bold mb-2">Shopping Cart</h2>
+            <div id="cartList" class="mb-4"></div>
+            <p class="border-t w-full my-2"></p>
+            <p class="text-lg font-bold my-2">Total: $<span id="cartTotal">0.00</span></p>
+            <div class="btn-group mt-4">
+                <button class="btn btn-danger mr-2" onclick="checkout()">Checkout</button>
+                <button class="btn btn-danger ml-2" onclick="toggleCart()">Close</button>
+            </div>
         </div>
-      </div>
     </div>
 
-    <!-- Main content -->
-    <main class="spaConfig flex flex-col">
-      <!-- Hero with overlay image-->
-      <div id="heroComp"></div>
-
-      <!-- Category List -->
-      <div
-        id="categoryList"
-        class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-2/5 mx-auto mt-20"
-      ></div>
-
-      <!-- Product Details -->
-      <div id="productList" class="flex flex-wrap mx-auto mt-20 "></div>
-
-      <!--Login-->
-      <div id="loginForm" class="flex flex-col mx-auto"></div>
+    <!-- Dynamic Content -->
+    <main class="spaConfig flex flex-col h-screen">
+        <!-- Landing Page Video Placeholder -->
+        <div id="heroComp"></div>
+    
+        <!-- Category List -->
+        <div id="categoryList" class="lg:grid-cols-4 gap-6 w-full max-w-2xl mx-auto overflow-x-auto scrollable-container"></div>
+    
+        <!-- Product Details Placeholder -->
+        <div id="productList" class="lg:grid-cols-4 gap-6 w-full max-w-2xl mx-auto overflow-x-auto scrollable-container"></div>
+    
+        <!-- Login Form Placeholder -->
+        <div id="loginForm" class="flex flex-col mx-auto"></div>
     </main>
 
+    <!-- JavaScript File -->
     <script src="app.js"></script>
-  </body>
+</body>
 </html>

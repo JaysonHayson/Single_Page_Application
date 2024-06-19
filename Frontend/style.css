@@ -218,3 +218,11 @@ body {
   opacity: 0;
   animation: fadeIn 4s ease-in 4s forwards;
 }
+
+.scrollable-container {
+  overflow-y: scroll;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  display:none;
+}

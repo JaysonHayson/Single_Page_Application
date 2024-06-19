@@ -119,7 +119,7 @@ function createElement(tag, className, innerHTML) {
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className =
-    "card-container h-96 flex flex-col justify-between mb-40 w-1/2 p-4";
+    "card-container h-96 gap-4 mb-40 p-4";
   productCard.innerHTML = `
     <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
       <div class="card card-compact w-full shadow-xl h-full transition-shadow">
@@ -160,7 +160,7 @@ function renderProducts(categoryName) {
 
 function createCategoryCard(category) {
   const categoryCard = document.createElement("div");
-  categoryCard.className = "card-container h-96";
+  categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
 
   const imageSrc = category.foto;
 
