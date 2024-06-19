@@ -195,7 +195,7 @@ function fetchDataAndRender() {
     body: new URLSearchParams({
       'Command': 'GetProductsForCategorie',
       'CatNr': '3'
-    }).toString()
+    })
   })
     .then((response) => {
       if (!response.ok) {
