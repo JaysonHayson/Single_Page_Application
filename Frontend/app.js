@@ -446,15 +446,15 @@ document.addEventListener("DOMContentLoaded", () => {
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.className =
-    "p-6 rounded-lg shadow-lg max-w-sm w-full border-2 card m-auto mt-10";
+    "p-6 rounded-lg shadow-lg border-2 card m-auto h-full w-80 sm:w-1/2 md:w-1/4";
 
   loginForm.innerHTML = `
       <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
-      <div class="mb-4">
+      <div class="mb-4 w-full">
           <label class="block text-sm font-medium mb-1">Email</label>
           <input type="email" class="input input-bordered w-full" placeholder="Enter your email">
       </div>
-      <div class="mb-4">
+      <div class="mb-4 w-full">
           <label class="block text-sm font-medium mb-1">Password</label>
           <input type="password" class="input input-bordered w-full" placeholder="Enter your password">
       </div>
