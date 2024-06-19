@@ -190,7 +190,7 @@ function renderCategories() {
   });
 }
 function fetchDataAndRender() {
-  fetch("/Backend/index.php")
+  fetch("../Backend/index.php")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
