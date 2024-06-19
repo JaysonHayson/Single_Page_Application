@@ -118,8 +118,7 @@ function createElement(tag, className, innerHTML) {
 
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
-  productCard.className =
-    "card-container h-96 gap-4 mb-40 p-4";
+  productCard.className = "card-container h-96 gap-4 mb-40 p-4";
   productCard.innerHTML = `
     <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
       <div class="card card-compact w-full shadow-xl h-full transition-shadow">
@@ -482,31 +481,26 @@ function renderLoginForm() {
 //hero
 function createHero() {
   const hero = document.createElement("div");
-  hero.className = "";
+  hero.className = "mx-auto";
 
-  hero.innerHTML = `<div class="hero min-h-screen relative overflow-hidden"><video
-                      id="backgroundVideo"
-                      autoplay
-                      loop
-                      muted
-                      playsinline
-                      class="video-filter absolute w-full h-full object-cover">
-                      <source src="hero.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    <div class="hero-overlay bg-opacity-60 absolute inset-0"></div>
-                    <div
-                      class="hero-content text-center text-neutral-content relative z-10">
-                      <div class="max-w-md">
-                        <h1 class="mb-20 text-7xl font-bold">WELCOME</h1>
-                        <button
-                          id="scrollButton"
-                          class="btn btn-primary" onclick="xInnerHtmlAndCallback(renderCategories)">
-                          BROWSE OFFERS NOW
-                        </button>
-                      </div>
-                    </div>
-                    </div>`;
+  hero.innerHTML = `
+  <div class="hero min-h-screen relative overflow-hidden">
+    <video id="backgroundVideo" autoplay loop muted playsinline class="video-filter absolute w-full h-full object-cover">
+      <source src="hero.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay bg-opacity-60 absolute inset-0"></div>
+    <div class="hero-content text-center text-neutral-content relative z-10">
+      <div class="max-w-md mx-auto">
+        <h1 class="mb-6 text-4xl md:text-8xl lg:text-14xl font-bold">WELCOME</h1>
+        <button id="scrollButton" class="btn btn-primary px-8 py-3 md:px-12 md:py-4" onclick="xInnerHtmlAndCallback(renderCategories)">
+          BROWSE OFFERS NOW
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+
   return hero;
 }
 function renderHero() {
