@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.className =
-    "p-6 rounded-lg shadow-lg border-2 card m-auto h-full w-80 sm:w-1/2 md:w-1/4";
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mb-40 mx-auto w-full lg:w-3/4";
 
   loginForm.innerHTML = `
       <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -466,7 +466,7 @@ function createLoginForm() {
       
       <button class="btn btn-primary w-full mb-4">Login</button>
       <div class="text-center">
-          <p class="text-sm text-gray-700">If you are not registered yet <a href="#" class="text-blue-600">register</a></p>
+          <p class="text-sm text-gray-700">If you are not registered yet! <a href="#" class="text-blue-600">Register</a></p>
       </div>
   `;
 
