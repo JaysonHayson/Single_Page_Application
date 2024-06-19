@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Fetch data and render categories
-  fetchProductsForCategory();
+  fetchProductsForCategory(3);
 
   // Render hero section
   renderHero();
@@ -531,7 +531,7 @@ function createHero() {
     <div class="hero-content text-center text-neutral-content relative z-10">
       <div class="max-w-md mx-auto">
         <h1 class="mb-6 text-4xl md:text-8xl lg:text-14xl font-bold">WELCOME</h1>
-        <button id="scrollButton" class="btn btn-primary px-8 py-3 md:px-12 md:py-4" onclick="xInnerHtmlAndCallback(renderCategories)">
+        <button id="scrollButton" class="btn btn-primary px-8 py-3 md:px-12 md:py-4" onclick="xInnerHtmlAndCallback(fetchCategories)">
           BROWSE OFFERS NOW
         </button>
       </div>
