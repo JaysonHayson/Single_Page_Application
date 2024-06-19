@@ -219,6 +219,7 @@ body {
 
 .scrollable-container {
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .scrollable-container::-webkit-scrollbar {
