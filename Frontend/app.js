@@ -190,7 +190,13 @@ function renderCategories() {
   });
 }
 function fetchDataAndRender() {
-  fetch("../Backend/index.php")
+  fetch('../Backend/index.php', {
+    method: 'POST',
+    body: new URLSearchParams({
+      'Command': 'GetProductsForCategorie',
+      'CatNr': '3'
+    }).toString()
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -198,22 +204,19 @@ function fetchDataAndRender() {
       return response.json();
     })
     .then((data) => {
-      console.log("Fetched data:", data); // Log the fetched data
+      console.log("Fetched data:", data);
 
-      // Convert the data object to a JSON string for display
-      const jsonData = JSON.stringify(data, null, 2);
-      console.log("Fetched data (JSON format):", jsonData); // Log the JSON representation
+      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
 
-      // Assuming data is the categories array
       if (Array.isArray(data)) {
         categories = data;
         renderCategories();
       } else {
-        console.error("Fetched data is not an array:", data); // Log an error if data is not an array
+        console.error("Fetched data is not an array:", data);
       }
     })
     .catch((error) => {
-      console.error("Error fetching categories:", error); // Log any errors that occur during fetch
+      console.error("Error fetching data:", error);
     });
 }
 
