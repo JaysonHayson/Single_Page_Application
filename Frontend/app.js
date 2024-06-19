@@ -159,8 +159,6 @@ function renderProducts(categoryName) {
 }
 
 
-
-
 function fetchProductsForCategory(catNr) {
   fetch('../Backend/index.php', {
     method: 'POST',
@@ -217,12 +215,14 @@ function createCategoryCard(category) {
 function renderCategories(data) {
   const categoryList = document.getElementById("categoryList");
   categoryList.innerHTML = "";
+  
   data.forEach((identifier) => {
+    console.log(identifier);
     const categoryCard = createCategoryCard(identifier);
     categoryList.appendChild(categoryCard);
   });
 }
-function fetchCategorys(data) {
+function fetchCategorys() {
   fetch('../Backend/index.php', {
     method: 'POST',
     body: new URLSearchParams({
