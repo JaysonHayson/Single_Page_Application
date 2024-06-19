@@ -109,6 +109,7 @@ const categories = [
   },
 ];
 
+
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -157,6 +158,39 @@ function renderProducts(categoryName) {
   });
 }
 
+
+
+
+function fetchProductsForCategory(catNr) {
+  fetch('../Backend/index.php', {
+    method: 'POST',
+    body: new URLSearchParams({
+      'Command': 'GetProductsForCategorie',
+      'CatNr': catNr
+    })
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Fetched data:", data);
+
+      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
+      if (Array.isArray(data)) {
+        //return data;
+        //renderCategories();
+      } else {
+        console.error("Fetched data is not an array:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+}
 function createCategoryCard(category) {
   const categoryCard = document.createElement("div");
   categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
@@ -180,21 +214,19 @@ function createCategoryCard(category) {
   `;
   return categoryCard;
 }
-
-function renderCategories() {
+function renderCategories(data) {
   const categoryList = document.getElementById("categoryList");
   categoryList.innerHTML = "";
-  categories.forEach((category) => {
-    const categoryCard = createCategoryCard(category);
+  data.forEach((identifier) => {
+    const categoryCard = createCategoryCard(identifier);
     categoryList.appendChild(categoryCard);
   });
 }
-function fetchDataAndRender() {
+function fetchCategorys(data) {
   fetch('../Backend/index.php', {
     method: 'POST',
     body: new URLSearchParams({
-      'Command': 'GetProductsForCategorie',
-      'CatNr': '3'
+      'Command': 'GetAllCategories'
     })
   })
     .then((response) => {
@@ -209,8 +241,7 @@ function fetchDataAndRender() {
       console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
 
       if (Array.isArray(data)) {
-        categories = data;
-        renderCategories();
+        renderCategories(data);
       } else {
         console.error("Fetched data is not an array:", data);
       }
@@ -385,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Fetch data and render categories
-  fetchDataAndRender();
+  fetchProductsForCategory();
 
   // Render hero section
   renderHero();
