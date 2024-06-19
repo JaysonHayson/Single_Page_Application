@@ -88,7 +88,6 @@ body {
 }
 
 .hamburger-icon-container {
-  color: red;
   height: 1.7em;
   width: 1.7em;
   position: relative;
@@ -105,7 +104,6 @@ body {
   position: absolute;
   height: 3px;
   width: 1.7em;
-  background: white;
   transition: all 0.2s ease;
 }
 
@@ -197,12 +195,12 @@ body {
 }
 
 .video-filter {
-  filter: grayscale(100%) invert(100%);
-  transition: filter 0.5s ease-in-out;
+  filter: grayscale(100%) invert(0%);
 }
 
 .video-invert {
-  filter: grayscale(100%) invert(0%);
+  filter: grayscale(100%) invert(100%);
+  transition: filter 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {

@@ -1,4 +1,17 @@
 :root {
+  --background-color: #312f30;
+  --text-color: #fffdfa;
+  --text-color2: #fffdfa;
+  --primary-color: #70613f;
+  --secondary-color: rgb(70, 70, 70);
+  --card-background-color: rgb(40, 40, 40);
+  --button-background-color: #70613f;
+  --button-bg-hover: #7e6f4c;
+  --hero-color: rgb(21, 23, 27);
+}
+
+/* Dark mode theme */
+.dark-mode {
   --background-color: rgb(210, 235, 255);
   --text-color: rgb(80, 80, 80);
   --text-color2: #fffdfa;
@@ -10,16 +23,12 @@
   --hero-color: rgb(148, 150, 153);
 }
 
-.dark-mode {
-  --background-color: #312f30;
-  --text-color: #fffdfa;
-  --text-color2: #fffdfa;
-  --primary-color: #70613f;
-  --secondary-color: rgb(70, 70, 70);
-  --card-background-color: rgb(40, 40, 40);
-  --button-background-color: #70613f;
-  --button-bg-hover: #7e6f4c;
-  --hero-color: rgb(21, 23, 27);
+.material-symbols-outlined {
+  color: var(--button-bg-hover); /* Default text color */
+}
+
+.dark-mode .material-symbols-outlined {
+  color: var(--button-bg-hover); /* Black color for dark mode */
 }
 
 body {
@@ -98,4 +107,13 @@ button.btn:hover {
 }
 .checkbox {
   background-color: var(--text-color);
+}
+
+.hamburger-btn svg {
+  stroke: var(--button-bg-hover); /* Default text color */
+}
+
+/* Adjust hamburger lines color for dark mode */
+.dark-mode .hamburger-btn svg {
+  stroke: var(--button-bg-hover); /* Black color for dark mode */
 }
