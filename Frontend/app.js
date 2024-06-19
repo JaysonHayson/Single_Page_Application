@@ -203,7 +203,7 @@ function createCategoryCard(category) {
         <div class="card-body h-1/3 flex flex-col justify-between p-4">
           <h2 class="card-title text-xl font-semibold">${category.name}</h2>
           <div class="card-actions justify-end">
-            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => fetchProductsForCategory('${category.name}'))">View Products</button>
+            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => fetchProductsForCategory('${category.id}'))">View Products</button>
           </div>
         </div>
       </div>
