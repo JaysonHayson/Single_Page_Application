@@ -116,7 +116,7 @@ function createElement(tag, className, innerHTML) {
   if (innerHTML) element.innerHTML = innerHTML;
   return element;
 }
-
+//PRODUCTS
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className = "card-container h-96 gap-4 mb-40 p-4";
@@ -140,18 +140,14 @@ function createProductCard(item, categoryName) {
   return productCard;
 }
 
-function renderProducts(categoryName) {
+function renderProducts(data, categoryName) {
   console.log("Rendering products for category:", categoryName); // Debugging
-  const category = categories.find((cat) => cat.name === categoryName);
-  if (!category) {
-    console.error("Category not found:", categoryName); // Debugging
-    return;
-  }
+  
 
   const productList = document.getElementById("productList");
   console.log("Product list element:", productList); // Debugging
   productList.innerHTML = "";
-  category.items.forEach((item) => {
+  data.forEach((item) => {
     console.log("Creating product card for item:", item); // Debugging
     const productCard = createProductCard(item, categoryName);
     productList.appendChild(productCard);
@@ -180,7 +176,7 @@ function fetchProductsForCategory(catNr) {
 
       if (Array.isArray(data)) {
         //return data;
-        //renderCategories();
+        renderProducts(data);
       } else {
         console.error("Fetched data is not an array:", data);
       }
@@ -189,6 +185,9 @@ function fetchProductsForCategory(catNr) {
       console.error("Error fetching data:", error);
     });
 }
+
+//PRODUCTS
+//CATEGORIES
 function createCategoryCard(category) {
   const categoryCard = document.createElement("div");
   categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
@@ -204,7 +203,7 @@ function createCategoryCard(category) {
         <div class="card-body h-1/3 flex flex-col justify-between p-4">
           <h2 class="card-title text-xl font-semibold">${category.name}</h2>
           <div class="card-actions justify-end">
-            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => renderProducts('${category.name}'))">View Products</button>
+            <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => fetchProductsForCategory('${category.name}'))">View Products</button>
           </div>
         </div>
       </div>
@@ -250,7 +249,7 @@ function fetchCategories() {
       console.error("Error fetching data:", error);
     });
 }
-
+//CATEGORIES
 let cart = [];
 
 function addToCart(categoryName, productName) {
