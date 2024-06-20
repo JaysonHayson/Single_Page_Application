@@ -140,7 +140,7 @@
 // }
 //CATEGORIES
 
-
+// =====================
 // Testing Area Start
 // =====================
 
@@ -289,6 +289,9 @@ function renderCategories(data) {
 }
 
 
+// =====================
+// TESTING AREA END
+// =====================
 
 
 
@@ -475,11 +478,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function toggleSearch() {
-  const searchBar = document.getElementById("searchBar");
-  searchBar.classList.toggle("show");
 }
 
 function togglePersonMenu() {
