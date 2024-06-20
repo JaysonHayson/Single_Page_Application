@@ -25,7 +25,7 @@ function createProductCard(item) {
       </div>
     </a>
     <div class="flex justify-center p-4">
-      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}')">Add to Cart</button>
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}', '${item.image})">Add to Cart</button>
     </div> 
   `;
   return productCard;
@@ -141,11 +141,12 @@ function fetchCategories() {
 //CATEGORIES
 let cart = [];
 
-function addToCart(itemId, itemName, itemPrice) {
+function addToCart(itemId, itemName, itemPrice, itemImage) {
   const product = {
     id: itemId,
     name: itemName,
-    price: itemPrice
+    price: itemPrice,
+    image: itemImage
   };
 
   if (!product.id || !product.name || isNaN(product.price)) {
