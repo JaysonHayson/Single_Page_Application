@@ -257,8 +257,8 @@ function renderCart() {
         <span class="text-lg font-bold">$${(
           product.price * product.quantity
         ).toFixed(2)}</span>
-        <button class="btn btn-ghost btn-sm ml-2" onclick="decreaseQuantity('${productName})'">-</button>
-        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity('${productName})'">+</button>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="decreaseQuantity('${productName}')">-</button>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity('${productName}')">+</button>
       </div>
     `;
     cartList.appendChild(cartItem);
