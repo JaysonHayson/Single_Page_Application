@@ -143,7 +143,13 @@ let cart = [];
 
 function addToCart(item) {
   
-  const product = [item.id, item.name, item.price];
+  const product = {
+    id: item.id,
+    name: item.name,
+    price: item.price
+  };
+  console.log(item);
+
   if (!product) {
     console.error("Product not found:", productName);
     return;
