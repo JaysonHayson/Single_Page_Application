@@ -8,7 +8,7 @@ function createElement(tag, className, innerHTML) {
   return element;
 }
 //PRODUCTS
-function createProductCard(item, categoryName) {
+function createProductCard(item) {
   const productCard = document.createElement("div");
   productCard.className = "card-container h-96 gap-4 mb-40 p-4 mt-16";
   productCard.innerHTML = `
@@ -31,16 +31,14 @@ function createProductCard(item, categoryName) {
   return productCard;
 }
 
-function renderProducts(data, categoryName) {
-  console.log("Rendering products for category:", categoryName); // Debugging
-  
+function renderProducts(data) {
 
   const productList = document.getElementById("productList");
   console.log("Product list element:", productList); // Debugging
   productList.innerHTML = "";
   data.forEach((item) => {
     console.log("Creating product card for item:", item); // Debugging
-    const productCard = createProductCard(item, categoryName);
+    const productCard = createProductCard(item);
     productList.appendChild(productCard);
   });
 }
