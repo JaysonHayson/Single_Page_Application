@@ -277,7 +277,8 @@ function renderCart() {
   }
 
   // Update the total price
-  cartTotal.textContent = total.toFixed(2);
+  console.log(total);
+  //cartTotal.textContent = total.toFixed(2);
 }
 
 // ToggleDarkMode
@@ -300,9 +301,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
     cart = storedCart;
-    renderCart();
+    
   }
-
+  renderCart();
   // Render hero section
   renderHero();
 });
