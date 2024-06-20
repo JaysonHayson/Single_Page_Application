@@ -203,4 +203,27 @@
  //##################
  //##################
  //##################
+
+
+    /**
+     * registerNewUser
+     * Prepares and executes a Creation of a new user with Provided Password and username.
+     * 
+     * @param  PDO      $pdo        PDO Handle
+     * @param  string   $userName      RequestedUserName
+     * @param  string    $userPW  RequestedPW
+     * @return Array    Array of (Bool, Mesasge)
+     */
+
+    function registerNewUser(&$pdo,$userName,$userPW){
+        $returnVar = [true,""];
+        $secPW= password_hash($userPW,null);
+        $sql = "INSERT into `Users` ('Username','Password') VALUES ('$userName','$secPW')";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute();
+
+        $returnVar = $stmt -> fetchAll();
+
+        return $returnVar;
+    }
 ?>
