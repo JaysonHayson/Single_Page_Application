@@ -220,6 +220,7 @@ body {
 .scrollable-container {
   overflow-y: scroll;
   scrollbar-width: none;
+  width: 100%;
 }
 
 .scrollable-container::-webkit-scrollbar {
