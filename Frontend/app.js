@@ -7,15 +7,7 @@ function createElement(tag, className, innerHTML) {
   if (innerHTML) element.innerHTML = innerHTML;
   return element;
 }
-
-/*
-################################################################
-||                                                            ||
-||                          PRODUCTS                          ||
-||                                                            ||
-################################################################
-*/
-
+//PRODUCTS
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className = "card-container h-96 gap-4 mb-40 p-4 mt-16";
@@ -33,7 +25,7 @@ function createProductCard(item, categoryName) {
       </div>
     </a>
     <div class="flex justify-center p-4">
-      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${categoryName}', '${item.name}')">Add to Cart</button>
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item}')">Add to Cart</button>
     </div>
   `;
   return productCard;
@@ -85,14 +77,8 @@ function fetchProductsForCategory(catNr) {
     });
 }
 
-/*
-################################################################
-||                                                            ||
-||                          CATEGORIES                        ||
-||                                                            ||
-################################################################
-*/
-
+//PRODUCTS
+//CATEGORIES
 function createCategoryCard(category) {
   const categoryCard = document.createElement("div");
   categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
@@ -154,21 +140,12 @@ function fetchCategories() {
       console.error("Error fetching data:", error);
     });
 }
-
-/*
-################################################################
-||                                                            ||
-||                          CART                              ||
-||                                                            ||
-################################################################
-*/
-
+//CATEGORIES
 let cart = [];
 
-function addToCart(categoryName, productName) {
-  const category = categories.find((cat) => cat.name === categoryName);
-  const product = category.items.find((item) => item.name === productName);
-
+function addToCart(item) {
+  
+  const product = [item.id, item.name, item.price];
   if (!product) {
     console.error("Product not found:", productName);
     return;
@@ -201,16 +178,12 @@ function decreaseQuantity(productName) {
   }
 }
 
-function increaseQuantity(productName) {
-  const category = categories.find((cat) =>
-    cat.items.some((item) => item.name === productName)
-  );
-  if (category) {
-    const product = category.items.find((item) => item.name === productName);
-    cart.push(product);
-    updateCart();
-    renderCart();
-  }
+function increaseQuantity(product) {
+  
+  cart.push(product);
+  updateCart();
+  renderCart();
+  
 }
 
 function removeFromCart(productName) {
@@ -281,7 +254,7 @@ function renderCart() {
           product.price * product.quantity
         ).toFixed(2)}</span>
         <button class="btn btn-ghost btn-sm ml-2" onclick="decreaseQuantity('${productName}')">-</button>
-        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity('${productName}')">+</button>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity('${product}')">+</button>
       </div>
     `;
     cartList.appendChild(cartItem);
@@ -303,14 +276,6 @@ function renderCart() {
   // Update the total price
   cartTotal.textContent = total.toFixed(2);
 }
-
-/*
-################################################################
-||                                                            ||
-||                          THEMES                            ||
-||                                                            ||
-################################################################
-*/
 
 // ToggleDarkMode
 function toggleDarkMode() {
@@ -334,9 +299,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cart = storedCart;
     renderCart();
   }
-
-  // Fetch data and render categories
-  fetchProductsForCategory(3);
 
   // Render hero section
   renderHero();
@@ -399,14 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/*
-################################################################
-||                                                            ||
-||                          LOGIN                             ||
-||                                                            ||
-################################################################
-*/
-
+//loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.className =
@@ -442,15 +397,8 @@ function renderLoginForm() {
   const loginFormItem = createLoginForm();
   loginForm.appendChild(loginFormItem);
 }
-
-/*
-################################################################
-||                                                            ||
-||                          HERO                              ||
-||                                                            ||
-################################################################
-*/
-
+//loginform end
+//hero
 function createHero() {
   const hero = document.createElement("div");
   hero.className = "mx-auto";
@@ -481,14 +429,7 @@ function renderHero() {
   const heroItem = createHero();
   hero.appendChild(heroItem);
 }
-
-/*
-################################################################
-||                                                            ||
-||                     DELETE AND CALLBACK                    ||
-||                                                            ||
-################################################################
-*/
+//hero end
 
 function xInnerHtmlAndCallback(callback) {
   const spaConfig = document.querySelector(".spaConfig");
@@ -501,14 +442,7 @@ function xInnerHtmlAndCallback(callback) {
   }
   callback();
 }
-
-/*
-################################################################
-||                                                            ||
-||                          TO-DO                             ||
-||                                                            ||
-################################################################
-*/
+// TODO: Functions to be implemented
 
 function showLogin() {
   alert("Login functionality to be implemented.");
