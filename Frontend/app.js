@@ -7,7 +7,15 @@ function createElement(tag, className, innerHTML) {
   if (innerHTML) element.innerHTML = innerHTML;
   return element;
 }
-//PRODUCTS
+
+/*
+################################################################
+||                                                            ||
+||                          PRODUCTS                          ||
+||                                                            ||
+################################################################
+*/
+
 function createProductCard(item, categoryName) {
   const productCard = document.createElement("div");
   productCard.className = "card-container h-96 gap-4 mb-40 p-4 mt-16";
@@ -77,8 +85,14 @@ function fetchProductsForCategory(catNr) {
     });
 }
 
-//PRODUCTS
-//CATEGORIES
+/*
+################################################################
+||                                                            ||
+||                          CATEGORIES                        ||
+||                                                            ||
+################################################################
+*/
+
 function createCategoryCard(category) {
   const categoryCard = document.createElement("div");
   categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
@@ -140,7 +154,15 @@ function fetchCategories() {
       console.error("Error fetching data:", error);
     });
 }
-//CATEGORIES
+
+/*
+################################################################
+||                                                            ||
+||                          CART                              ||
+||                                                            ||
+################################################################
+*/
+
 let cart = [];
 
 function addToCart(categoryName, productName) {
@@ -282,6 +304,14 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
 }
 
+/*
+################################################################
+||                                                            ||
+||                          THEMES                            ||
+||                                                            ||
+################################################################
+*/
+
 // ToggleDarkMode
 function toggleDarkMode() {
   const body = document.body;
@@ -369,7 +399,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//loginform
+/*
+################################################################
+||                                                            ||
+||                          LOGIN                             ||
+||                                                            ||
+################################################################
+*/
+
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.className =
@@ -405,8 +442,15 @@ function renderLoginForm() {
   const loginFormItem = createLoginForm();
   loginForm.appendChild(loginFormItem);
 }
-//loginform end
-//hero
+
+/*
+################################################################
+||                                                            ||
+||                          HERO                              ||
+||                                                            ||
+################################################################
+*/
+
 function createHero() {
   const hero = document.createElement("div");
   hero.className = "mx-auto";
@@ -437,7 +481,14 @@ function renderHero() {
   const heroItem = createHero();
   hero.appendChild(heroItem);
 }
-//hero end
+
+/*
+################################################################
+||                                                            ||
+||                     DELETE AND CALLBACK                    ||
+||                                                            ||
+################################################################
+*/
 
 function xInnerHtmlAndCallback(callback) {
   const spaConfig = document.querySelector(".spaConfig");
@@ -450,7 +501,14 @@ function xInnerHtmlAndCallback(callback) {
   }
   callback();
 }
-// TODO: Functions to be implemented
+
+/*
+################################################################
+||                                                            ||
+||                          TO-DO                             ||
+||                                                            ||
+################################################################
+*/
 
 function showLogin() {
   alert("Login functionality to be implemented.");
