@@ -25,8 +25,8 @@ function createProductCard(item) {
       </div>
     </a>
     <div class="flex justify-center p-4">
-      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
-    </div>
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}')">Add to Cart</button>
+    </div> 
   `;
   return productCard;
 }
@@ -141,18 +141,15 @@ function fetchCategories() {
 //CATEGORIES
 let cart = [];
 
-function addToCart(itemJSON) {
-  const item = JSON.parse(itemJSON);
-
+function addToCart(itemId, itemName, itemPrice) {
   const product = {
-    id: item.id,
-    name: item.name,
-    price: item.price
+    id: itemId,
+    name: itemName,
+    price: itemPrice
   };
-  console.log(item);
 
-  if (!product) {
-    console.error("Product not found:", productName);
+  if (!product.id || !product.name || isNaN(product.price)) {
+    console.error("Invalid product data:", product);
     return;
   }
 
@@ -163,7 +160,6 @@ function addToCart(itemJSON) {
 
   addToCartAnimation();
 }
-
 function addToCartAnimation() {
   var animation = document.querySelector(".animation");
 
