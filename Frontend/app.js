@@ -141,8 +141,9 @@ function fetchCategories() {
 //CATEGORIES
 let cart = [];
 
-function addToCart(item) {
-  
+function addToCart(itemJSON) {
+  const item = JSON.parse(itemJSON);
+
   const product = {
     id: item.id,
     name: item.name,
