@@ -364,33 +364,89 @@ document.addEventListener("DOMContentLoaded", () => {
 //loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
+  loginForm.id = "loginContainer";
   loginForm.className =
     "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-full my-auto lg:w-3/4";
 
   loginForm.innerHTML = `
-      <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
+    <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
+
+    <div id="registerSection" class="hidden loginTransition mb-4">
       <div class="mb-4 w-full">
-          <label class="block text-sm font-medium mb-1">Email</label>
-          <input type="email" class="input input-bordered w-full" placeholder="Enter your email">
-      </div>
-      <div class="mb-4 w-full">
-          <label class="block text-sm font-medium mb-1">Password</label>
-          <input type="password" class="input input-bordered w-full" placeholder="Enter your password">
-      </div>
-      <div class="flex items-center mb-2 mt-2">
-          <input type="checkbox" class="checkbox mr-2">
-          <label class="text-sm text-gray-700">Remember me</label>
-          <a href="#" class="text-sm text-blue-600 ml-auto">Forgot password?</a>
+        <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
+        <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name">
       </div>
       
-      <button class="btn btn-primary w-full mb-4">Login</button>
-      <div class="text-center">
-          <p class="text-sm text-gray-700">If you are not registered yet! <a href="#" class="text-blue-600">Register</a></p>
+      <div class="mb-4 w-full">
+        <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
+        <input id="lastNameInput" type="password" class="input input-bordered w-full" placeholder="Enter your last name">
       </div>
+    </div>
+
+    <div class="mb-4 w-full">
+      <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
+      <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email">
+    </div>
+
+    <div class="mb-4 w-full">
+      <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
+      <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password">
+    </div>
+
+    <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
+      <input type="checkbox" class="checkbox mr-2">
+      <label class="text-sm">Remember me</label>
+    </div>
+
+    <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+
+    <div id="registerMessage" class="text-sm mb-4">
+      If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
+    </div>
   `;
+
+  const registerLink = loginForm.querySelector("#registerLink");
+  const registerSection = loginForm.querySelector("#registerSection");
+  const loginButton = loginForm.querySelector("#loginButton");
+  const registerMessage = loginForm.querySelector("#registerMessage");
+  const rememberMeSection = loginForm.querySelector("#rememberMeSection");
+  const formTitle = loginForm.querySelector("#formTitle");
+
+  registerLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    registerSection.classList.toggle("hidden");
+    registerMessage.classList.toggle("hidden");
+    rememberMeSection.classList.toggle("hidden");
+    loginForm.classList.toggle("expanded");
+
+    if (!registerSection.classList.contains("hidden")) {
+      formTitle.textContent = "Register";
+      loginButton.textContent = "Register";
+      loginButton.removeEventListener("click", handleLogin);
+      loginButton.addEventListener("click", handleRegister);
+    } else {
+      formTitle.textContent = "Login";
+      loginButton.textContent = "Login";
+      loginButton.removeEventListener("click", handleRegister);
+      loginButton.addEventListener("click", handleLogin);
+    }
+  });
+
+  function handleLogin() {
+    console.log("Login button clicked");
+    // Implement login functionality here
+  }
+
+  function handleRegister() {
+    console.log("Register button clicked");
+    // Implement registration functionality here
+  }
+
+  loginButton.addEventListener("click", handleLogin);
 
   return loginForm;
 }
+
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
   loginForm.innerHTML = "";
