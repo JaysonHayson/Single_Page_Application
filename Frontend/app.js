@@ -145,7 +145,7 @@ function addToCart(itemId, itemName, itemPrice, itemImage) {
   const product = {
     id: itemId,
     name: itemName,
-    price: itemPrice,
+    price: parseFloat(itemPrice),
     image: itemImage
   };
 
@@ -278,7 +278,7 @@ function renderCart() {
 
   // Update the total price
   console.log(total);
-  //cartTotal.textContent = total.toFixed(2);
+  cartTotal.textContent = total.toFixed(2);
 }
 
 // ToggleDarkMode
