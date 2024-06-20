@@ -238,7 +238,8 @@ function renderCart() {
       "div",
       "cart-item grid grid-cols-4 gap-4 mb-2"
     );
-
+    console.log(product);
+    console.log(productName);
     cartItem.innerHTML = `
       <div>
         <img src="${
@@ -254,7 +255,7 @@ function renderCart() {
           product.price * product.quantity
         ).toFixed(2)}</span>
         <button class="btn btn-ghost btn-sm ml-2" onclick="decreaseQuantity(${productName})">-</button>
-        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity(${JSON.stringify(product)})">+</button>
+        <button class="btn btn-ghost btn-sm ml-2" onclick="increaseQuantity(${productName})">+</button>
       </div>
     `;
     cartList.appendChild(cartItem);
