@@ -23,6 +23,18 @@
             $db_results=selectAllFromTable($pdo,'categories');
             echo json_encode($db_results);
             break;
+        case 'registerNewUser':
+            $reqUser = $requestArray['userName'];
+            $reqPass = $requestArray['userPW'];
+
+            if(is_string($reqUser && is_string($reqPass))){
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(['error' => 'userName or userPW empty.']);
+                return;
+            }
+            $db_results=registerNewUser($pdo,"$reqUser","$reqPass");
+            echo json_encode($db_results);
+            break;
         default:
                 header("HTTP/1.0 404 Not Found");
                 echo json_encode(['message' => 'Endpoint not found']);

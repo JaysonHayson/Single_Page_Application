@@ -212,18 +212,28 @@
      * @param  PDO      $pdo        PDO Handle
      * @param  string   $userName      RequestedUserName
      * @param  string    $userPW  RequestedPW
-     * @return Array    Array of (Bool, Mesasge)
+     * @return Array    Array of (Bool, Message)
      */
 
     function registerNewUser(&$pdo,$userName,$userPW){
         $returnVar = [true,""];
         $secPW= password_hash($userPW,null);
-        $sql = "INSERT into `Users` ('Username','Password') VALUES ('$userName','$secPW')";
-        $stmt = $pdo -> prepare($sql);
-        $stmt -> execute();
+        $sql = "INSERT into `Users` (`Username`,`Password`) VALUES ('$userName','$secPW')";
+        try{
+            $stmt = $pdo -> prepare($sql);
+            $stmt -> execute();
 
-        $returnVar = $stmt -> fetchAll();
+            $returnVar[1] = $stmt -> fetchAll();
 
-        return $returnVar;
+            return $returnVar;
+        }catch (PDOException $e) {
+             $eCode = $e->getCode();
+             $errorMessage = 'Unknown-Error';
+             //# Check for Known Error Duplicate UserName
+             if($eCode == 23000){
+                $errorMessage = 'Username already in use.';
+             }
+             return [false, $errorMessage];
+        }
     }
 ?>
