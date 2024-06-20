@@ -1,5 +1,213 @@
 
 
+//ORIGINAL FUNCTIONALITY
+// function createElement(tag, className, innerHTML) {
+//   const element = document.createElement(tag);
+//   if (className) element.className = className;
+//   if (innerHTML) element.innerHTML = innerHTML;
+//   return element;
+// }
+// //PRODUCTS
+// function createProductCard(item) {
+//   const productCard = document.createElement("div");
+//   productCard.className = "card-container h-96 gap-4 mb-40 p-4 mt-16";
+//   productCard.innerHTML = `
+//     <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
+//       <div class="card card-compact w-full shadow-xl h-full transition-shadow">
+//         <figure class="h-2/3 overflow-hidden">
+//           <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full"/>
+//         </figure>
+//         <div class="card-body h-1/3 flex flex-col justify-between p-4">
+//           <h2 class="card-title text-xl font-semibold">${item.name}</h2>
+//           <p>${item.description}</p>
+//           <p class="text-lg font-bold">$${item.price}</p>
+//         </div>
+//       </div>
+//     </a>
+//     <div class="flex justify-center p-4">
+//       <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}', '${item.image}')">Add to Cart</button>
+//     </div> 
+//   `;
+//   return productCard;
+// }
+
+// function renderProducts(data) {
+
+//   const productList = document.getElementById("productList");
+//   console.log("Product list element:", productList); // Debugging
+//   productList.innerHTML = "";
+//   data.forEach((item) => {
+//     console.log("Creating product card for item:", item); // Debugging
+//     const productCard = createProductCard(item);
+//     productList.appendChild(productCard);
+//   });
+// }
+
+
+// function fetchProductsForCategory(catNr) {
+//   fetch('../Backend/index.php', {
+//     method: 'POST',
+//     body: new URLSearchParams({
+//       'Command': 'GetProductsForCategorie',
+//       'CatNr': catNr
+//     })
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log("Fetched data:", data);
+
+//       console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
+//       if (Array.isArray(data)) {
+//         //return data;
+//         renderProducts(data);
+//       } else {
+//         console.error("Fetched data is not an array:", data);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching data:", error);
+//     });
+// }
+
+// //PRODUCTS
+// //CATEGORIES
+// function createCategoryCard(category) {
+//   const categoryCard = document.createElement("div");
+//   categoryCard.className = "card-container h-96 gap-4 mb-20 mt-16 p-4";
+
+//   const imageSrc = category.foto;
+
+//   categoryCard.innerHTML = `
+//     <div class="block h-full hover:shadow-lg transition-shadow w-full">
+//       <div class="card card-compact w-full shadow-xl h-full transition-shadow">
+//         <figure class="h-2/3 overflow-hidden">
+//           <img src="${imageSrc}" alt="${category.name}" class="object-cover w-full h-full"/>
+//         </figure>
+//         <div class="card-body h-1/3 flex flex-col justify-between p-4">
+//           <h2 class="card-title text-xl font-semibold">${category.name}</h2>
+//           <div class="card-actions justify-end">
+//             <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(() => fetchProductsForCategory('${category.id}'))">View Products</button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+//   return categoryCard;
+// }
+// function renderCategories(data) {
+//   const categoryList = document.getElementById("categoryList");
+//   categoryList.innerHTML = "";
+  
+//   data.forEach((identifier) => {
+//     console.log(identifier);
+//     const categoryCard = createCategoryCard(identifier);
+//     categoryList.appendChild(categoryCard);
+//   });
+// }
+// function fetchCategories() {
+//   fetch('../Backend/index.php', {
+//     method: 'POST',
+//     body: new URLSearchParams({
+//       'Command': 'GetAllCategories'
+//     })
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log("Fetched data:", data);
+
+//       console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
+//       if (Array.isArray(data)) {
+//         renderCategories(data);
+//       } else {
+//         console.error("Fetched data is not an array:", data);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching data:", error);
+//     });
+// }
+//CATEGORIES
+
+
+// Testing Area Start
+// =====================
+
+// Placeholder product data
+const placeholderProducts = [
+  {
+    id: "1",
+    name: "Product 1",
+    description: "Description for Product 1",
+    price: "19.99",
+    image: "https://via.placeholder.com/300x200"
+  },
+  {
+    id: "2",
+    name: "Product 2",
+    description: "Description for Product 2",
+    price: "29.99",
+    image: "https://via.placeholder.com/300x200"
+  },
+  {
+    id: "3",
+    name: "Product 3",
+    description: "Description for Product 3",
+    price: "39.99",
+    image: "https://via.placeholder.com/300x200"
+  }
+];
+
+// Placeholder category data
+const placeholderCategories = [
+  {
+    id: "1",
+    name: "Category 1",
+    foto: "https://via.placeholder.com/300x200"
+  },
+  {
+    id: "2",
+    name: "Category 2",
+    foto: "https://via.placeholder.com/300x200"
+  },
+  {
+    id: "3",
+    name: "Category 3",
+    foto: "https://via.placeholder.com/300x200"
+  }
+];
+
+// Overriding fetchProductsForCategory function to use placeholder data
+function fetchProductsForCategory(catNr) {
+  console.log(`Fetching products for category ${catNr}`);
+  // Simulating a delay to mimic a real fetch call
+  setTimeout(() => {
+    renderProducts(placeholderProducts);
+  }, 500);
+}
+
+// Overriding fetchCategories function to use placeholder data
+function fetchCategories() {
+  console.log("Fetching categories");
+  // Simulating a delay to mimic a real fetch call
+  setTimeout(() => {
+    renderCategories(placeholderCategories);
+  }, 500);
+}
+
+// Testing Area End
+// =====================
 
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
@@ -7,6 +215,7 @@ function createElement(tag, className, innerHTML) {
   if (innerHTML) element.innerHTML = innerHTML;
   return element;
 }
+
 //PRODUCTS
 function createProductCard(item) {
   const productCard = document.createElement("div");
@@ -32,7 +241,6 @@ function createProductCard(item) {
 }
 
 function renderProducts(data) {
-
   const productList = document.getElementById("productList");
   console.log("Product list element:", productList); // Debugging
   productList.innerHTML = "";
@@ -41,38 +249,6 @@ function renderProducts(data) {
     const productCard = createProductCard(item);
     productList.appendChild(productCard);
   });
-}
-
-
-function fetchProductsForCategory(catNr) {
-  fetch('../Backend/index.php', {
-    method: 'POST',
-    body: new URLSearchParams({
-      'Command': 'GetProductsForCategorie',
-      'CatNr': catNr
-    })
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Fetched data:", data);
-
-      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
-
-      if (Array.isArray(data)) {
-        //return data;
-        renderProducts(data);
-      } else {
-        console.error("Fetched data is not an array:", data);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
 }
 
 //PRODUCTS
@@ -100,6 +276,7 @@ function createCategoryCard(category) {
   `;
   return categoryCard;
 }
+
 function renderCategories(data) {
   const categoryList = document.getElementById("categoryList");
   categoryList.innerHTML = "";
@@ -110,35 +287,22 @@ function renderCategories(data) {
     categoryList.appendChild(categoryCard);
   });
 }
-function fetchCategories() {
-  fetch('../Backend/index.php', {
-    method: 'POST',
-    body: new URLSearchParams({
-      'Command': 'GetAllCategories'
-    })
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Fetched data:", data);
 
-      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
 
-      if (Array.isArray(data)) {
-        renderCategories(data);
-      } else {
-        console.error("Fetched data is not an array:", data);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
-}
-//CATEGORIES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let cart = [];
 
 function addToCart(itemId, itemName, itemPrice, itemImage) {
