@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
     cart = storedCart;
-    renderCart();
+    
   }
 
   // Render hero section
