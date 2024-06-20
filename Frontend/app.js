@@ -25,7 +25,7 @@ function createProductCard(item) {
       </div>
     </a>
     <div class="flex justify-center p-4">
-      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart(${JSON.stringidy(item)})">Add to Cart</button>
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
     </div>
   `;
   return productCard;
