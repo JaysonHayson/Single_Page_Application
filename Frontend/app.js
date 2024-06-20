@@ -379,7 +379,7 @@ function createLoginForm() {
       
       <div class="mb-4 w-full">
         <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-        <input id="lastNameInput" type="password" class="input input-bordered w-full" placeholder="Enter your last name">
+        <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name">
       </div>
     </div>
 
