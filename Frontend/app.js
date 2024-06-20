@@ -25,7 +25,7 @@ function createProductCard(item) {
       </div>
     </a>
     <div class="flex justify-center p-4">
-      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}', '${item.image})">Add to Cart</button>
+      <button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="addToCart('${item.id}', '${item.name}', '${item.price}', '${item.image}')">Add to Cart</button>
     </div> 
   `;
   return productCard;
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
     cart = storedCart;
-    
+    renderCart();
   }
 
   // Render hero section
