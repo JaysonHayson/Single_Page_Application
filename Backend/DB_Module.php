@@ -229,11 +229,12 @@
         }catch (PDOException $e) {
              $eCode = $e->getCode();
              $errorMessage = 'Unknown-Error';
+             $returnVar[0] = false;
              //# Check for Known Error Duplicate UserName
              if($eCode == 23000){
-                $errorMessage = 'Username already in use.';
+                $returnVar[1] = 'Username already in use.';
              }
-             return [false, $errorMessage];
+             return $returnVar;
         }
     }
 ?>
