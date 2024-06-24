@@ -194,11 +194,15 @@
         // Constructing the SQL query
         $sql = "SELECT * FROM $table";
         // Preparing and executing the statement
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        try{
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
 
-        // Fetching all rows of the results
-        return $stmt->fetchall(PDO::FETCH_ASSOC);
+            // Fetching all rows of the results
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            return [false,'Error fetching Categories.'];
+        }
     }
  //##################
  //##################
