@@ -209,6 +209,8 @@ function fetchCategories() {
 // Testing Area End
 // =====================
 
+//TEST
+
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
   if (className) element.className = className;
