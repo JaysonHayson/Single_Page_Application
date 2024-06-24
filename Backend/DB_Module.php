@@ -241,4 +241,38 @@
              return $returnVar;
         }
     }
+    
+    /**
+    * loginUser
+    * Prepares and executes a Creation of a new user with Provided Password and username.
+    * 
+    * @param  PDO      $pdo        PDO Handle
+    * @param  string   $userName      RequestedUserName
+    * @param  string    $userPW  RequestedPW
+    * @return Array    Array of (Bool, Message)
+    */
+
+    function loginUser(&$pdo,$userName,$userPW,$userSessID = ""){
+        $returnVar = [false,""];
+        $changeSessID = true;
+        $secPW = password_hash($userPW,null);
+        try{
+            $fetchPWsql = "SELECT from `Users` (`Password`,`SessionID`) WHERE `Username` = $userName";
+            $fetch_stmt = $pdo -> prepare($fetchPWsql);
+            $fetch_stmt -> execute();
+            $compareArr = $fetch_stmt->fetchAll();
+            if($secPW == $compareArr[0])
+            {
+                if($userSessID != "" && $userSessID == $compareArr[1])
+                {
+                    // Reuse Session, user already logged in.
+                }else{
+                    // User Session =/= Server Session, close session make a new Session.
+                }
+            }
+        }
+        catch (PDOException $e) {
+            $errorMessage = "DB-Error Please attempt again later.";
+        }
+    }
 ?>
