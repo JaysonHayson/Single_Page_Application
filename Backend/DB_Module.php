@@ -228,7 +228,7 @@
             return $returnVar;
         }catch (PDOException $e) {
              $eCode = $e->getCode();
-             $errorMessage = 'Unknown-Error';
+             $returnVar[1] = 'Unknown-Error';
              $returnVar[0] = false;
              //# Check for Known Error Duplicate UserName
              if($eCode == 23000){
