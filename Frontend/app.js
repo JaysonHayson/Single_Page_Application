@@ -366,29 +366,35 @@ function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.id = "loginContainer";
   loginForm.className =
-    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-full my-auto lg:w-3/4";
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-full lg:w-3/4 mt-20";
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
 
-    <div id="registerSection" class="hidden loginTransition mb-4">
-      <div class="mb-4 w-full">
+    <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
+
+      <div class="mb-4 w-full sm:w-full lg:w-full">
+        <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
+        <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username">
+      </div>
+
+      <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
         <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name">
       </div>
       
-      <div class="mb-4 w-full">
+      <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
         <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name">
       </div>
     </div>
 
-    <div class="mb-4 w-full">
+    <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
       <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email">
     </div>
 
-    <div class="mb-4 w-full">
+    <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
       <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password">
     </div>
@@ -431,18 +437,6 @@ function createLoginForm() {
       loginButton.addEventListener("click", handleLogin);
     }
   });
-
-  function handleLogin() {
-    console.log("Login button clicked");
-    // Implement login functionality here
-  }
-
-  function handleRegister() {
-    console.log("Register button clicked");
-    // Implement registration functionality here
-  }
-
-  loginButton.addEventListener("click", handleLogin);
 
   return loginForm;
 }
