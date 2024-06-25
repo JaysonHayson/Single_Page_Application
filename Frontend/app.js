@@ -367,24 +367,24 @@ function createLoginForm() {
       <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username">
+          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
         </div>
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name">
+          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name" required>
         </div>
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name">
+          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name" required>
         </div>
       </div>
       <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email">
+        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email" required>
       </div>
       <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-        <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password">
+        <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
       </div>
       <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
         <input type="checkbox" class="checkbox mr-2">
@@ -449,10 +449,10 @@ function createLoginForm() {
       }),
     })
       .then((response) => {
-        // if (!response.ok) {
-        //   throw new Error("Network response was not ok");
-        // }
-        // return response.json();
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
         console.log("Nice buddy!");
 
       });
