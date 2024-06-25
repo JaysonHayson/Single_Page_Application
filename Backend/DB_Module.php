@@ -266,6 +266,7 @@
                 if($userSessID != "" && $userSessID == $compareArr[1])
                 {
                     // Reuse Session, user already logged in.
+                    $changeSessID = false;
                 }else{
                     // User Session =/= Server Session, close session make a new Session.
                 }
@@ -275,4 +276,21 @@
             $errorMessage = "DB-Error Please attempt again later.";
         }
     }
+
+    function userLogout(&$pdo,$userName,$userSessID){
+
+        try{
+            $sql = "UPDATE `Users` set SESS_ID = '' WHERE `Username` = $userName";
+            $stmt = $pdo -> prepare($sql);
+            $stmt -> execute();
+            $results = $stmt -> fetchAll();
+            //@TODO Destroy Session on Server
+
+            return [true, "Logout Successful"];
+        }catch(PDOException $e){
+            $errorMessage = "DB-Error Please attempt again later.";
+            return [false,$errorMessage];
+        }
+    }
+
 ?>
