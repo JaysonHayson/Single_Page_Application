@@ -1,6 +1,6 @@
 <?php
-    require 'DB_Module.php';
-    require 'config.php';
+    require_once 'DB_Module.php';
+    require_once 'config.php';
 
 
     $requestMethod = $_SERVER['REQUEST_METHOD'];

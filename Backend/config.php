@@ -1,7 +1,7 @@
 <?php
 
     define('DBCONFFILEPATH', '/etc/php/DB_Conf.php');
-    require DBCONFFILEPATH;
+    require_once DBCONFFILEPATH;
 
     $DBHost = 'localhost';
     $DB_DBName = 'spa_shop';
