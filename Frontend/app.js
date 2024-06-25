@@ -394,20 +394,32 @@ function createLoginForm() {
       <div id="registerMessage" class="text-sm mb-4">
         If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
       </div>
+      <div id="loginMessage" class="hidden text-sm mb-4">
+        If you are registered! <a href="#" id="loginLink" class="text-blue-600">Login</a>
+      </div>
     </form>
   `;
 
+ 
+  document.body.appendChild(loginForm);
+
+ 
   const registerLink = loginForm.querySelector("#registerLink");
+  const loginLink = loginForm.querySelector("#loginLink");
   const registerSection = loginForm.querySelector("#registerSection");
   const loginButton = loginForm.querySelector("#loginButton");
   const registerMessage = loginForm.querySelector("#registerMessage");
+  const loginMessage = loginForm.querySelector("#loginMessage");
   const rememberMeSection = loginForm.querySelector("#rememberMeSection");
   const formTitle = loginForm.querySelector("#formTitle");
+  const authForm = loginForm.querySelector("#authForm");
 
+  // Toggle between login and register forms
   registerLink.addEventListener("click", (event) => {
     event.preventDefault();
     registerSection.classList.toggle("hidden");
     registerMessage.classList.toggle("hidden");
+    loginMessage.classList.toggle("hidden");
     rememberMeSection.classList.toggle("hidden");
     loginForm.classList.toggle("expanded");
 
@@ -421,6 +433,27 @@ function createLoginForm() {
       loginButton.textContent = "Login";
       loginButton.removeEventListener("click", handleRegister);
       loginButton.addEventListener("click", handleLogin);
+    }
+  });
+
+
+  loginLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    registerSection.classList.add("hidden");
+    registerMessage.classList.add("hidden");
+    loginMessage.classList.add("hidden");
+    rememberMeSection.classList.remove("hidden");
+    loginForm.classList.remove("expanded");
+  
+    formTitle.textContent = "Login";
+    loginButton.textContent = "Login";
+    loginButton.removeEventListener("click", handleRegister);
+    loginButton.addEventListener("click", handleLogin);
+  
+    if (registerSection.classList.contains("hidden")) {
+      registerMessage.classList.remove("hidden");
+    } else {
+      registerMessage.classList.add("hidden");
     }
   });
 
