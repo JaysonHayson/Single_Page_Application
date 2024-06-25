@@ -1,6 +1,3 @@
-
-
-
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -32,7 +29,6 @@ function createProductCard(item) {
 }
 
 function renderProducts(data) {
-
   const productList = document.getElementById("productList");
   console.log("Product list element:", productList); // Debugging
   productList.innerHTML = "";
@@ -43,14 +39,13 @@ function renderProducts(data) {
   });
 }
 
-
 function fetchProductsForCategory(catNr) {
-  fetch('../Backend/index.php', {
-    method: 'POST',
+  fetch("../Backend/index.php", {
+    method: "POST",
     body: new URLSearchParams({
-      'Command': 'GetProductsForCategorie',
-      'CatNr': catNr
-    })
+      Command: "GetProductsForCategorie",
+      CatNr: catNr,
+    }),
   })
     .then((response) => {
       if (!response.ok) {
@@ -103,7 +98,7 @@ function createCategoryCard(category) {
 function renderCategories(data) {
   const categoryList = document.getElementById("categoryList");
   categoryList.innerHTML = "";
-  
+
   data.forEach((identifier) => {
     console.log(identifier);
     const categoryCard = createCategoryCard(identifier);
@@ -111,11 +106,11 @@ function renderCategories(data) {
   });
 }
 function fetchCategories() {
-  fetch('../Backend/index.php', {
-    method: 'POST',
+  fetch("../Backend/index.php", {
+    method: "POST",
     body: new URLSearchParams({
-      'Command': 'GetAllCategories'
-    })
+      Command: "GetAllCategories",
+    }),
   })
     .then((response) => {
       if (!response.ok) {
@@ -146,7 +141,7 @@ function addToCart(itemId, itemName, itemPrice, itemImage) {
     id: itemId,
     name: itemName,
     price: parseFloat(itemPrice),
-    image: itemImage
+    image: itemImage,
   };
 
   if (!product.id || !product.name || isNaN(product.price)) {
@@ -302,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
     cart = storedCart;
-    
   }
   renderCart();
   // Render hero section
@@ -366,7 +360,7 @@ function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.id = "loginContainer";
   loginForm.className =
-    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-full lg:w-3/4 mt-20";
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -443,17 +437,17 @@ function createLoginForm() {
     // Implement login functionality here
   }
 
-  function handleRegister(firstName, lastName,username, email, pw) {
-    fetch('../Backend/index.php', {
-      method: 'POST',
+  function handleRegister(firstName, lastName, username, email, pw) {
+    fetch("../Backend/index.php", {
+      method: "POST",
       body: new URLSearchParams({
-        'Command': 'registerNewUser',
-        'userFirstName': firstName,
-        'userLastName': lastName,
-        'userName': username,
-        'userE-mail': email,
-        'userPw': pw
-      })
+        Command: "registerNewUser",
+        userFirstName: firstName,
+        userLastName: lastName,
+        userName: username,
+        "userE-mail": email,
+        userPw: pw,
+      }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -463,16 +457,17 @@ function createLoginForm() {
       })
       .then((data) => {
         console.log("Fetched data:", data);
-  
-        console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
 
+        console.log(
+          "Fetched data (JSON format):",
+          JSON.stringify(data, null, 2)
+        );
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
     // Implement registration functionality here
   }
-
 
   loginButton.addEventListener("click", handleLogin);
 
