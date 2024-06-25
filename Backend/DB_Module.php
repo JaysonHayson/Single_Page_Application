@@ -277,7 +277,16 @@
         }
     }
 
-    function userLogout(&$pdo,$userName,$userSessID){
+    /**
+    * logoutUser
+    * Logs out User with given username and Session token.
+    * 
+    * @param  PDO      $pdo             PDO Handle
+    * @param  string   $userName        UserName to LogOut
+    * @param  string   $userSessID      SessID of User Logging out
+    * @return Array    Array of (Bool, Message)
+    */
+    function logoutUser(&$pdo,$userName,$userSessID){
 
         try{
             $sql = "UPDATE `Users` set SESS_ID = '' WHERE `Username` = $userName";
