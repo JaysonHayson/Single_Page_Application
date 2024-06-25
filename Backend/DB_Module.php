@@ -297,8 +297,6 @@
             $stmt = $pdo -> prepare($sql);
             $stmt -> execute();
             $results = $stmt -> fetchAll();
-            //@TODO Destroy Session on Server
-
             return [true, "Logout Successful"];
         }catch(PDOException $e){
             $errorMessage = "DB-Error Please attempt again later.";

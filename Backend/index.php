@@ -25,12 +25,20 @@
             echo json_encode($db_results);
             break;
         case 'registerNewUser':
-            $reqUser = $requestArray['userName'];
-            $reqPass = $requestArray['userPW'];
+            $reqUser        = $requestArray['userName'];
+            $reqPass        = $requestArray['userPW'];
+            $reqEmail       = $requestArray['userE-Mail'];
+            $UserFirstName  = $requestArray['userFirstName'];
+            $UserLastName   = $requestArray['userLastName'];
 
-            if(is_string($reqUser && is_string($reqPass))){
+            if( !is_string($reqUser         &&
+                !is_string($reqPass)        &&
+                !is_string($reqEmail)       &&
+                !is_string($UserFirstName)  &&
+                !is_string($UserLastName)
+             )){
                 header("HTTP/1.0 400 Bad Request");
-                echo json_encode(['error' => 'userName or userPW empty.']);
+                echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
             }
             $db_results=registerNewUser($pdo,"$reqUser","$reqPass");
