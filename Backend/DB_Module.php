@@ -274,6 +274,7 @@
                     $newSessToken = createNewSessionToken($userName);
                     $sql = "UPDATE `Users` set SESS_ID = '$newSessToken' WHERE `Username` = $userName";
                 }
+                return [true, "$newSessToken"];
             }
         }
         catch (PDOException $e) {
