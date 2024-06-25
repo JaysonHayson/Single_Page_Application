@@ -1,6 +1,7 @@
 <?php
     
     require_once './config.php';
+    require_once './sessionHandling/functions.php';
 
     try {
         $pdo = new PDO("mysql:host=$DBHost;dbname=$DB_DBName", DBUSERNAME, DBPASSWORD);
@@ -270,6 +271,8 @@
                     $changeSessID = false;
                 }else{
                     // User Session =/= Server Session, close session make a new Session.
+                    $newSessToken = createNewSessionToken($userName);
+                    $sql = "UPDATE `Users` set SESS_ID = '$newSessToken' WHERE `Username` = $userName";
                 }
             }
         }
