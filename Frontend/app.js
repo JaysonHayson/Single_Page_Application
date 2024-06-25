@@ -437,7 +437,12 @@ function createLoginForm() {
     // Implement login functionality here
   }
 
-  function handleRegister(firstName, lastName, username, email, pw) {
+  function handleRegister() {
+    firstName = document.getElementById('firstNameInput').value;
+    lastName = document.getElementById('lastNameInput').value;
+    username = document.getElementById('userNameInput').value;
+    email = document.getElementById('emailInput').value;
+    pw = document.getElementById('passwordInput').value;
     fetch("../Backend/index.php", {
       method: "POST",
       body: new URLSearchParams({
@@ -445,7 +450,7 @@ function createLoginForm() {
         userFirstName: firstName,
         userLastName: lastName,
         userName: username,
-        "userE-mail": email,
+        userEmail: email,
         userPw: pw,
       }),
     })

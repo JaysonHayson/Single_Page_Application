@@ -27,7 +27,7 @@
         case 'registerNewUser':
             $reqUser        = $requestArray['userName'];
             $reqPass        = $requestArray['userPW'];
-            $reqEmail       = $requestArray['userE-Mail'];
+            $reqEmail       = $requestArray['userEmail'];
             $UserFirstName  = $requestArray['userFirstName'];
             $UserLastName   = $requestArray['userLastName'];
 
