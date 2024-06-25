@@ -437,10 +437,36 @@ function createLoginForm() {
     // Implement login functionality here
   }
 
-  function handleRegister() {
-    console.log("Register button clicked");
+  function handleRegister(firstName, lastName,username, email, pw) {
+    fetch('../Backend/index.php', {
+      method: 'POST',
+      body: new URLSearchParams({
+        'Command': 'registerNewUser',
+        'userFirstName': firstName,
+        'userLastName': lastName,
+        'userName': username,
+        'userE-mail': email,
+        'userPw': pw
+      })
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetched data:", data);
+  
+        console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
     // Implement registration functionality here
   }
+
 
   loginButton.addEventListener("click", handleLogin);
 
