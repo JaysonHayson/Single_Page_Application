@@ -313,11 +313,6 @@ function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function toggleSearch() {
-  const searchBar = document.getElementById("searchBar");
-  searchBar.classList.toggle("show");
-}
-
 function togglePersonMenu() {
   const personDropdown = document.querySelector(".dropdown-content");
   personDropdown.classList.toggle("hidden");
@@ -511,10 +506,6 @@ function showLogin() {
 
 function showRegister() {
   alert("Register functionality to be implemented.");
-}
-
-function searchItems(query) {
-  alert("Search functionality to be implemented.");
 }
 
 function showImpressum() {

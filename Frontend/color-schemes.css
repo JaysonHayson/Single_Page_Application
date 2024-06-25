@@ -90,18 +90,6 @@ button.btn:hover {
   transition: box-shadow 0.1s ease-in-out;
 }
 
-#searchBar input {
-  color: var(--text-color2);
-  border: var(--primary-color);
-  border-radius: 12px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-#searchBar input::placeholder {
-  color: var(--text-color2);
-}
-
 .hero h1 {
   color: var(--hero-color);
 }

@@ -71,16 +71,6 @@ body {
   }
 }
 
-#searchBar {
-  max-height: 0;
-  transition: max-height 0.4s ease-out;
-  color: var(--text-color);
-}
-
-#searchBar.show {
-  max-height: 100px;
-}
-
 .hamburger-btn {
   background: none;
   border: none;
