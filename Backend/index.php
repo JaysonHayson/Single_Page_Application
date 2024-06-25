@@ -9,6 +9,7 @@
     header('Content-Type: application/json');
 
     if ($requestMethod != 'POST'){
+        header("HTTP/1.0 400 Bad Request");
         echo json_encode(['error' => 'Method not allowed']);
         return;    
     }
@@ -35,9 +36,31 @@
             $db_results=registerNewUser($pdo,"$reqUser","$reqPass");
             echo json_encode($db_results);
             break;
+        case 'loginUser':
+            $User = $requestArray['userName'];
+            $Pass = $requestArray['userPW'];
+            if(is_string($User && is_string($Pass))){
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(['error' => 'userName or userPW empty.']);
+                return;
+            }
+            $result = loginUser($pdo,$User,$Pass);
+            echo json_encode(['SUCCESS' => 'User Created']);
+            break;
+        case 'logoutUser':
+            $User      = $requestArray['userName'];
+            $SessToken = $requestArray['SessionID'];
+            if(is_string($User && is_string($SessToken))){
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(['error' => 'userName or Session empty.']);
+                return;
+            }
+            $result = logoutUser($pdo,$User,$Pass);
+            echo json_encode(['SUCCESS' => 'logout Successfull']);
+            break;
         default:
-                header("HTTP/1.0 404 Not Found");
-                echo json_encode(['message' => 'Endpoint not found']);
+            header("HTTP/1.0 404 Not Found");
+            echo json_encode(['message' => 'Endpoint not found']);
             break;
 
     }
