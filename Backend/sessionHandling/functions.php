@@ -5,7 +5,7 @@
     * Creates New Session Token for current Logged in User.
     * 
     * @param  string   $UserName     Username to create a session for.
-    * @return Array    Array of (Bool, Message)
+    * @return string   new USER Session Token
     */
     function createNewSessionToken($UserName){
         $magicString = base64_encode(
