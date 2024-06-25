@@ -359,50 +359,42 @@ document.addEventListener("DOMContentLoaded", () => {
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.id = "loginContainer";
-  loginForm.className =
-    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+  loginForm.className = "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
-
-    <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
-
-      <div class="mb-4 w-full sm:w-full lg:w-full">
-        <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-        <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username">
+    <form id="authForm">
+      <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
+        <div class="mb-4 w-full sm:w-full lg:w-full">
+          <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
+          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username">
+        </div>
+        <div class="mb-4 w-full sm:w-full lg:w-full">
+          <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
+          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name">
+        </div>
+        <div class="mb-4 w-full sm:w-full lg:w-full">
+          <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
+          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name">
+        </div>
       </div>
-
       <div class="mb-4 w-full sm:w-full lg:w-full">
-        <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-        <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name">
+        <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
+        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email">
       </div>
-      
       <div class="mb-4 w-full sm:w-full lg:w-full">
-        <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-        <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name">
+        <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
+        <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password">
       </div>
-    </div>
-
-    <div class="mb-4 w-full sm:w-full lg:w-full">
-      <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-      <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email">
-    </div>
-
-    <div class="mb-4 w-full sm:w-full lg:w-full">
-      <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-      <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password">
-    </div>
-
-    <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
-      <input type="checkbox" class="checkbox mr-2">
-      <label class="text-sm">Remember me</label>
-    </div>
-
-    <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
-
-    <div id="registerMessage" class="text-sm mb-4">
-      If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
-    </div>
+      <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
+        <input type="checkbox" class="checkbox mr-2">
+        <label class="text-sm">Remember me</label>
+      </div>
+      <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+      <div id="registerMessage" class="text-sm mb-4">
+        If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
+      </div>
+    </form>
   `;
 
   const registerLink = loginForm.querySelector("#registerLink");
@@ -438,6 +430,8 @@ function createLoginForm() {
   }
 
   function handleRegister() {
+    event.preventDefault();
+
     firstName = document.getElementById('firstNameInput').value;
     lastName = document.getElementById('lastNameInput').value;
     username = document.getElementById('userNameInput').value;
@@ -455,22 +449,24 @@ function createLoginForm() {
       }),
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Fetched data:", data);
+        // if (!response.ok) {
+        //   throw new Error("Network response was not ok");
+        // }
+        // return response.json();
+        console.log("Nice buddy!");
 
-        console.log(
-          "Fetched data (JSON format):",
-          JSON.stringify(data, null, 2)
-        );
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
       });
+      // .then((data) => {
+      //   console.log("Fetched data:", data);
+
+      //   console.log(
+      //     "Fetched data (JSON format):",
+      //     JSON.stringify(data, null, 2)
+      //   );
+      // })
+      // .catch((error) => {
+      //   console.error("Error fetching data:", error);
+      // });
     // Implement registration functionality here
   }
 

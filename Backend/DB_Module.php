@@ -220,7 +220,7 @@
      * @return Array    Array of (Bool, Message)
      */
 
-    function registerNewUser(&$pdo,$userName,$userPW){
+    function registerNewUser(&$pdo,$userName,$userPW, $userEmail, $userFirstName, $userLastName){
         $returnVar = [true,""];
         $secPW= password_hash($userPW,null);
         $sql = "INSERT into `Users` (`Username`,`Password`) VALUES ('$userName','$secPW')";
