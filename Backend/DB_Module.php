@@ -244,11 +244,12 @@
     
     /**
     * loginUser
-    * Prepares and executes a Creation of a new user with Provided Password and username.
+    * Attempts to login user with given Credentials and optional current SessToken
     * 
-    * @param  PDO      $pdo        PDO Handle
-    * @param  string   $userName      RequestedUserName
-    * @param  string    $userPW  RequestedPW
+    * @param  PDO      $pdo         PDO Handle
+    * @param  string   $userName    RequestedUserName
+    * @param  string   $userPW      RequestedPW
+    * @param  string   $userSessID  Optional: Current Session Token
     * @return Array    Array of (Bool, Message)
     */
 
