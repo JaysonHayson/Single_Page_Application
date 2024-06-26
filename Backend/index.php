@@ -17,7 +17,7 @@
     switch ($requestArray['Command']) {
         case 'GetProductsForCategorie':
             $cat_condition[] = ['category_id' => $requestArray['CatNr']];
-            $db_results = selectWithWhereCondition($pdo,'Items',$cat_condition);
+            $db_results = selectWithWhereCondition($pdo,'items',$cat_condition);
             echo json_encode($db_results);
             break;
         case 'GetAllCategories':
@@ -40,7 +40,7 @@
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
             }
-            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, $reqFirstName, $reqLastName);
+            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, "$reqFirstName", "$reqLastName");
             //$db_resultsCustomer = registerNewCustomer(...
             echo json_encode($db_results);
             break;

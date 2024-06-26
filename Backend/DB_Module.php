@@ -231,12 +231,12 @@
             $secPW = password_hash($userPW, PASSWORD_DEFAULT);
     
             //First Statement
-            $sql1 = "INSERT INTO Users (Username, Password) VALUES (:userName, :secPW)";
+            $sql1 = "INSERT INTO users (username, password) VALUES (:userName, :secPW)";
             $stmt1 = $pdo->prepare($sql1);
             $stmt1->execute(['userName' => $userName, 'secPW' => $secPW]);
     
             // Second Statement
-            $sql2 = "INSERT INTO customers (vorname, nachname, email) VALUES (:firstName, :lastName, :email)";
+            $sql2 = "INSERT INTO customers (firstName, lastName, email) VALUES (:firstName, :lastName, :email)";
             $stmt2 = $pdo->prepare($sql2);
             $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
