@@ -285,7 +285,7 @@
         //      }
         //      return $returnVar;
         // }
-    }
+    
     
     /**
     * loginUser
