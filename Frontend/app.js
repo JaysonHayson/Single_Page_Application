@@ -36,17 +36,19 @@ function renderProducts(data) {
   productList.innerHTML = "";
 
   const controlsDiv = document.getElementById("controls");
-  const renderOtherButton = document.createElement("button");
-  renderCategoriesButton.id = "renderCategoriesButton";
-  renderCategoriesButton.className = "btn px-4 py-2 rounded";
-  renderCategoriesButton.textContent = "renderCategoriesButton";
-  renderCategoriesButton.addEventListener("click", renderCategories);
   
+
+  const renderOtherButton = document.createElement("button");
+  renderOtherButton.id = "renderOtherButton"; 
+  renderOtherButton.className = "btn px-4 py-2 rounded";
+  renderOtherButton.textContent = "Render Categories"; 
+  
+  renderOtherButton.addEventListener("click", renderCategories); 
+
   controlsDiv.appendChild(renderOtherButton);
 
-  
   data.forEach((item) => {
-    console.log("Creating product card for item:", item); 
+    console.log("Creating product card for item:", item);
     const productCard = createProductCard(item);
     productList.appendChild(productCard);
   });
