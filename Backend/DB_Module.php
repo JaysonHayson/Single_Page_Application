@@ -330,6 +330,8 @@
                     // User Session =/= Server Session, close session make a new Session.
                     $newSessToken = createNewSessionToken($userName);
                     $sql = "UPDATE `Users` set SESS_ID = '$newSessToken' WHERE `Username` = $userName";
+                    $stmt = $pdo -> prepare($sql);
+                    $stmt -> execute();
                 }
                 return [true, "$newSessToken"];
             }

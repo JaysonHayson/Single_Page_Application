@@ -465,7 +465,25 @@ function createLoginForm() {
   });
 
   function handleLogin() {
-    console.log("Login button clicked");
+    event.preventDefault();
+
+    username= document.getElementById('userNameInput').value;
+    pw = document.getElementById('passwordInput').value;
+
+    fetch("../Backend/index.php", {
+      method: "POST",
+      body: new URLSearchParams({
+        Command: "loginUser",
+        userName: usernamem,
+        userPW: pw
+      })
+    })
+    .then((response) => {
+      if(!response.ok){
+        throw new Error("Login response fail");
+      }
+      
+    });
     // Implement login functionality here
   }
 
@@ -486,7 +504,7 @@ function createLoginForm() {
         userLastName: lastName,
         userName: username,
         userEmail: email,
-        userPW: pw,
+        userPW: pw
       }),
     })
       .then((response) => {
