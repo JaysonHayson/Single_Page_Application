@@ -350,10 +350,13 @@ document.addEventListener("DOMContentLoaded", () => {
         drawer.classList.remove("open");
       }
     });
-  } else {
-    console.error(
-      'Elemente mit den IDs "drawerOpener" und/oder "drawer" und/oder "drawerCloseButton" wurden nicht gefunden.'
-    );
+
+    const drawerLinks = drawer.querySelectorAll("a");
+    drawerLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        drawer.classList.remove("open");
+      });
+    });
   }
 });
 
