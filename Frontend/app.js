@@ -37,10 +37,10 @@ function renderProducts(data) {
 
   const controlsDiv = document.getElementById("controls");
   const renderOtherButton = document.createElement("button");
-  renderOtherButton.id = "renderCategories";
-  renderOtherButton.className = "btn px-4 py-2 rounded";
-  renderOtherButton.textContent = "renderCategories";
-  renderOtherButton.addEventListener("click", renderCategories());
+  renderCategoriesButton.id = "renderCategoriesButton";
+  renderCategoriesButton.className = "btn px-4 py-2 rounded";
+  renderCategoriesButton.textContent = "renderCategoriesButton";
+  renderCategoriesButton.addEventListener("click", renderCategories);
   
   controlsDiv.appendChild(renderOtherButton);
 
