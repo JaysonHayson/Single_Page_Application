@@ -230,7 +230,7 @@
             // First statement: Insert into 'users' table
             $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
             $stmt1 = $pdo->prepare($sql1);
-            $success1 = $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
+            $success1 = $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, null)]);
     
             // Check if the insert was successful
             if ($success1) {
@@ -238,7 +238,7 @@
                 $userId = $pdo->lastInsertId();
     
                 // Second statement: Insert into 'customers' table
-                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
+                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, adress) VALUES (:userId, :firstName, :lastName, :email, null)";
                 $stmt2 = $pdo->prepare($sql2);
                 $success2 = $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
