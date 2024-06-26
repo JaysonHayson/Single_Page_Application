@@ -565,6 +565,22 @@ function xInnerHtmlAndCallback(callback) {
   }
   callback();
 }
+
+//checkout
+function createCheckout() {
+  const checkout = document.createElement("div");
+  checkout.id = "checkoutContainer";
+}
+
+
+
+function renderCheckout() {
+  const checkout = document.getElementById("checkout");
+  checkout.innerHTML = "";
+  const checkoutItem = createCheckout();
+  checkout.appendChild(checkoutItem);
+}
+
 // TODO: Functions to be implemented
 
 function showLogin() {
@@ -585,8 +601,4 @@ function showAGB() {
 
 function showContact() {
   alert("Contact functionality to be implemented.");
-}
-
-function checkout() {
-  alert("Checkout functionality to be implemented.");
 }
