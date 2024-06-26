@@ -474,7 +474,7 @@ function createLoginForm() {
       method: "POST",
       body: new URLSearchParams({
         Command: "loginUser",
-        userName: usernamem,
+        userName: username,
         userPW: pw
       })
     })
@@ -528,8 +528,6 @@ function createLoginForm() {
       // });
     // Implement registration functionality here
   }
-
-  loginButton.addEventListener("click", handleLogin);
 
   return loginForm;
 }
