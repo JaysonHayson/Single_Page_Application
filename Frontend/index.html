@@ -128,7 +128,7 @@
             <p class="border-t w-full my-2"></p>
             <p class="text-lg font-bold my-2">Total: $<span id="cartTotal">0.00</span></p>
             <div class="btn-group mt-4">
-                <button class="btn btn-danger mr-2" onclick="checkout()">Checkout</button>
+                <button class="btn btn-danger mr-2" onclick="xInnerHtmlAndCallback(renderCheckout)">Checkout</button>
                 <button class="btn btn-danger ml-2" onclick="toggleCart()">Close</button>
             </div>
         </div>
@@ -149,8 +149,11 @@
         </div>
     
         <!-- Login Form Placeholder -->
-        <div id="loginForm" class="mx-auto my-auto w-full lg:w-2/4">
-        </div>
+        <div id="loginForm" class="mx-auto my-auto w-full lg:w-2/4"></div>
+
+        <!-- Checkout Placeholder-->
+        <div id="Checkout" class="mx-auto my-auto w-3/4 md:mx-auto my-auto w-3/4 lg:mx-auto my-auto w-3/4"></div>
+
     </main>
 
     <!-- JavaScript File -->
