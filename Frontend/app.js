@@ -32,10 +32,21 @@ function createProductCard(item) {
 
 function renderProducts(data) {
   const productList = document.getElementById("productList");
-  console.log("Product list element:", productList); // Debugging
+  console.log("Product list element:", productList);
   productList.innerHTML = "";
+
+  const controlsDiv = document.getElementById("controls");
+  const renderOtherButton = document.createElement("button");
+  renderOtherButton.id = "renderCategories";
+  renderOtherButton.className = "btn px-4 py-2 rounded";
+  renderOtherButton.textContent = "renderCategories";
+  renderOtherButton.addEventListener("click", renderCategories());
+  
+  controlsDiv.appendChild(renderOtherButton);
+
+  
   data.forEach((item) => {
-    console.log("Creating product card for item:", item); // Debugging
+    console.log("Creating product card for item:", item); 
     const productCard = createProductCard(item);
     productList.appendChild(productCard);
   });
