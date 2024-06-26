@@ -40,7 +40,7 @@
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
             }
-            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, "$reqFirstName", "$reqLastName");
+            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, $reqFirstName, $reqLastName);
             //$db_resultsCustomer = registerNewCustomer(...
             echo json_encode($db_results);
             break;

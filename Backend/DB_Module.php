@@ -228,7 +228,7 @@
     
         try {
 
-            $secPW = password_hash($userPW, PASSWORD_DEFAULT);
+            $secPW = password_hash($userPW, null);
     
             //First Statement
             $sql1 = "INSERT INTO users (username, password) VALUES (:userName, :secPW)";
@@ -244,7 +244,7 @@
             $pdo->commit();
     
             
-            $returnVar[1] = 'User and Customer successfully registered.';
+            $returnVar[1] = 'user and customer successfully registered.';
         } catch (PDOException $e) {
             // Roll back transaction in case of an error
             $pdo->rollBack();
@@ -256,7 +256,7 @@
             $errorMessage = $e-> getMessage();
             error_log("PDOException: $errorMessage");
             if ($eCode == '23000') {
-                $returnVar[1] = 'Username or Email already in use.';
+                $returnVar[1] = 'username or email already in use.';
             } else {
                 $returnVar[1] = 'Unknown error occurred.';
             }
