@@ -222,38 +222,43 @@
 
      function registerNewUser(&$pdo, $userName, $userPW, $userEmail, $userFirstName, $userLastName) {
         $returnVar = [true, ""];
-    
+        
         // Start transaction
         $pdo->beginTransaction();
-    
+        
         try {
-
-            $secPW = password_hash($userPW, null);
-    
-            //First Statement
-            $sql1 = "INSERT INTO users (username, password) VALUES (:userName, :secPW)";
-            $stmt1 = $pdo->prepare($sql1);
-            $stmt1->execute(['userName' => $userName, 'secPW' => $secPW]);
-    
-            //Get last inserted id
-            $userId = $pdo->lastInsertId();
-
-            // Second Statement
-            $sql2 = "INSERT INTO customers (User_id, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
+            // First statement
+            $sql2 = "INSERT INTO customers (firstName, lastName, email) VALUES (:firstName, :lastName, :email)";
             $stmt2 = $pdo->prepare($sql2);
-            $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
-    
-            // Commit the transaction
+            $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
+        
+            //Get last inserted id 
+            $customerId = $pdo->lastInsertId();
+        
+            // Second statement
+            $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
+            $stmt1 = $pdo->prepare($sql1);
+            $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
+        
+            //Get last inserted id from users table
+            $userId = $pdo->lastInsertId();
+        
+            // Update customers table with user_id
+            $sql3 = "UPDATE customers SET user_ID = :userId WHERE customer_id = :customerId";
+            $stmt3 = $pdo->prepare($sql3);
+            $stmt3->execute(['userId' => $userId, 'customerId' => $customerId]);
+        
+            
             $pdo->commit();
-    
-            $returnVar[1] = 'user and customer successfully registered.';
+        
+            $returnVar[1] = 'User and customer successfully registered.';
         } catch (PDOException $e) {
-            // Roll back transaction in case of an error
+            
             $pdo->rollBack();
     
             $returnVar[0] = false;
             
-            // Handle error code
+            
             $eCode = $e-> getCode();
             $errorMessage = $e-> getMessage();
             error_log("PDOException: $errorMessage");
