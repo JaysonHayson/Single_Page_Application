@@ -236,7 +236,7 @@
             $stmt1->execute(['userName' => $userName, 'secPW' => $secPW]);
     
             // Second Statement
-            $sql2 = "INSERT INTO Customers (vorname, nachname, email) VALUES (:firstName, :lastName, :email)";
+            $sql2 = "INSERT INTO customers (vorname, nachname, email) VALUES (:firstName, :lastName, :email)";
             $stmt2 = $pdo->prepare($sql2);
             $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
@@ -249,7 +249,6 @@
             // Roll back transaction in case of an error
             $pdo->rollBack();
     
-            
             $returnVar[0] = false;
             
             // Handle error code
