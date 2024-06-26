@@ -478,7 +478,7 @@ function createLoginForm() {
         userLastName: lastName,
         userName: username,
         userEmail: email,
-        userPw: pw,
+        userPW: pw,
       }),
     })
       .then((response) => {
