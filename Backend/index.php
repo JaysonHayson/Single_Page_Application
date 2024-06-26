@@ -28,8 +28,8 @@
             $reqUser        = $requestArray['userName'];
             $reqPass        = $requestArray['userPW'];
             $reqEmail       = $requestArray['userEmail'];
-            $UserFirstName  = $requestArray['userFirstName'];
-            $UserLastName   = $requestArray['userLastName'];
+            $reqFirstName  = $requestArray['userFirstName'];
+            $reqLastName   = $requestArray['userLastName'];
 
             if (!is_string($reqUser) ||
                 !is_string($reqPass) ||
