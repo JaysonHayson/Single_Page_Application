@@ -370,10 +370,7 @@ function createLoginForm() {
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
     <form id="authForm">
       <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
-        <div class="mb-4 w-full sm:w-full lg:w-full">
-          <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
-        </div>
+        
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
           <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name" required>
@@ -382,11 +379,16 @@ function createLoginForm() {
           <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
           <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name" required>
         </div>
-      </div>
-      <div class="mb-4 w-full sm:w-full lg:w-full">
+         <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
         <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email" required>
       </div>
+      </div>
+     
+      <div class="mb-4 w-full sm:w-full lg:w-full">
+          <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
+          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
+        </div>
       <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
         <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
