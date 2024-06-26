@@ -228,18 +228,20 @@
         
         try {
             // First statement
-            $sql2 = "INSERT INTO customers (firstName, lastName, email) VALUES (:firstName, :lastName, :email)";
-            $stmt2 = $pdo->prepare($sql2);
-            $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
+            $sql1 = "INSERT INTO customers (firstName, lastName, email) VALUES (:firstName, :lastName, :email)";
+            $stmt1 = $pdo->prepare($sql1);
+            $stmt1->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
         
+            echo "first query";
             //Get last inserted id 
             $customerId = $pdo->lastInsertId();
         
             // Second statement
-            $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
-            $stmt1 = $pdo->prepare($sql1);
-            $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
+            $sql2 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
+            $stmt2 = $pdo->prepare($sql2);
+            $stmt2->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
         
+            echo "second query";
             //Get last inserted id from users table
             $userId = $pdo->lastInsertId();
         
@@ -248,6 +250,7 @@
             $stmt3 = $pdo->prepare($sql3);
             $stmt3->execute(['userId' => $userId, 'customerId' => $customerId]);
         
+            echo "third query";
             
             $pdo->commit();
         
