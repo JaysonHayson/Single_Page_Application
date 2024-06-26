@@ -10,14 +10,16 @@ function createProductCard(item) {
   productCard.className = "card-container h-96 gap-4 mb-40 p-4 mt-16";
   productCard.innerHTML = `
     <a href="#" class="block h-full hover:shadow-lg transition-shadow w-full">
-      <div class="card card-compact w-full shadow-xl h-full transition-shadow">
+      <div class="card card-compact w-full shadow-xl h-full transition-shadow relative">
         <figure class="h-2/3 overflow-hidden">
           <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full"/>
         </figure>
         <div class="card-body h-1/3 flex flex-col justify-between p-4">
           <h2 class="card-title text-xl font-semibold">${item.name}</h2>
-          <p>${item.description}</p>
-          <p class="text-lg font-bold">$${item.price}</p>
+          <p class="truncate">${item.description}</p>
+          <div class="relative">
+            <p class="text-xl font-bold absolute -bottom-4 left-0 bg-white">$${item.price}</p>
+          </div>
         </div>
       </div>
     </a>
