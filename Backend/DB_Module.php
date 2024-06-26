@@ -235,15 +235,17 @@
             $stmt1 = $pdo->prepare($sql1);
             $stmt1->execute(['userName' => $userName, 'secPW' => $secPW]);
     
+            //Get last inserted id
+            $userId = $pdo->lastInsertId();
+
             // Second Statement
-            $sql2 = "INSERT INTO customers (firstName, lastName, email) VALUES (:firstName, :lastName, :email)";
+            $sql2 = "INSERT INTO customers (User_id, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
             $stmt2 = $pdo->prepare($sql2);
-            $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
+            $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
             // Commit the transaction
             $pdo->commit();
     
-            
             $returnVar[1] = 'user and customer successfully registered.';
         } catch (PDOException $e) {
             // Roll back transaction in case of an error
