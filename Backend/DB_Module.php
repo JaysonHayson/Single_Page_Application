@@ -230,13 +230,13 @@
             // first statement
             $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
             $stmt1 = $pdo->prepare($sql1);
-            $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
+            $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, null)]);
     
             //Get last inserted id 
             $userId = $pdo->lastInsertId();
     
             // second statement
-            $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
+            $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, adress) VALUES (:userId, :firstName, :lastName, :email, null)";
             $stmt2 = $pdo->prepare($sql2);
             $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
