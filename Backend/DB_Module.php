@@ -227,23 +227,37 @@
         $pdo->beginTransaction();
     
         try {
-            // first statement
+            // First statement: Insert into 'users' table
             $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
             $stmt1 = $pdo->prepare($sql1);
-            $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
+            $success1 = $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
     
-            //Get last inserted id 
-            $userId = $pdo->lastInsertId();
+            // Check if the insert was successful
+            if ($success1) {
+                // Get the user_ID of the inserted row
+                $userId = $pdo->lastInsertId();
     
-            // second statement
-            $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
-            $stmt2 = $pdo->prepare($sql2);
-            $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
+                // Second statement: Insert into 'customers' table
+                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email) VALUES (:userId, :firstName, :lastName, :email)";
+                $stmt2 = $pdo->prepare($sql2);
+                $success2 = $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
     
-            // Commit the transaction
-            $pdo->commit();
-    
-            $returnVar[1] = 'User and customer successfully registered.';
+                if ($success2) {
+                    // Commit the transaction if both inserts were successful
+                    $pdo->commit();
+                    $returnVar[1] = 'User and customer successfully registered.';
+                } else {
+                    // Roll back if second insert fails
+                    $pdo->rollBack();
+                    $returnVar[0] = false;
+                    $returnVar[1] = 'Failed to insert into customers table.';
+                }
+            } else {
+                // Roll back if first insert fails
+                $pdo->rollBack();
+                $returnVar[0] = false;
+                $returnVar[1] = 'Failed to insert into users table.';
+            }
         } catch (PDOException $e) {
             $pdo->rollBack();
     
@@ -252,6 +266,7 @@
             $eCode = $e->getCode();
             $errorMessage = $e->getMessage();
             error_log("PDOException: $errorMessage");
+    
             if ($eCode == '23000') {
                 $returnVar[1] = 'Username or email already in use.';
             } else {
