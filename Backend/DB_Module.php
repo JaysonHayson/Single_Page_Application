@@ -220,27 +220,71 @@
      * @return Array    Array of (Bool, Message)
      */
 
-    function registerNewUser(&$pdo,$userName,$userPW, $userEmail, $userFirstName, $userLastName){
-        $returnVar = [true,""];
-        $secPW= password_hash($userPW,null);
-        $sql = "INSERT into `Users` (`Username`,`Password`) VALUES ('$userName','$secPW')";
-        try{
-            $stmt = $pdo -> prepare($sql);
-            $stmt -> execute();
+     function registerNewUser(&$pdo, $userName, $userPW, $userEmail, $userFirstName, $userLastName) {
+        $returnVar = [true, ""];
+    
+        // Start transaction
+        $pdo->beginTransaction();
+    
+        try {
 
-            $returnVar[1] = $stmt -> fetchAll();
-
-            return $returnVar;
-        }catch (PDOException $e) {
-             $eCode = $e->getCode();
-             $returnVar[1] = 'Unknown-Error';
-             $returnVar[0] = false;
-             //# Check for Known Error Duplicate UserName
-             if($eCode == 23000){
-                $returnVar[1] = 'Username already in use.';
-             }
-             return $returnVar;
+            $secPW = password_hash($userPW, PASSWORD_DEFAULT);
+    
+            //First Statement
+            $sql1 = "INSERT INTO Users (Username, Password) VALUES (:userName, :secPW)";
+            $stmt1 = $pdo->prepare($sql1);
+            $stmt1->execute(['userName' => $userName, 'secPW' => $secPW]);
+    
+            // Second Statement
+            $sql2 = "INSERT INTO Customers (vorname, nachname, email) VALUES (:firstName, :lastName, :email)";
+            $stmt2 = $pdo->prepare($sql2);
+            $stmt2->execute(['firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail]);
+    
+            // Commit the transaction
+            $pdo->commit();
+    
+            
+            $returnVar[1] = 'User and Customer successfully registered.';
+        } catch (PDOException $e) {
+            // Roll back transaction in case of an error
+            $pdo->rollBack();
+    
+            
+            $returnVar[0] = false;
+    
+            // Handle error code
+            $eCode = $e->getCode();
+            if ($eCode == '23000') {
+                $returnVar[1] = 'Username or Email already in use.';
+            } else {
+                $returnVar[1] = 'Unknown error occurred.';
+            }
         }
+    
+        // Return the result
+        return $returnVar;
+    }
+
+        // $returnVar = [true,""];
+        // $secPW= password_hash($userPW,null);
+        // $sql = "INSERT into `Users` (`Username`,`Password`) VALUES ('$userName','$secPW')";
+        // try{
+        //     $stmt = $pdo -> prepare($sql);
+        //     $stmt -> execute();
+
+        //     $returnVar[1] = $stmt -> fetchAll();
+
+        //     return $returnVar;
+        // }catch (PDOException $e) {
+        //      $eCode = $e->getCode();
+        //      $returnVar[1] = 'Unknown-Error';
+        //      $returnVar[0] = false;
+        //      //# Check for Known Error Duplicate UserName
+        //      if($eCode == 23000){
+        //         $returnVar[1] = 'Username already in use.';
+        //      }
+        //      return $returnVar;
+        // }
     }
     
     /**

@@ -31,12 +31,11 @@
             $UserFirstName  = $requestArray['userFirstName'];
             $UserLastName   = $requestArray['userLastName'];
 
-            if( !is_string($reqUser         &&
-                !is_string($reqPass)        &&
-                !is_string($reqEmail)       &&
-                !is_string($UserFirstName)  &&
-                !is_string($UserLastName)
-             )){
+            if (!is_string($reqUser) ||
+                !is_string($reqPass) ||
+                !is_string($reqEmail) ||
+                !is_string($UserFirstName) ||
+                !is_string($UserLastName)) {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
