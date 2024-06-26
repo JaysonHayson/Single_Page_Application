@@ -387,11 +387,11 @@ function createLoginForm() {
      
       <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-          <input id="userNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
+          <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
         </div>
       <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-        <input id="passwordInput" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
+        <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
       </div>
       <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
         <input type="checkbox" class="checkbox mr-2">
@@ -467,8 +467,8 @@ function createLoginForm() {
   function handleLogin() {
     event.preventDefault();
 
-    username= document.getElementById('userNameInput').value;
-    pw = document.getElementById('passwordInput').value;
+    username= document.getElementsByName('userName')[0].value;
+    pw = document.getElementsByName('pw')[0].value;
 
     fetch("../Backend/index.php", {
       method: "POST",
