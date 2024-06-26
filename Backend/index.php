@@ -34,8 +34,8 @@
             if (!is_string($reqUser) ||
                 !is_string($reqPass) ||
                 !is_string($reqEmail) ||
-                !is_string($UserFirstName) ||
-                !is_string($UserLastName)) {
+                !is_string($reqFirstName) ||
+                !is_string($reqLastName)) {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
