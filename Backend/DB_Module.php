@@ -251,9 +251,11 @@
     
             
             $returnVar[0] = false;
-    
+            
             // Handle error code
-            $eCode = $e->getCode();
+            $eCode = $e-> getCode();
+            $errorMessage = $e-> getMessage();
+            error_log("PDOException: $errorMessage");
             if ($eCode == '23000') {
                 $returnVar[1] = 'Username or Email already in use.';
             } else {

@@ -470,6 +470,7 @@ function createLoginForm() {
     username = document.getElementById('userNameInput').value;
     email = document.getElementById('emailInput').value;
     pw = document.getElementById('passwordInput').value;
+    
     fetch("../Backend/index.php", {
       method: "POST",
       body: new URLSearchParams({
