@@ -18,7 +18,7 @@ function createProductCard(item) {
           <h2 class="card-title text-xl font-semibold">${item.name}</h2>
           <p class="truncate">${item.description}</p>
           <div class="relative">
-            <p class="text-xl font-bold absolute -bottom-4 left-0 bg-white">$${item.price}</p>
+            <p class="text-xl font-bold absolute -bottom-4 left-0">$${item.price}</p>
           </div>
         </div>
       </div>
