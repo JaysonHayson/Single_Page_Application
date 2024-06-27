@@ -223,10 +223,9 @@
      function registerNewUser(&$pdo, $userName, $userPW, $userEmail, $userFirstName, $userLastName) {
         $returnVar = [true, ""];
     
-        // Start transaction
-        $pdo->beginTransaction();
-    
         try {
+            // Start transaction
+            $pdo->beginTransaction();
             // First statement: Insert into 'users' table
             $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
             $stmt1 = $pdo->prepare($sql1);
@@ -272,6 +271,11 @@
             } else {
                 $returnVar[1] = 'Unknown error occurred.';
             }
+        } catch (Exception $e){
+            //Try to rollBack, if possible.
+            $pdo->rollBack();
+            $returnVar[0] = false;
+            $returnVar[1] = 'Error: Unspecified uncaught Error.';
         }
     
         // Return the result
