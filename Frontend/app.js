@@ -514,16 +514,16 @@ function handleRegister() {
       // Remove existing content
       xInnerHtmlAndCallback(() => {
         const messageDiv = document.createElement("div");
-        messageDiv.className = "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
+        messageDiv.className = "transform -translate-x-1/2 px-4 py-2 rounded shadow";
 
         if (data[0]) {
           // Registration successful
           messageDiv.textContent = "Registration successful!";
-          messageDiv.classList.add("bg-green-500", "m-auto");
+          messageDiv.classList.add("m-*");
         } else {
           // Registration failed
           messageDiv.textContent = "Registration failed! " + data[1];
-          messageDiv.classList.add("bg-red-500", "m-auto");
+          messageDiv.classList.add("m-*");
         }
 
         document.body.appendChild(messageDiv);
