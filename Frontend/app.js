@@ -643,7 +643,7 @@ function InitializeCart() {
 
 let cartItems = [];
 
-document.addEventListener("DOMContentLoaded", initializeCart);
+document.addEventListener("DOMContentLoaded", InitializeCart);
 
 
 
