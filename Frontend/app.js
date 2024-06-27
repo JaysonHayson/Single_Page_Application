@@ -602,12 +602,29 @@ function xInnerHtmlAndCallback(callback) {
 }
 
 //checkout
+
+function getCartItems() {
+  return cartItems;
+}
+
 function createCheckout() {
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer";
+
+
+const cartItems = getCartItems();
+if (cartItems.length === 0) {
+  checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
+} else {
+  cartItems.forEach(item => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "checkout-item";
+    itemDiv.textContent = 'Artikel: ${item.name}, Preis: ${item.price}';
+    checkout.appendChild(itemDiv);
+  });
 }
-
-
+  return checkout;
+}
 
 function renderCheckout() {
   const checkout = document.getElementById("checkout");
@@ -615,6 +632,9 @@ function renderCheckout() {
   const checkoutItem = createCheckout();
   checkout.appendChild(checkoutItem);
 }
+
+
+
 
 // TODO: Functions to be implemented
 
