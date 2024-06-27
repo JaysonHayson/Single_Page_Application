@@ -523,7 +523,7 @@ function createLoginForm() {
             if (data[0]) {
                 // Registration successful
                 messageDiv.textContent = "Registration successful!";
-                messageDiv.classList.add("bg-green-500");
+                messageDiv.classList.add("bg-green-500 m-auto");
             } else {
                 // Registration failed
                 messageDiv.textContent = "Registration failed! " + data[1];
