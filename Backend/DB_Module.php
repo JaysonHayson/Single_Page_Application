@@ -341,6 +341,7 @@
         }
         catch (PDOException $e) {
             $errorMessage = "DB-Error Please attempt again later.";
+            return [false,$errorMessage];
         }
     }
 
