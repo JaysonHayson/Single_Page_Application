@@ -622,7 +622,7 @@ if (cartItems.length === 0) {
   cartItems.forEach(item => {
     const itemDiv = document.createElement("div");
     itemDiv.className = "checkout-item";
-    itemDiv.textContent = 'Artikel: ${item.name}, Preis: ${item.price}';
+    itemDiv.textContent = `Artikel: ${item.name}, Preis: ${item.price}`;
     checkout.appendChild(itemDiv);
   });
 }
