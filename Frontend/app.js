@@ -482,75 +482,68 @@ function createLoginForm() {
     });
     // Implement login functionality here
   }
-
-  function handleRegister() {
-    event.preventDefault();
-
-    const firstName = document.getElementById("firstNameInput").value;
-    const lastName = document.getElementById("lastNameInput").value;
-    const username = document.getElementById("userNameInput").value;
-    const email = document.getElementById("emailInput").value;
-    const pw = document.getElementById("passwordInput").value;
-
-    fetch("../Backend/index.php", {
-      method: "POST",
-      body: new URLSearchParams({
-        Command: "registerNewUser",
-        userFirstName: firstName,
-        userLastName: lastName,
-        userName: username,
-        userEmail: email,
-        userPW: pw,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Remove existing content
-        xInnerHtmlAndCallback(() => {
-          const messageDiv = document.createElement("div");
-          messageDiv.className =
-            "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
-
-          if (data[0]) {
-            // Registration successful
-            messageDiv.textContent = "Registration successful!";
-            messageDiv.classList.add("bg-green-500");
-          } else {
-            // Registration failed
-            messageDiv.textContent = "Registration failed! " + data[1];
-            messageDiv.classList.add("bg-red-500");
-          }
-
-          document.body.appendChild(messageDiv);
-
-          setTimeout(() => {
-            messageDiv.remove();
-            if (data[0]) {
-                // Registration successful
-                messageDiv.textContent = "Registration successful!";
-                messageDiv.classList.add("bg-green-500 m-auto");
-              renderLoginForm();
-            } else {
-              renderRegisterForm();
-            }
-          }, 2000);
-        });
-      })
-      .catch((error) => {
-        console.error(
-          "There was a problem with the registration request:",
-          error
-        );
-      });
-  }
   return loginForm;
 }
+function handleRegister() {
+  event.preventDefault();
 
+  const firstName = document.getElementById("firstNameInput").value;
+  const lastName = document.getElementById("lastNameInput").value;
+  const username = document.getElementById("userNameInput").value;
+  const email = document.getElementById("emailInput").value;
+  const pw = document.getElementById("passwordInput").value;
+
+  fetch("../Backend/index.php", {
+    method: "POST",
+    body: new URLSearchParams({
+      Command: "registerNewUser",
+      userFirstName: firstName,
+      userLastName: lastName,
+      userName: username,
+      userEmail: email,
+      userPW: pw,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Remove existing content
+      xInnerHtmlAndCallback(() => {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
+
+        if (data[0]) {
+          // Registration successful
+          messageDiv.textContent = "Registration successful!";
+          messageDiv.classList.add("bg-green-500", "m-auto");
+        } else {
+          // Registration failed
+          messageDiv.textContent = "Registration failed! " + data[1];
+          messageDiv.classList.add("bg-red-500", "m-auto");
+        }
+
+        document.body.appendChild(messageDiv);
+
+        setTimeout(() => {
+          if (data[0]) {
+            xInnerHtmlAndCallback(renderLoginForm());
+          } else {
+            xInnerHtmlAndCallback(renderRegisterForm());
+          }
+        }, 2000);
+      });
+    })
+    .catch((error) => {
+      console.error(
+        "There was a problem with the registration request:",
+        error
+      );
+    });
+}
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
   loginForm.innerHTML = "";
