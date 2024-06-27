@@ -28,14 +28,21 @@
             $reqUser        = $requestArray['userName'];
             $reqPass        = $requestArray['userPW'];
             $reqEmail       = $requestArray['userEmail'];
-            $reqFirstName  = $requestArray['userFirstName'];
-            $reqLastName   = $requestArray['userLastName'];
+            $reqFirstName   = $requestArray['userFirstName'];
+            $reqLastName    = $requestArray['userLastName'];
 
-            if (!is_string($reqUser) ||
-                !is_string($reqPass) ||
-                !is_string($reqEmail) ||
-                !is_string($reqFirstName) ||
-                !is_string($reqLastName)) {
+            if (
+                (!is_string($reqUser)       || strlen($reqUser)<1)      //Frontend may provide an Empty string, make sure it doesn't;
+                ||
+                (!is_string($reqPass)       || strlen($reqPass)<1)      //Frontend may provide an Empty string, make sure it doesn't;
+                ||
+                (!is_string($reqEmail)      || strlen($reqEmail)<1)     //Frontend may provide an Empty string, make sure it doesn't;
+                ||
+                !is_string($reqFirstName)
+                ||
+                !is_string($reqLastName)
+                )
+            {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
