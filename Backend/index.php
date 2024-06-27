@@ -52,20 +52,25 @@
             echo json_encode($db_results);
             break;
         case 'loginUser':
-            $User = $requestArray['userName'];
-            $Pass = $requestArray['userPW'];
+            $User        = $requestArray['userName'];
+            $Pass        = $requestArray['userPW'];
+            $userSession = $requestArray['Session_ID'];
             if(
                 (!is_string($User) || strlen($User)<1)
                  ||
                 (!is_string($Pass) || strlen($Pass)<1)
-                )
+              )
             {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'userName or userPW empty.']);
                 return;
             }
             $result = loginUser($pdo,$User,$Pass);
-            echo json_encode(['SUCCESS' => 'User Created']);
+            $returningArray = array(    // Prepare Assoc array to give Frontend.
+                [   'SUCCESS'       => 'User logged in.' ],
+                [   'Session_ID'    => "$result[1]"      ]
+                );
+            echo json_encode($returningArray);
             break;
         case 'logoutUser':
             $User      = $requestArray['userName'];
