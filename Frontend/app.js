@@ -607,6 +607,11 @@ function xInnerHtmlAndCallback(callback) {
 
 //checkout
 
+function loadCartItems() {
+  const storedCart = JSON.parse(localStorage.getItem("cart"));
+  return storedCart ? storedCart : [];
+}
+
 function getCartItems() {
   return cartItems;
 }
@@ -638,8 +643,14 @@ function renderCheckout() {
   checkout.appendChild(checkoutItem);
 }
 
+function InitializeCart() {
+  cartItems = loadCartItems();
+  renderCheckout();
+}
+
 let cartItems = [];
 
+document.addEventListener("DOMContentLoaded", initializeCart);
 
 
 
