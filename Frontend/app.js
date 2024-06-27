@@ -467,8 +467,8 @@ function createLoginForm() {
   function handleLogin() {
     event.preventDefault();
 
-    username= document.getElementsByName('userName')[0].value;
-    pw = document.getElementsByName('pw')[0].value;
+    const username= document.getElementsByName('userName')[0].value;
+    const pw = document.getElementsByName('pw')[0].value;
 
     fetch("../Backend/index.php", {
       method: "POST",
@@ -491,11 +491,11 @@ function createLoginForm() {
     event.preventDefault();
 
 
-    firstName = document.getElementById('firstNameInput').value;
-    lastName = document.getElementById('lastNameInput').value;
-    username = document.getElementById('userNameInput').value;
-    email = document.getElementById('emailInput').value;
-    pw = document.getElementById('passwordInput').value;
+    const firstName = document.getElementById('firstNameInput').value;
+    const lastName = document.getElementById('lastNameInput').value;
+    const username = document.getElementById('userNameInput').value;
+    const email = document.getElementById('emailInput').value;
+    const pw = document.getElementById('passwordInput').value;
     
     fetch("../Backend/index.php", {
       method: "POST",
