@@ -54,7 +54,12 @@
         case 'loginUser':
             $User = $requestArray['userName'];
             $Pass = $requestArray['userPW'];
-            if(!is_string($User) && !is_string($Pass)){
+            if(
+                (!is_string($User) || strlen($User)<1)
+                 ||
+                (!is_string($Pass) || strlen($Pass)<1)
+                )
+            {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'userName or userPW empty.']);
                 return;
