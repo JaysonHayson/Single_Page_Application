@@ -229,7 +229,7 @@
             // First statement: Insert into 'users' table
             $sql1 = "INSERT INTO users (username, password, SESS_ID) VALUES (:userName, :secPW, NULL)";
             $stmt1 = $pdo->prepare($sql1);
-            $success1 = $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, null)]);
+            $success1 = $stmt1->execute(['userName' => $userName, 'secPW' => password_hash($userPW, PASSWORD_DEFAULT)]);
     
             // Check if the insert was successful
             if ($success1) {
@@ -316,28 +316,27 @@
     */
 
     function loginUser(&$pdo,$userName,$userPW,$userSessID = ""){
-        $returnVar = [false,""];
-        $changeSessID = true;
-        $secPW = password_hash($userPW,null);
         try{
             $fetchPWsql = "SELECT from `Users` (`Password`,`SessionID`) WHERE `Username` = $userName";
             $fetch_stmt = $pdo -> prepare($fetchPWsql);
             $fetch_stmt -> execute();
             $compareArr = $fetch_stmt->fetchAll();
-            if($secPW == $compareArr[0])
+            if( password_verify($userPW,$compareArr[0])  )
             {
                 if($userSessID != "" && $userSessID == $compareArr[1])
                 {
-                    // Reuse Session, user already logged in.
-                    $changeSessID = false;
+                    // Reuse Session, user already logged in and Session matches Servers Session.
+                    return [true, "$userSessID"];
                 }else{
                     // User Session =/= Server Session, close session make a new Session.
                     $newSessToken = createNewSessionToken($userName);
                     $sql = "UPDATE `Users` set SESS_ID = '$newSessToken' WHERE `Username` = $userName";
                     $stmt = $pdo -> prepare($sql);
                     $stmt -> execute();
+                    return [true, "$newSessToken"];
                 }
-                return [true, "$newSessToken"];
+            }else{
+                return [false, "Wrong Username / Password combination"];
             }
         }
         catch (PDOException $e) {

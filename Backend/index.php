@@ -65,12 +65,12 @@
                 echo json_encode(['error' => 'userName or userPW empty.']);
                 return;
             }
-            $result = loginUser($pdo,$User,$Pass);
-            $returningArray = array(    // Prepare Assoc array to give Frontend.
-                [   'SUCCESS'       => 'User logged in.' ],
-                [   'Session_ID'    => "$result[1]"      ]
-                );
-            echo json_encode($returningArray);
+            if( (is_string($userSession) || strlen($userSession)>0)){ //Existing Session
+                $result = loginUser($pdo,$User,$Pass,$userSession);
+            }else{
+                $result = loginUser($pdo,$User,$Pass);                //No SessionGiven
+            }
+            echo json_encode($result);
             break;
         case 'logoutUser':
             $User      = $requestArray['userName'];
