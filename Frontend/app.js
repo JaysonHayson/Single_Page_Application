@@ -546,6 +546,7 @@ function createLoginForm() {
         console.error("There was a problem with the registration request:", error);
     });
   }
+  return loginForm;
 }
 
 
@@ -598,7 +599,9 @@ function xInnerHtmlAndCallback(callback) {
       div.innerHTML = "";
     });
   }
-  callback();
+  if (typeof callback === 'function') {
+    callback();
+}
 }
 
 //checkout
