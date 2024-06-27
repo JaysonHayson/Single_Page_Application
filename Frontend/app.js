@@ -490,6 +490,7 @@ function createLoginForm() {
   function handleRegister() {
     event.preventDefault();
 
+
     firstName = document.getElementById('firstNameInput').value;
     lastName = document.getElementById('lastNameInput').value;
     username = document.getElementById('userNameInput').value;
@@ -506,31 +507,47 @@ function createLoginForm() {
         userEmail: email,
         userPW: pw
       }),
-    })
+      })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
-        console.log("Nice buddy!");
+      }) 
+      .then(data => {
+        // Remove existing content
+        xInnerHtmlAndCallback(() => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
 
-      });
-      // .then((data) => {
-      //   console.log("Fetched data:", data);
+            if (data[0]) {
+                // Registration successful
+                messageDiv.textContent = "Registration successful!";
+                messageDiv.classList.add("bg-green-500");
+            } else {
+                // Registration failed
+                messageDiv.textContent = "Registration failed! " + data[1];
+                messageDiv.classList.add("bg-red-500");
+            }
 
-      //   console.log(
-      //     "Fetched data (JSON format):",
-      //     JSON.stringify(data, null, 2)
-      //   );
-      // })
-      // .catch((error) => {
-      //   console.error("Error fetching data:", error);
-      // });
-    // Implement registration functionality here
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.remove();
+                if (data[0]) {
+                    renderLoginForm();
+                } else {
+                    renderRegisterForm();
+                }
+            }, 2000);
+        });
+    })
+    .catch(error => {
+        console.error("There was a problem with the registration request:", error);
+    });
   }
-
-  return loginForm;
 }
+
 
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
