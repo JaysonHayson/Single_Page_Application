@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const drawerLinks = drawer.querySelectorAll("a");
-    drawerLinks.forEach(link => {
+    drawerLinks.forEach((link) => {
       link.addEventListener("click", () => {
         drawer.classList.remove("open");
       });
@@ -364,7 +364,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function createLoginForm() {
   const loginForm = document.createElement("div");
   loginForm.id = "loginContainer";
-  loginForm.className = "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+  loginForm.className =
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -373,15 +374,15 @@ function createLoginForm() {
         
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name" required>
+          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name">
         </div>
         <div class="mb-4 w-full sm:w-full lg:w-full">
           <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name" required>
+          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name">
         </div>
          <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email" required>
+        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email">
       </div>
       </div>
      
@@ -407,10 +408,8 @@ function createLoginForm() {
     </form>
   `;
 
- 
   document.body.appendChild(loginForm);
 
- 
   const registerLink = loginForm.querySelector("#registerLink");
   const loginLink = loginForm.querySelector("#loginLink");
   const registerSection = loginForm.querySelector("#registerSection");
@@ -443,7 +442,6 @@ function createLoginForm() {
     }
   });
 
-
   loginLink.addEventListener("click", (event) => {
     event.preventDefault();
     registerSection.classList.add("hidden");
@@ -451,12 +449,12 @@ function createLoginForm() {
     loginMessage.classList.add("hidden");
     rememberMeSection.classList.remove("hidden");
     loginForm.classList.remove("expanded");
-  
+
     formTitle.textContent = "Login";
     loginButton.textContent = "Login";
     loginButton.removeEventListener("click", handleRegister);
     loginButton.addEventListener("click", handleLogin);
-  
+
     if (registerSection.classList.contains("hidden")) {
       registerMessage.classList.remove("hidden");
     } else {
@@ -467,22 +465,20 @@ function createLoginForm() {
   function handleLogin() {
     event.preventDefault();
 
-    username= document.getElementsByName('userName')[0].value;
-    pw = document.getElementsByName('pw')[0].value;
+    const username = document.getElementsByName("userName")[0].value;
+    const pw = document.getElementsByName("pw")[0].value;
 
     fetch("../Backend/index.php", {
       method: "POST",
       body: new URLSearchParams({
         Command: "loginUser",
         userName: username,
-        userPW: pw
-      })
-    })
-    .then((response) => {
-      if(!response.ok){
+        userPW: pw,
+      }),
+    }).then((response) => {
+      if (!response.ok) {
         throw new Error("Login response fail");
       }
-      
     });
     // Implement login functionality here
   }
@@ -490,13 +486,12 @@ function createLoginForm() {
   function handleRegister() {
     event.preventDefault();
 
+    const firstName = document.getElementById("firstNameInput").value;
+    const lastName = document.getElementById("lastNameInput").value;
+    const username = document.getElementById("userNameInput").value;
+    const email = document.getElementById("emailInput").value;
+    const pw = document.getElementById("passwordInput").value;
 
-    firstName = document.getElementById('firstNameInput').value;
-    lastName = document.getElementById('lastNameInput').value;
-    username = document.getElementById('userNameInput').value;
-    email = document.getElementById('emailInput').value;
-    pw = document.getElementById('passwordInput').value;
-    
     fetch("../Backend/index.php", {
       method: "POST",
       body: new URLSearchParams({
@@ -505,49 +500,53 @@ function createLoginForm() {
         userLastName: lastName,
         userName: username,
         userEmail: email,
-        userPW: pw
+        userPW: pw,
       }),
-      })
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
-      }) 
-      .then(data => {
+      })
+      .then((data) => {
         // Remove existing content
         xInnerHtmlAndCallback(() => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
+          const messageDiv = document.createElement("div");
+          messageDiv.className =
+            "fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow text-white z-50";
 
+          if (data[0]) {
+            // Registration successful
+            messageDiv.textContent = "Registration successful!";
+            messageDiv.classList.add("bg-green-500");
+          } else {
+            // Registration failed
+            messageDiv.textContent = "Registration failed! " + data[1];
+            messageDiv.classList.add("bg-red-500");
+          }
+
+          document.body.appendChild(messageDiv);
+
+          setTimeout(() => {
+            messageDiv.remove();
             if (data[0]) {
-                // Registration successful
-                messageDiv.textContent = "Registration successful!";
-                messageDiv.classList.add("bg-green-500");
+              renderLoginForm();
             } else {
-                // Registration failed
-                messageDiv.textContent = "Registration failed! " + data[1];
-                messageDiv.classList.add("bg-red-500");
+              renderRegisterForm();
             }
-
-            document.body.appendChild(messageDiv);
-
-            setTimeout(() => {
-                messageDiv.remove();
-                if (data[0]) {
-                    renderLoginForm();
-                } else {
-                    renderRegisterForm();
-                }
-            }, 2000);
+          }, 2000);
         });
-    })
-    .catch(error => {
-        console.error("There was a problem with the registration request:", error);
-    });
+      })
+      .catch((error) => {
+        console.error(
+          "There was a problem with the registration request:",
+          error
+        );
+      });
   }
+  return loginForm;
 }
-
 
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
@@ -598,7 +597,9 @@ function xInnerHtmlAndCallback(callback) {
       div.innerHTML = "";
     });
   }
-  callback();
+  if (typeof callback === "function") {
+    callback();
+  }
 }
 
 //checkout
