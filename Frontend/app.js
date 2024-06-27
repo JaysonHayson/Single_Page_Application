@@ -531,13 +531,10 @@ function createLoginForm() {
           setTimeout(() => {
             messageDiv.remove();
             if (data[0]) {
-<<<<<<< HEAD
                 // Registration successful
                 messageDiv.textContent = "Registration successful!";
                 messageDiv.classList.add("bg-green-500 m-auto");
-=======
               renderLoginForm();
->>>>>>> 740947d9bd6023bb5a410ccee6d7cc0ebfa127e1
             } else {
               renderRegisterForm();
             }
@@ -641,8 +638,7 @@ function renderCheckout() {
   checkout.appendChild(checkoutItem);
 }
 
-let cartItems = []
-;
+let cartItems = [];
 
 
 
