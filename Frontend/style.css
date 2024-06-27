@@ -222,10 +222,12 @@ body {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f9f9f9;
+  width: 100%;
 }
 
 .checkout-item {
   padding: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #eee;
+  width: 100%;
 }

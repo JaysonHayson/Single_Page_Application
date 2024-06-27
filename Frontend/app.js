@@ -609,6 +609,7 @@ function getCartItems() {
 }
 
 function createCheckout() {
+  
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer";
 
@@ -633,6 +634,9 @@ function renderCheckout() {
   const checkoutItem = createCheckout();
   checkout.appendChild(checkoutItem);
 }
+
+let cartItems = []
+;
 
 
 
