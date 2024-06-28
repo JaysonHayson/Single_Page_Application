@@ -1,4 +1,4 @@
-import sessionManager from './sessionManager.js';
+
 
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
