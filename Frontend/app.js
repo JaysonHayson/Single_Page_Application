@@ -479,8 +479,19 @@ function handleLogin(event) {
     }),
   }).then((response) => {
     if (!response.ok) {
-      throw new Error("Login response fail");
+      throw new Error("Login response failed");
     }
+    return response.json();
+  }).then((data) => {
+    if (data[0]) {
+      console.log("Login successful: ", data[1]);
+      // Handle successful login
+    } else {
+      console.error("Login failed: ", data[1]);
+      // Handle login failure
+    }
+  }).catch((error) => {
+    console.error("There was a problem with the login request:", error);
   });
   // Implement login functionality here
 }
