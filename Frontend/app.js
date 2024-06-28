@@ -612,20 +612,45 @@ function getCartItems() {
 function createCheckout() {
   
   const checkout = document.createElement("div");
-  checkout.id = "checkoutContainer";
+  checkout.id = "checkoutContainer table";
 
 
-const cartItems = getCartItems();
-if (cartItems.length === 0) {
-  checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
-} else {
-  cartItems.forEach(item => {
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "checkout-item";
-    itemDiv.textContent = `Artikel: ${item.name}, Preis: ${item.price}, ${item.image}`;
-    checkout.appendChild(itemDiv);
-  });
-}
+  const cartItems = getCartItems();
+  if (cartItems.length === 0) {
+    checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
+  } else {
+    Object.keys(cartSummary).forEach((productName) => {
+      const product = cartSummary[productName];
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "checkout-item ";
+      
+      itemDiv.innerHTML = `<tr>
+        
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar">
+                <div class="mask mask-squircle h-12 w-12">
+                  <img
+                    src="${product.image}"
+                    alt="item photo" />
+                </div>
+              </div>
+          </td>
+
+          <td>
+              <div class="font-bold">${product.name}</div>
+          </td>
+
+          <td>
+          ${product.quantity}
+          </td>
+
+          <td>${product.price}</td>
+          
+        </tr>`;
+      checkout.appendChild(itemDiv);
+    });
+  }
   return checkout;
 }
 
