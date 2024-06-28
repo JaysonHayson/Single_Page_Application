@@ -529,9 +529,9 @@ function handleRegister(event) {
         mainContainer.appendChild(messageDiv);
 
         setTimeout(() => {
-          if (data[0]) {
+          if (data[1]== "User and customer successfully registered.") {
             xInnerHtmlAndCallback(renderLoginForm);
-          } else {
+          } else if(data[1] == "Username or email already in use."){
             xInnerHtmlAndCallback(renderRegisterForm);
           }
         }, 2000);
