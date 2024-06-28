@@ -626,7 +626,18 @@ function createCheckout() {
       const itemDiv = document.createElement("div");
       itemDiv.className = "checkout-item ";
       
-      itemDiv.innerHTML = `<tr>
+      itemDiv.innerHTML = 
+      
+      <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      `<tr>
         
           <td>
             <div class="flex items-center gap-3">
