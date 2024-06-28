@@ -683,7 +683,7 @@ function createCheckout() {
 
 function renderCheckout() {
   const checkout = document.getElementById("checkout");
-  const checkoutOverlay = document.getElementById(cartOverlay);
+  const checkoutOverlay = document.getElementById("cartOverlay");
   checkoutOverlay.classList.toggle("hidden");
   cartItems = loadCartItems();
   checkout.innerHTML = "";
