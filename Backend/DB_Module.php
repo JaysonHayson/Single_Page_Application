@@ -317,7 +317,7 @@
 
     function loginUser(&$pdo,$userName,$userPW,$userSessID = ""){
         try{
-            $fetchPWsql = "SELECT from `Users` (`Password`,`SessionID`) WHERE `Username` = $userName";
+            $fetchPWsql = "SELECT from `Users` (`password`,`SESS_ID`) WHERE `username` = $userName";
             $fetch_stmt = $pdo -> prepare($fetchPWsql);
             $fetch_stmt -> execute();
             $compareArr = $fetch_stmt->fetchAll();
@@ -330,7 +330,7 @@
                 }else{
                     // User Session =/= Server Session, close session make a new Session.
                     $newSessToken = createNewSessionToken($userName);
-                    $sql = "UPDATE `Users` set SESS_ID = '$newSessToken' WHERE `Username` = $userName";
+                    $sql = "UPDATE `users` set SESS_ID = '$newSessToken' WHERE `username` = $userName";
                     $stmt = $pdo -> prepare($sql);
                     $stmt -> execute();
                     return [true, "$newSessToken"];
