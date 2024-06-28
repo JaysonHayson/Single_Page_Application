@@ -650,6 +650,15 @@ function createCheckout() {
         </tr>`;
       checkout.appendChild(itemDiv);
     });
+
+    const totalContainer = createElement(
+      "div"
+    );
+    totalContainer.innerHTML =
+    <p>${total}</p>
+    cartList.appendChild(totalContainer);
+    cartTotal.textContent = total.toFixed(2);
+    
   }
   return checkout;
 }
