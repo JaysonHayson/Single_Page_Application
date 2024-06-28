@@ -516,7 +516,7 @@ function handleRegister(event) {
       // Remove existing content
       xInnerHtmlAndCallback(() => {
         const messageDiv = document.createElement("div");
-        messageDiv.className = "transform -translate-x-1/2 px-4 py-2 rounded shadow text-system m-* bg-system";
+        messageDiv.className = "px-4 py-2 rounded shadow text-system m-auto bg-system";
 
         if (data[0]) {
           // Registration successful
