@@ -617,8 +617,8 @@ function createCheckout() {
   `<h2 class="checkoutHeading">Checkout</h2>`;
 
   const checkout = document.createElement("div");
-  checkout.id = "checkoutContainer table";
-  checkout.className = "w-96";
+  checkout.id = "checkoutContainer";
+  checkout.className="table w-96";
 
 
   const cartItems = getCartItems();
