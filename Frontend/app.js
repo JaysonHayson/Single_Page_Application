@@ -452,8 +452,8 @@ function createLoginForm() {
 
     formTitle.textContent = "Login";
     loginButton.textContent = "Login";
-    loginButton.removeEventListener("click", handleRegister);
-    loginButton.addEventListener("click", handleLogin);
+    loginButton.removeEventListener("click", (event)=>handleRegister(event));
+    loginButton.addEventListener("click", (event)=>handleLogin(event));
 
     if (registerSection.classList.contains("hidden")) {
       registerMessage.classList.remove("hidden");
@@ -462,7 +462,7 @@ function createLoginForm() {
     }
   });
 
-  function handleLogin() {
+  function handleLogin(event) {
     event.preventDefault();
 
     const username = document.getElementsByName("userName")[0].value;
@@ -484,7 +484,7 @@ function createLoginForm() {
   }
   return loginForm;
 }
-function handleRegister() {
+function handleRegister(event) {
   event.preventDefault();
 
   const firstName = document.getElementById("firstNameInput").value;
