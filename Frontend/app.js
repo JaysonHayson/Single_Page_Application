@@ -683,17 +683,20 @@ function createCheckout() {
 
 function renderCheckout() {
   const checkout = document.getElementById("checkout");
+  const checkoutOverlay = document.getElementById(cartOverlay);
+  checkoutOverlay.toggle("hidden");
+  cartItems = loadCartItems();
   checkout.innerHTML = "";
   const checkoutItem = createCheckout();
   checkout.appendChild(checkoutItem);
 }
-
+let cartItems = [];
 // function InitializeCart() {
 //   cartItems = loadCartItems();
 //   renderCheckout();
 // }
 
-// let cartItems = [];
+
 
 // document.addEventListener("DOMContentLoaded", InitializeCart);
 
