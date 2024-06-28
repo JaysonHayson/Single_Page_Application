@@ -1,23 +1,15 @@
-const sessionManager = {
-    token: null,
-  
-    init() {
-      this.token = localStorage.getItem('sessionToken');
+window.sessionManager = {
+    setToken: function(token) {
+      localStorage.setItem('authToken', token);
     },
-  
-    setToken(token) {
-      this.token = token;
-      localStorage.setItem('sessionToken', token);
+    getToken: function() {
+      return localStorage.getItem('authToken');
     },
-  
-    clearToken() {
-      this.token = null;
-      localStorage.removeItem('sessionToken');
+    clearToken: function() {
+      localStorage.removeItem('authToken');
     },
-  
-    isAuthenticated() {
-      return this.token !== null;
+    isAuthenticated: function() {
+      return !!this.getToken();
     }
-};
+  };
   
-export default sessionManager;
