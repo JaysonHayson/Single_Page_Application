@@ -369,7 +369,7 @@ function createLoginForm() {
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
-    <form id="authForm">
+    <form id="authForm" method="POST">
       <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
         
         <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -432,13 +432,13 @@ function createLoginForm() {
     if (!registerSection.classList.contains("hidden")) {
       formTitle.textContent = "Register";
       loginButton.textContent = "Register";
-      authForm.removeEventListener("submit", handleLogin);
-      authForm.addEventListener("submit", handleRegister);
+      authForm.removeEventListener("submit", (event)=>handleLogin(event));
+      authForm.addEventListener("submit", (event)=>handleRegister(event));
     } else {
       formTitle.textContent = "Login";
       loginButton.textContent = "Login";
-      authForm.removeEventListener("submit", handleRegister);
-      authForm.addEventListener("submit", handleLogin);
+      authForm.removeEventListener("submit", (event)=>handleRegister(event));
+      authForm.addEventListener("submit", (event)=>handleLogin(event));
     }
   });
 
@@ -452,8 +452,8 @@ function createLoginForm() {
 
     formTitle.textContent = "Login";
     loginButton.textContent = "Login";
-    loginButton.removeEventListener("submit", handleRegister);
-    loginButton.addEventListener("submit", handleLogin);
+    authForm.removeEventListener("submit", (event)=>handleRegister(event));
+    authForm.addEventListener("submit", (event)=>handleLogin(event));
 
     if (registerSection.classList.contains("hidden")) {
       registerMessage.classList.remove("hidden");
