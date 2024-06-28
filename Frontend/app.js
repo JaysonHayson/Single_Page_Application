@@ -488,8 +488,8 @@ function handleLogin(event) {
     if (data[0]) {
       console.log("Login successful: ", data[1]);
       sessionManager.setToken(data[1]); //save token
-      // renderProtectedContent
-      renderProtectedContent();
+      //handle UI
+      checkAuthentication();
     } else {
       console.error("Login failed: ", data[1]);
     }
@@ -497,17 +497,16 @@ function handleLogin(event) {
     console.error("There was a problem with the login request:", error);
   });
 }
-function renderProtectedContent() {
-  xInnerHtmlAndCallback(renderCheckout);
+function checkAuthentication() {
+  if (sessionManager.isAuthenticated()) {
+    xInnerHtmlAndCallback(renderHero);
+  } else {
+    xInnerHtmlAndCallback(renderCheckout);
+  }
 }
 
-// initialize sessionmanager on start
-document.addEventListener("DOMContentLoaded", () => {
-  sessionManager.init();
-  if (sessionManager.isAuthenticated()) {
-    renderProtectedContent();
-  }
-});
+// check token on visit
+document.addEventListener("DOMContentLoaded", checkAuthentication);
 //TEST TOKENHANDLING
 
 
