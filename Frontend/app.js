@@ -656,8 +656,8 @@ function createCheckout() {
     );
     totalContainer.innerHTML =`
     <p>${total}</p>`;
-    checkoutList.appendChild(totalContainer);
-    checkoutTotal.textContent = total.toFixed(2);
+    checkout.appendChild(totalContainer);
+    checkout.textContent = total.toFixed(2);
     
   }
   return checkout;
