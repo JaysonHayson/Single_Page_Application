@@ -398,7 +398,7 @@ function createLoginForm() {
         <input type="checkbox" class="checkbox mr-2">
         <label class="text-sm">Remember me</label>
       </div>
-      <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+      <button type="submit" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
       <div id="registerMessage" class="text-sm mb-4">
         If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
       </div>
@@ -464,6 +464,7 @@ function createLoginForm() {
 
   function handleLogin(event) {
     event.preventDefault();
+    event.stopImmediatePropagation();
 
     const username = document.getElementsByName("userName")[0].value;
     const pw = document.getElementsByName("pw")[0].value;
@@ -486,6 +487,7 @@ function createLoginForm() {
 }
 function handleRegister(event) {
   event.preventDefault();
+  event.stopImmediatePropagation();
 
   const firstName = document.getElementById("firstNameInput").value;
   const lastName = document.getElementById("lastNameInput").value;
