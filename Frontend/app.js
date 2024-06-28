@@ -642,11 +642,11 @@ function createCheckout() {
 
     Object.keys(cartSummary).forEach((productName) => {
       const product = cartSummary[productName];
-      const itemDiv = document.createElement("div");
+      const itemDiv = document.createElement("tr");
       itemDiv.className = "checkout-item ";
     
     
-      itemDiv.innerHTML = `<tr>
+      itemDiv.innerHTML = `
         
           <td>
             <div class="flex items-center gap-3">
@@ -667,9 +667,7 @@ function createCheckout() {
               <div class="font-bold">${productName}</div>
           </td>
 
-          <td>${(product.price * product.quantity).toFixed(2)}€</td>
-          
-        </tr>`;
+          <td>${(product.price * product.quantity).toFixed(2)}€</td>`;
       checkout.appendChild(itemDiv);
     });
 
