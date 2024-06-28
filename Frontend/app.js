@@ -638,11 +638,11 @@ function createCheckout() {
           </td>
 
           <td>
-              <div class="font-bold">${productName}</div>
+            ${product.quantity}
           </td>
 
           <td>
-            ${product.quantity}
+              <div class="font-bold">${productName}</div>
           </td>
 
           <td>${product.price * product.quantity}</td>
