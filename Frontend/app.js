@@ -516,7 +516,7 @@ function handleRegister(event) {
       // Remove existing content
       xInnerHtmlAndCallback(() => {
         const messageDiv = document.createElement("div");
-        messageDiv.className = "px-4 py-2 rounded shadow text-system m-auto bg-system";
+        messageDiv.className = "px-4 py-2 rounded shadow text-system m-auto bg-system z-50";
 
         if (data[0]) {
           // Registration successful
@@ -525,8 +525,8 @@ function handleRegister(event) {
           // Registration failed
           messageDiv.textContent = "Registration failed! " + data[1];
         }
-
-        document.body.appendChild(messageDiv);
+        const mainContainer = document.querySelector(".spaConfig");
+        mainContainer.appendChild(messageDiv);
 
         setTimeout(() => {
           if (data[0]) {
