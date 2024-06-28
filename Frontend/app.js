@@ -616,32 +616,38 @@ function createCheckout() {
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer table";
 
+  const checkoutHeader = document.createElement("div");
+  checkoutHeader.innerHTML = 
+  `<div class="checkout-heading">
+        <h2>Checkout</h2>
+      </div>`;
+
+  checkout.appendChild(checkoutHeader);   
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
     checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
   } else {
+    const formHeader = document.createElement("div");
+    formHeader.innerHTML = `<thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+    </thead>`;
+
+    checkout.appendChild(formHeader);
+
+
     Object.keys(cartSummary).forEach((productName) => {
       const product = cartSummary[productName];
       const itemDiv = document.createElement("div");
       itemDiv.className = "checkout-item ";
-      
-      itemDiv.innerHTML = `
-      
-      <div class="checkout-heading">
-        <h2>Checkout</h2>
-      </div>;
-
-      <thead>
-      <tr>
-        <th>Quantity</th>
-        <th>Product</th>
-        <th>Price</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tr>
+    
+    
+      itemDiv.innerHTML = `<tr>
         
           <td>
             <div class="flex items-center gap-3">
