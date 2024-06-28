@@ -653,9 +653,10 @@ function createCheckout() {
       checkout.appendChild(itemDiv);
     });
 
+
     const totalContainer = document.createElement("div");
     totalContainer.innerHTML =`
-    <p>Gesamtpreis: ${totalPrice.toFixed(2)}€}</p>`;
+    <p>Gesamtpreis: ${total.toFixed(2)}€}</p>`;
     checkout.appendChild(totalContainer);
     
   }
