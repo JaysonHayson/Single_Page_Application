@@ -369,7 +369,7 @@ function createLoginForm() {
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
-    <form id="authForm" method="POST">
+    <form id="authForm">
       <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
         
         <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -398,7 +398,7 @@ function createLoginForm() {
         <input type="checkbox" class="checkbox mr-2">
         <label class="text-sm">Remember me</label>
       </div>
-      <button type="submit" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+      <button onclick="handleLogin(event)" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
       <div id="registerMessage" class="text-sm mb-4">
         If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
       </div>
@@ -461,30 +461,30 @@ function createLoginForm() {
       registerMessage.classList.add("hidden");
     }
   });
-
-  function handleLogin(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
-    const username = document.getElementsByName("userName")[0].value;
-    const pw = document.getElementsByName("pw")[0].value;
-
-    fetch("../Backend/index.php", {
-      method: "POST",
-      body: new URLSearchParams({
-        Command: "loginUser",
-        userName: username,
-        userPW: pw,
-      }),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("Login response fail");
-      }
-    });
-    // Implement login functionality here
-  }
   return loginForm;
 }
+
+function handleLogin(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  const username = document.getElementsByName("userName")[0].value;
+  const pw = document.getElementsByName("pw")[0].value;
+  fetch("../Backend/index.php", {
+    method: "POST",
+    body: new URLSearchParams({
+      Command: "loginUser",
+      userName: username,
+      userPW: pw,
+    }),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Login response fail");
+    }
+  });
+  // Implement login functionality here
+}
+
 function handleRegister(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
