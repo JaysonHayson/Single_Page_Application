@@ -688,14 +688,14 @@ function renderCheckout() {
   checkout.appendChild(checkoutItem);
 }
 
-function InitializeCart() {
-  cartItems = loadCartItems();
-  renderCheckout();
-}
+// function InitializeCart() {
+//   cartItems = loadCartItems();
+//   renderCheckout();
+// }
 
-let cartItems = [];
+// let cartItems = [];
 
-document.addEventListener("DOMContentLoaded", InitializeCart);
+// document.addEventListener("DOMContentLoaded", InitializeCart);
 
 
 
