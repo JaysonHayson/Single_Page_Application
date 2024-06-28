@@ -614,12 +614,12 @@ function getCartItems() {
 function createCheckout() {
   
   const checkoutHeader = document.createElement("div");
-
+  checkout.className="table";
   checkoutHeader.innerHTML = 
   `<h2 class="checkoutHeading">Checkout</h2>`;
 
   const checkout = document.createElement("div");
-  checkout.id = "checkoutContainer table";
+  checkout.id = "checkoutContainer";
   checkout.className = "w-96";
 
 
