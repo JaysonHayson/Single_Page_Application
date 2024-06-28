@@ -647,7 +647,7 @@ function createCheckout() {
               <div class="font-bold">${productName}</div>
           </td>
 
-          <td>${product.price * product.quantity}</td>
+          <td>${(product.price * product.quantity).toFixed(2)}€</td>
           
         </tr>`;
       checkout.appendChild(itemDiv);
@@ -656,7 +656,7 @@ function createCheckout() {
 
     const totalContainer = document.createElement("div");
     totalContainer.innerHTML =`
-    <p>Gesamtpreis: ${total.toFixed(2)}€}</p>`;
+    <p>Gesamtpreis: ${total.toFixed(2)}€</p>`;
     checkout.appendChild(totalContainer);
     
   }
