@@ -616,9 +616,7 @@ function createCheckout() {
   const checkoutHeader = document.createElement("div");
 
   checkoutHeader.innerHTML = 
-  `<div class="checkout-heading">
-    <h2>Checkout</h2>
-    </div>`;
+  `<h2 class="checkoutHeading">Checkout</h2>`;
 
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer table";
