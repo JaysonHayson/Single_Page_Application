@@ -616,27 +616,26 @@ function createCheckout() {
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer table";
 
-  const checkoutHeader = document.createElement("div");
-  checkoutHeader.innerHTML = 
-  `<div class="checkout-heading">
-        <h2>Checkout</h2>
-      </div>`;
+  // const checkoutHeader = document.createElement("thead");
+  // checkoutHeader.innerHTML = 
+  // `<div class="checkout-heading">
+  //       <h2>Checkout</h2>
+  //     </div>`;
 
-  checkout.appendChild(checkoutHeader);   
+  // checkout.appendChild(checkoutHeader);   
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
     checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
   } else {
-    const formHeader = document.createElement("div");
-    formHeader.innerHTML = `<thead>
+    const formHeader = document.createElement("thead");
+    formHeader.innerHTML = `
     <tr>
       <th>Quantity</th>
       <th>Product</th>
       <th>Price</th>
       <th></th>
-    </tr>
-    </thead>`;
+    </tr>`;
 
     checkout.appendChild(formHeader);
 
