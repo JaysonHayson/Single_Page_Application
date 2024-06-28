@@ -212,7 +212,7 @@ function renderCart() {
 
   cartList.innerHTML = "";
 
-  let total = 0;
+  total = 0;
 
   // Create an object to summarize the products in the cart
   cartSummary = {};
