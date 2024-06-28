@@ -207,7 +207,8 @@ function toggleCart() {
   const cartOverlay = document.getElementById("cartOverlay");
   cartOverlay.classList.toggle("hidden");
 }
-
+// Create an object to summarize the products in the cart
+cartSummary = {};
 function renderCart() {
   const cartList = document.getElementById("cartList");
   const cartTotal = document.getElementById("cartTotal");
@@ -216,8 +217,8 @@ function renderCart() {
 
   total = 0;
 
-  // Create an object to summarize the products in the cart
-  cartSummary = {};
+  
+  
 
   cart.forEach((item) => {
     total += item.price;

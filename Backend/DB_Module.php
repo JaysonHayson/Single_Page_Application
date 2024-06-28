@@ -317,7 +317,7 @@
 
     function loginUser(&$pdo,$userName,$userPW,$userSessID = ""){
         try{
-            $fetchPWsql = "SELECT from `Users` (`password`,`SESS_ID`) WHERE `username` = $userName";
+            $fetchPWsql = "SELECT from `users` (`password`,`SESS_ID`) WHERE `username` = $userName";
             $fetch_stmt = $pdo -> prepare($fetchPWsql);
             $fetch_stmt -> execute();
             $compareArr = $fetch_stmt->fetchAll();
