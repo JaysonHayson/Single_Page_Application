@@ -516,16 +516,14 @@ function handleRegister(event) {
       // Remove existing content
       xInnerHtmlAndCallback(() => {
         const messageDiv = document.createElement("div");
-        messageDiv.className = "transform -translate-x-1/2 px-4 py-2 rounded shadow";
+        messageDiv.className = "transform -translate-x-1/2 px-4 py-2 rounded shadow text-system m-* bg-system";
 
         if (data[0]) {
           // Registration successful
           messageDiv.textContent = "Registration successful!";
-          messageDiv.classList.add("m-*");
         } else {
           // Registration failed
           messageDiv.textContent = "Registration failed! " + data[1];
-          messageDiv.classList.add("m-*");
         }
 
         document.body.appendChild(messageDiv);
