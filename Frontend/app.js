@@ -1,3 +1,5 @@
+import sessionManager from './sessionManager.js';
+
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -463,7 +465,7 @@ function createLoginForm() {
   });
   return loginForm;
 }
-
+// TEST TOKENHANDLING
 function handleLogin(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -485,16 +487,29 @@ function handleLogin(event) {
   }).then((data) => {
     if (data[0]) {
       console.log("Login successful: ", data[1]);
-      // Handle successful login
+      sessionManager.setToken(data[1]); //save token
+      // renderProtectedContent
+      renderProtectedContent();
     } else {
       console.error("Login failed: ", data[1]);
-      // Handle login failure
     }
   }).catch((error) => {
     console.error("There was a problem with the login request:", error);
   });
-  // Implement login functionality here
 }
+function renderProtectedContent() {
+  xInnerHtmlAndCallback(renderCheckout);
+}
+
+// initialize sessionmanager on start
+document.addEventListener("DOMContentLoaded", () => {
+  sessionManager.init();
+  if (sessionManager.isAuthenticated()) {
+    renderProtectedContent();
+  }
+});
+//TEST TOKENHANDLING
+
 
 function handleRegister(event) {
   event.preventDefault();
