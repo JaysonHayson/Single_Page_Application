@@ -613,16 +613,16 @@ function getCartItems() {
 
 function createCheckout() {
   
+  const checkoutHeader = document.createElement("div");
+
+  checkoutHeader.innerHTML = 
+  `<div class="checkout-heading">
+    <h2>Checkout</h2>
+    </div>`;
+
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer table";
 
-  // const checkoutHeader = document.createElement("thead");
-  // checkoutHeader.innerHTML = 
-  // `<div class="checkout-heading">
-  //       <h2>Checkout</h2>
-  //     </div>`;
-
-  // checkout.appendChild(checkoutHeader);   
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
@@ -631,10 +631,10 @@ function createCheckout() {
     const formHeader = document.createElement("thead");
     formHeader.innerHTML = `
     <tr>
+      <th></th>
       <th>Quantity</th>
       <th>Product</th>
       <th>Price</th>
-      <th></th>
     </tr>`;
 
     checkout.appendChild(formHeader);
@@ -678,7 +678,10 @@ function createCheckout() {
     checkout.appendChild(totalContainer);
     
   }
-  return checkout;
+  const checkoutContainer = document.createElement("div");
+  checkoutContainer.appendChild(checkoutHeader);
+  checkoutContainer.appendChild(checkout);
+  return checkoutContainer;
 }
 
 function renderCheckout() {
