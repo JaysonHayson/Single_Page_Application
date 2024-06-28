@@ -651,13 +651,10 @@ function createCheckout() {
       checkout.appendChild(itemDiv);
     });
 
-    const totalContainer = createElement(
-      "div"
-    );
+    const totalContainer = document.createElement("div");
     totalContainer.innerHTML =`
-    <p>${total}</p>`;
+    <p>Gesamtpreis: ${totalPrice.toFixed(2)}€}</p>`;
     checkout.appendChild(totalContainer);
-    checkout.textContent = total.toFixed(2);
     
   }
   return checkout;
