@@ -215,7 +215,7 @@ function renderCart() {
   let total = 0;
 
   // Create an object to summarize the products in the cart
-  const cartSummary = {};
+  cartSummary = {};
 
   cart.forEach((item) => {
     total += item.price;
