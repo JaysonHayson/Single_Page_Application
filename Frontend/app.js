@@ -502,7 +502,7 @@ function checkAuthentication() {
   if (sessionManager.isAuthenticated()) {
     xInnerHtmlAndCallback(renderHero);
   } else {
-    xInnerHtmlAndCallback(renderCheckout);
+    xInnerHtmlAndCallback(renderCategories);
   }
 }
 
