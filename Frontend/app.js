@@ -302,8 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storedCart) {
     cart = storedCart;
   }
+  checkAuthentication();
   renderCart();
-  // Render hero section
   renderHero();
 });
 
@@ -505,8 +505,6 @@ function checkAuthentication() {
   }
 }
 
-// check token on visit
-document.addEventListener("DOMContentLoaded", checkAuthentication);
 //TEST TOKENHANDLING
 
 
