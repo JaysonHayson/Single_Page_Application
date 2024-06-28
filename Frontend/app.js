@@ -452,8 +452,8 @@ function createLoginForm() {
 
     formTitle.textContent = "Login";
     loginButton.textContent = "Login";
-    loginButton.removeEventListener("click", (event)=>handleRegister(event));
-    loginButton.addEventListener("click", (event)=>handleLogin(event));
+    loginButton.removeEventListener("submit", handleRegister);
+    loginButton.addEventListener("submit", handleLogin);
 
     if (registerSection.classList.contains("hidden")) {
       registerMessage.classList.remove("hidden");
