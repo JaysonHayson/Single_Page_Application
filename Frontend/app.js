@@ -398,7 +398,7 @@ function createLoginForm() {
         <input type="checkbox" class="checkbox mr-2">
         <label class="text-sm">Remember me</label>
       </div>
-      <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+      <button type="submit" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
       <div id="registerMessage" class="text-sm mb-4">
         If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
       </div>
@@ -432,13 +432,13 @@ function createLoginForm() {
     if (!registerSection.classList.contains("hidden")) {
       formTitle.textContent = "Register";
       loginButton.textContent = "Register";
-      loginButton.removeEventListener("click", handleLogin);
-      loginButton.addEventListener("click", handleRegister);
+      authForm.removeEventListener("submit", handleLogin);
+      authForm.addEventListener("submit", handleRegister);
     } else {
       formTitle.textContent = "Login";
       loginButton.textContent = "Login";
-      loginButton.removeEventListener("click", handleRegister);
-      loginButton.addEventListener("click", handleLogin);
+      authForm.removeEventListener("submit", handleRegister);
+      authForm.addEventListener("submit", handleLogin);
     }
   });
 
@@ -452,8 +452,8 @@ function createLoginForm() {
 
     formTitle.textContent = "Login";
     loginButton.textContent = "Login";
-    loginButton.removeEventListener("click", (event)=>handleRegister(event));
-    loginButton.addEventListener("click", (event)=>handleLogin(event));
+    loginButton.removeEventListener("submit", handleRegister);
+    loginButton.addEventListener("submit", handleLogin);
 
     if (registerSection.classList.contains("hidden")) {
       registerMessage.classList.remove("hidden");
@@ -464,6 +464,7 @@ function createLoginForm() {
 
   function handleLogin(event) {
     event.preventDefault();
+    event.stopImmediatePropagation();
 
     const username = document.getElementsByName("userName")[0].value;
     const pw = document.getElementsByName("pw")[0].value;
@@ -486,6 +487,7 @@ function createLoginForm() {
 }
 function handleRegister(event) {
   event.preventDefault();
+  event.stopImmediatePropagation();
 
   const firstName = document.getElementById("firstNameInput").value;
   const lastName = document.getElementById("lastNameInput").value;
