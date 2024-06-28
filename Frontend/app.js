@@ -532,9 +532,9 @@ function handleRegister(event) {
 
         setTimeout(() => {
           if (data[0]) {
-            xInnerHtmlAndCallback(renderLoginForm());
+            xInnerHtmlAndCallback(renderLoginForm);
           } else {
-            xInnerHtmlAndCallback(renderRegisterForm());
+            xInnerHtmlAndCallback(renderRegisterForm);
           }
         }, 2000);
       });
