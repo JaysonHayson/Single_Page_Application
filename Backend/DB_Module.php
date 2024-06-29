@@ -397,4 +397,30 @@
         }
     }
 
+    /**
+    * getCombinedUserData
+    * Compares given authToken with Session in the DB.
+    * 
+    * @param  PDO      $pdo             PDO Handle
+    * @param  string   $userName        userName to grab Data for.
+    * @param  string   $userSessID      authToken for User
+    * @return Array    Array of (Bool, AssocArray)
+    */
+    function getCombinedUserData(&$pdo,$userName,$userSessID){
+        try{
+            $grabIDSQL      = "SELECT user_ID from `users` WHERE `username`= '$userName' AND `SESS_ID` = '$userSessID'";
+            $stmt           = $pdo -> prepare($grabIDSQL);
+            $stmt           -> execute();
+            $result         = $stmt -> fetch(PDO::FETCH_ASSOC);
+            $customerSQL    = "SELECT `firstName`,`lastName`,`adress`,`email` from `customers` WHERE user_ID = ".$result['user_ID'];
+            $custStmt       = $pdo -> prepare($customerSQL);
+            $custStmt       -> execute();
+            $customerResult = $custStmt -> fetch(PDO::FETCH_ASSOC);
+            return [true,$customerResult];
+        }catch(PDOException $e){
+            $errorMessage = "DB-Error Please attempt again later.";
+            return [false,$errorMessage];
+        }
+    }
+
 ?>
