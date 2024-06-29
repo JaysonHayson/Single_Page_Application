@@ -490,9 +490,9 @@ function handleLogin(event) {
   }).then((data) => {
     if (data[0]) {
       console.log("Login successful: ", data[1]);
-      // sessionManager.setToken(data[1]); //save token
-      // //handle UI
-      // checkAuthentication();
+      sessionManager.setToken(data[1], username); //save token
+      //handle UI
+      checkAuthentication();
     } else {
       console.error("Login failed: ", data[1]);
     }
@@ -500,13 +500,13 @@ function handleLogin(event) {
     console.error("There was a problem with the login request:", error);
   });
 }
-// function checkAuthentication() {
-//   if (sessionManager.isAuthenticated()) {
-//     xInnerHtmlAndCallback(renderHero);
-//   } else {
-//     xInnerHtmlAndCallback(fetchCategories);
-//   }
-// }
+function checkAuthentication() {
+  if (sessionManager.isAuthenticated()) {
+    xInnerHtmlAndCallback(renderHero);
+  } else {
+    xInnerHtmlAndCallback(fetchCategories);
+  }
+}
 
 //TEST TOKENHANDLING
 
