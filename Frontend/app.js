@@ -403,7 +403,7 @@ function createLoginForm() {
         <input type="checkbox" class="checkbox mr-2">
         <label class="text-sm">Remember me</label>
       </div>
-      <button id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+      <button onclick="handleLogin(event)" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
       <div id="registerMessage" class="text-sm mb-4">
         If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
       </div>
@@ -437,13 +437,13 @@ function createLoginForm() {
     if (!registerSection.classList.contains("hidden")) {
       formTitle.textContent = "Register";
       loginButton.textContent = "Register";
-      loginButton.removeEventListener("click", handleLogin(event));
-      loginButton.addEventListener("click", handleRegister(event));
+      authForm.removeEventListener("submit", (event)=>handleLogin(event));
+      authForm.addEventListener("submit", (event)=>handleRegister(event));
     } else {
       formTitle.textContent = "Login";
       loginButton.textContent = "Login";
-      loginButton.removeEventListener("click", (event)=>handleRegister(event));
-      loginButton.addEventListener("click", (event)=>handleLogin(event));
+      authForm.removeEventListener("submit", (event)=>handleRegister(event));
+      authForm.addEventListener("submit", (event)=>handleLogin(event));
     }
   });
 
