@@ -219,7 +219,8 @@ function renderCart() {
   
 
   
-  
+  total = 0;
+  cartSummary = {};
 
   cart.forEach((item) => {
     total += item.price;
