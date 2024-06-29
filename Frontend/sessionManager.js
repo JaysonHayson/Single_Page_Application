@@ -13,14 +13,19 @@ window.sessionManager = {
       localStorage.removeItem('authToken');
     },
     isAuthenticated: async function() {
-      const token = localStorage.getItem('')
-      const userNa= l
+      const token = localStorage.getItem('authToken');
+      const userNa= localStorage.getItem('userN');
+      
+      if(!token || userNa){
+        return false;
+      }
+
       fetch("../Backend/index.php", {
         method: "POST",
         body: new URLSearchParams({
           Command: "authUser",
-          Token: this.getToken(),
-          userN: this.getUserN(),
+          Token: token,
+          userN: userNa,
         }),
       }).then((response) => {
         if(!response.ok){
