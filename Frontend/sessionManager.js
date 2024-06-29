@@ -15,12 +15,12 @@ window.sessionManager = {
     isAuthenticated: async function() {
       const token = localStorage.getItem('authToken');
       const userNa= localStorage.getItem('userN');
-      
+      console.log("token in storage: "+ token + "userN in storage: " + userNa);
       if(!token || userNa){
         return false;
       }
 
-      fetch("../Backend/index.php", {
+      await fetch("../Backend/index.php", {
         method: "POST",
         body: new URLSearchParams({
           Command: "authUser",
@@ -40,6 +40,7 @@ window.sessionManager = {
           console.log("Authentification failed because of",data[1]);
           return false;
         }
+
       });
     }
 };

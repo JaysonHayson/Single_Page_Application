@@ -492,6 +492,7 @@ function handleLogin(event) {
       console.log("Login successful: ", data[1]);
       sessionManager.setTokenAndUsername(data[1], username); //save token
       //handle UI
+      console.log("username in handle Login: "+ username+ " and token: "+  data[1]);
       checkAuthentication();
     } else {
       console.error("Login failed: ", data[1]);
