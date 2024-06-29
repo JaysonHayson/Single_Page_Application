@@ -437,13 +437,13 @@ function createLoginForm() {
     if (!registerSection.classList.contains("hidden")) {
       formTitle.textContent = "Register";
       loginButton.textContent = "Register";
-      loginButton.removeEventListener("submit", (event)=>handleLogin(event));
-      loginButton.addEventListener("submit", (event)=>handleRegister(event));
+      loginButton.removeEventListener("click", handleLogin(event));
+      loginButton.addEventListener("click", handleRegister(event));
     } else {
       formTitle.textContent = "Login";
       loginButton.textContent = "Login";
-      loginButton.removeEventListener("submit", (event)=>handleRegister(event));
-      loginButton.addEventListener("submit", (event)=>handleLogin(event));
+      loginButton.removeEventListener("click", (event)=>handleRegister(event));
+      loginButton.addEventListener("click", (event)=>handleLogin(event));
     }
   });
 

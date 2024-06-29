@@ -8,7 +8,8 @@ window.sessionManager = {
     clearToken: function() {
       localStorage.removeItem('authToken');
     },
-    isAuthenticated: function() {
+    isAuthenticated: async function() {
+       fetch()
       return !!this.getToken();
     }
   };
