@@ -399,7 +399,7 @@
 
     /**
     * getCombinedUserData
-    * Compares given authToken with Session in the DB.
+    * Fetches customerData for logged in user.
     * 
     * @param  PDO      $pdo             PDO Handle
     * @param  string   $userName        userName to grab Data for.
