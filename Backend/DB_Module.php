@@ -370,7 +370,7 @@
 
     /**
     * authUser
-    * Logs out User with given username and Session token.
+    * Compares given authToken with Session in the DB.
     * 
     * @param  PDO      $pdo             PDO Handle
     * @param  string   $userName        userName to check token against
