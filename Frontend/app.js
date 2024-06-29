@@ -209,14 +209,15 @@ function toggleCart() {
 }
 // Create an object to summarize the products in the cart
 cartSummary = {};
+total = 0;
 function renderCart() {
   const cartList = document.getElementById("cartList");
   const cartTotal = document.getElementById("cartTotal");
 
   cartList.innerHTML = "";
 
-  total = 0;
-
+  
+  
   
   
 
