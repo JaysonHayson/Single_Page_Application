@@ -16,7 +16,7 @@ window.sessionManager = {
       const token = localStorage.getItem('authToken');
       const userNa= localStorage.getItem('userN');
       console.log("token in storage: "+ token + "userN in storage: " + userNa);
-      if(!token || userNa){
+      if(!token || !userNa){
         return false;
       }
 
