@@ -105,3 +105,7 @@ button.btn:hover {
 .dark-mode .hamburger-btn svg {
   stroke: var(--button-bg-hover); /* Black color for dark mode */
 }
+
+#checkoutContainer {
+  background-color: var(--background-color);
+}
