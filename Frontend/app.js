@@ -505,7 +505,9 @@ async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     xInnerHtmlAndCallback(renderHero);
+    console.log("authentificated content");
   } else {
+    console.log("Not authentificated for content");
     xInnerHtmlAndCallback(fetchCategories);
   }
 }
