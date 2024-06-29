@@ -368,4 +368,33 @@
         }
     }
 
+    /**
+    * authUser
+    * Logs out User with given username and Session token.
+    * 
+    * @param  PDO      $pdo             PDO Handle
+    * @param  string   $userName        userName to check token against
+    * @param  string   $userSessID      authToken for User
+    * @return Array    Array of (Bool, Message)
+    */
+    function authUser(&$pdo,$userName,$userSessID){
+        try{
+            $fetchAuthSQL = "SELECT `SESS_ID` from `users`  WHERE `username` = '$userName'";
+            $stmt  = $pdo->prepare($fetchAuthSQL);
+            $stmt -> execute();
+            $result = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+            if($result['SESS_ID'] === $userSessID)
+            {
+                return [true,'Authentification Sucessful.'];
+            }else
+            {
+                return [false,'Token rejected.'];
+            }
+        }catch(PDOException $e){
+            $errorMessage = "DB-Error Please attempt again later.";
+            return [false,$errorMessage];
+        }
+    }
+
 ?>
