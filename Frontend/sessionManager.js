@@ -13,6 +13,8 @@ window.sessionManager = {
       localStorage.removeItem('authToken');
     },
     isAuthenticated: async function() {
+      const token = localStorage.getItem('')
+      const userNa= l
       fetch("../Backend/index.php", {
         method: "POST",
         body: new URLSearchParams({
