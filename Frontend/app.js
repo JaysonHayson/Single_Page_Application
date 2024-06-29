@@ -365,110 +365,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+
 //loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
-  loginForm.id = "loginContainer";
   loginForm.className =
     "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
   loginForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Login</h2>
-    <form id="authForm">
-      <div id="registerSection" class="hidden loginTransition mb-4 sm:w-full">
-        
-        <div class="mb-4 w-full sm:w-full lg:w-full">
-          <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-          <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name">
-        </div>
-        <div class="mb-4 w-full sm:w-full lg:w-full">
-          <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-          <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name">
-        </div>
-         <div class="mb-4 w-full sm:w-full lg:w-full">
-        <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-        <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email">
-      </div>
-      </div>
-     
-      <div class="mb-4 w-full sm:w-full lg:w-full">
-          <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-          <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
-        </div>
-      <div class="mb-4 w-full sm:w-full lg:w-full">
-        <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-        <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
-      </div>
-      <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
-        <input type="checkbox" class="checkbox mr-2">
-        <label class="text-sm">Remember me</label>
-      </div>
-      <button onclick="handleLogin(event)" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
-      <div id="registerMessage" class="text-sm mb-4">
-        If you are not registered yet! <a href="#" id="registerLink" class="text-blue-600">Register now</a>
-      </div>
-      <div id="loginMessage" class="hidden text-sm mb-4">
-        If you are registered! <a href="#" id="loginLink" class="text-blue-600">Login</a>
-      </div>
-    </form>
+    
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+        <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
+        <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
+    </div>
+
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+      <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
+      <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+
+    <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
+      <input type="checkbox" class="checkbox mr-2">
+      <label class="text-sm">Remember me</label>
+    </div>
+
+    <button onclick="handleLogin(event)" id="loginButton" class="btn btn-primary w-full mb-4">Login</button>
+
+    <div id="registerMessage" class="text-sm mb-4">
+      If you are not registered yet! <a href="#" onclick= "xInnerHtmlAndCallback(renderRegisterForm)" id="registerLink" class="text-blue-600">Register now</a>
+    </div>
   `;
 
-  document.body.appendChild(loginForm);
-
-  const registerLink = loginForm.querySelector("#registerLink");
-  const loginLink = loginForm.querySelector("#loginLink");
-  const registerSection = loginForm.querySelector("#registerSection");
-  const loginButton = loginForm.querySelector("#loginButton");
-  const registerMessage = loginForm.querySelector("#registerMessage");
-  const loginMessage = loginForm.querySelector("#loginMessage");
-  const rememberMeSection = loginForm.querySelector("#rememberMeSection");
-  const formTitle = loginForm.querySelector("#formTitle");
-  const authForm = loginForm.querySelector("#authForm");
-
-  // Toggle between login and register forms
-  registerLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    registerSection.classList.toggle("hidden");
-    registerMessage.classList.toggle("hidden");
-    loginMessage.classList.toggle("hidden");
-    rememberMeSection.classList.toggle("hidden");
-    loginForm.classList.toggle("expanded");
-
-    if (!registerSection.classList.contains("hidden")) {
-      formTitle.textContent = "Register";
-      loginButton.textContent = "Register";
-      authForm.removeEventListener("submit", (event)=>handleLogin(event));
-      authForm.addEventListener("submit", (event)=>handleRegister(event));
-    } else {
-      formTitle.textContent = "Login";
-      loginButton.textContent = "Login";
-      authForm.removeEventListener("submit", (event)=>handleRegister(event));
-      authForm.addEventListener("submit", (event)=>handleLogin(event));
-    }
-  });
-
-  loginLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    registerSection.classList.add("hidden");
-    registerMessage.classList.add("hidden");
-    loginMessage.classList.add("hidden");
-    rememberMeSection.classList.remove("hidden");
-    loginForm.classList.remove("expanded");
-
-    formTitle.textContent = "Login";
-    loginButton.textContent = "Login";
-    authForm.removeEventListener("submit", (event)=>handleRegister(event));
-    authForm.addEventListener("submit", (event)=>handleLogin(event));
-
-    if (registerSection.classList.contains("hidden")) {
-      registerMessage.classList.remove("hidden");
-    } else {
-      registerMessage.classList.add("hidden");
-    }
-  });
   return loginForm;
 }
-// TEST TOKENHANDLING
+
+
 function handleLogin(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -491,7 +424,7 @@ function handleLogin(event) {
     if (data[0]) {
       console.log("Login successful: ", data[1]);
       sessionManager.setTokenAndUsername(data[1], username); //save token
-      //handle UI
+      
       console.log("username in handle Login: "+ username+ " and token: "+  data[1]);
       checkAuthentication();
     } else {
@@ -501,20 +434,60 @@ function handleLogin(event) {
     console.error("There was a problem with the login request:", error);
   });
 }
-async function checkAuthentication() {
-  const isAuthenticated = await sessionManager.isAuthenticated();
-  if (isAuthenticated) {
-    xInnerHtmlAndCallback(renderHero);
-    console.log("authentificated content");
-  } else {
-    console.log("Not authentificated for content");
-    xInnerHtmlAndCallback(fetchCategories);
-  }
+function renderLoginForm() {
+  const loginForm = document.getElementById("loginForm");
+  loginForm.innerHTML = "";
+  const loginFormItem = createLoginForm();
+  loginForm.appendChild(loginFormItem);
 }
 
-//TEST TOKENHANDLING
 
 
+
+function createRegisterForm() {
+  const registerForm = document.createElement("div");
+  registerForm.id = "loginContainer";
+  registerForm.className =
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+
+  registerForm.innerHTML = `
+    <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Register</h2>
+    
+      
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+      <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
+      <input id="firstNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your first name" autocomplete="given-name">
+    </div>
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+      <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
+      <input id="lastNameInput" type="text" class="input input-bordered w-full" placeholder="Enter your last name" autocomplete="family-name">
+    </div>
+      <div class="mb-4 w-full sm:w-full lg:w-full">
+    <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
+    <input id="emailInput" type="email" class="input input-bordered w-full" placeholder="Enter your email" autocomplete="email">
+    </div>
+    
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+        <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
+        <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
+      </div>
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+      <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
+      <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+    <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
+      <input type="checkbox" class="checkbox mr-2">
+      <label class="text-sm">Remember me</label>
+    </div>
+    <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Login</button>
+    
+    <div id="loginMessage" class="text-sm mb-4">
+      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
+    </div>
+  `;
+
+  return registerForm;
+}
 function handleRegister(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -574,11 +547,12 @@ function handleRegister(event) {
       );
     });
 }
-function renderLoginForm() {
-  const loginForm = document.getElementById("loginForm");
-  loginForm.innerHTML = "";
-  const loginFormItem = createLoginForm();
-  loginForm.appendChild(loginFormItem);
+
+function renderRegisterForm(){
+  const registerForm = document.getElementById("registerForm");
+  registerForm.innerHTML = "";
+  const registerFormItem = createRegisterForm();
+  registerForm.appendChild(registerFormItem);
 }
 //loginform end
 //hero
@@ -731,7 +705,16 @@ let cartItems = [];
 // document.addEventListener("DOMContentLoaded", InitializeCart);
 
 
-
+async function checkAuthentication() {
+  const isAuthenticated = await sessionManager.isAuthenticated();
+  if (isAuthenticated) {
+    xInnerHtmlAndCallback(renderHero);
+    console.log("authentificated content");
+  } else {
+    console.log("Not authentificated for content");
+    xInnerHtmlAndCallback(fetchCategories);
+  }
+}
 // TODO: Functions to be implemented
 
 function showLogin() {
