@@ -317,11 +317,11 @@
 
     function loginUser(&$pdo,$userName,$userPW,$userSessID = ""){
         try{
-            $fetchPWsql = "SELECT `password`,`SESS_ID` from `users`  WHERE `username` = $userName";
+            $fetchPWsql = "SELECT `password`,`SESS_ID` from `users`  WHERE `username` = '$userName'";
             $fetch_stmt = $pdo -> prepare($fetchPWsql);
             $fetch_stmt -> execute();
-            $compareArr = $fetch_stmt->fetchAll();
-            if( password_verify($userPW,$compareArr[0])  )
+            $compareArr = $fetch_stmt->fetch(PDO::FETCH_ASSOC);
+            if( password_verify($userPW,$compareArr['password'])  )
             {
                 if($userSessID != "" && $userSessID == $compareArr[1])
                 {
@@ -330,7 +330,7 @@
                 }else{
                     // User Session =/= Server Session, close session make a new Session.
                     $newSessToken = createNewSessionToken($userName);
-                    $sql = "UPDATE `users` set SESS_ID = '$newSessToken' WHERE `username` = $userName";
+                    $sql = "UPDATE `users` set `SESS_ID` = '$newSessToken' WHERE `username` = '$userName'";
                     $stmt = $pdo -> prepare($sql);
                     $stmt -> execute();
                     return [true, "$newSessToken"];
@@ -357,7 +357,7 @@
     function logoutUser(&$pdo,$userName,$userSessID){
 
         try{
-            $sql = "UPDATE `Users` set SESS_ID = '' WHERE `Username` = $userName";
+            $sql = "UPDATE `users` set SESS_ID = '' WHERE `username` = '$userName'";
             $stmt = $pdo -> prepare($sql);
             $stmt -> execute();
             $results = $stmt -> fetchAll();
