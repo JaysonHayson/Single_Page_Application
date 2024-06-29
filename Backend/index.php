@@ -83,6 +83,17 @@
             $result = logoutUser($pdo,$User,$Pass);
             echo json_encode(['SUCCESS' => 'logout Successfull']);
             break;
+        case 'authUser':
+            $User      = $requestArray['userName'];
+            $SessToken = $requestArray['authToken'];
+            if(is_string($User && is_string($SessToken))){
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(['error' => 'userName or Session empty.']);
+                return;
+            }
+            $result = authUser($pdo,$User,$SessToken);
+            echo json_encode($result);
+            break;
         default:
             header("HTTP/1.0 404 Not Found");
             echo json_encode(['message' => 'Endpoint not found']);
