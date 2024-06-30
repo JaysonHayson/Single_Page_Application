@@ -673,6 +673,15 @@ function createCheckout() {
   return checkoutContainer;
 }
 
+function calculateTotal(cartSummary) {
+  let total = 0;
+  Object.keys(cartSummary).forEach((productName) => {
+    const product = cartSummary[productName];
+    total += product.price * product.quantity;
+  });
+  return total;
+}
+
 function renderCheckout() {
   const checkout = document.getElementById("checkout");
   const checkoutOverlay = document.getElementById("cartOverlay");
