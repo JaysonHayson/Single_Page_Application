@@ -695,38 +695,6 @@ function createOrderConfirmation() {
   <h1>Order Confirmation</h1>
     <p>Dear Customer,</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
-
-function handleUserData(){
-  const userName = sessionManager.getToken();
-  const userToken = sessionManager.getUserN();
-  fetch("../Backend/index.php", {
-    method:"POST",
-    body: new URLSearchParams({
-      Command: "getUserData",
-      userName: userName,
-      authToken: userToken,
-    }),
-  })
-    .then((response) => {
-      if(!response.ok){
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) =>{
-      const userData = data[1];
-      //data 1 should be the user data
-      const firstName = userData.firstName;
-      const lastName = userData.lastName;
-      const address = userData.adress;
-      const email = userData.email; 
-
-      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
-      console.log(userDetails);
-    })
-}
->>>>>>> ebf2a47579158f061092061230eb182c040fcd4c
-
     <h2>Order Summary:</h2>
     <ul>
       <li><strong>Order Date:</strong> <span id="orderDate"></span></li>
@@ -806,6 +774,36 @@ function renderOrderConfirmation() {
   const container = document.getElementById("orderConfirmation");
   container.innerHTML = ""; // Clear existing content
   container.appendChild(createOrderConfirmation());
+}
+
+function handleUserData(){
+  const userName = sessionManager.getToken();
+  const userToken = sessionManager.getUserN();
+  fetch("../Backend/index.php", {
+    method:"POST",
+    body: new URLSearchParams({
+      Command: "getUserData",
+      userName: userName,
+      authToken: userToken,
+    }),
+  })
+    .then((response) => {
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) =>{
+      const userData = data[1];
+      //data 1 should be the user data
+      const firstName = userData.firstName;
+      const lastName = userData.lastName;
+      const address = userData.adress;
+      const email = userData.email; 
+
+      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+      console.log(userDetails);
+    })
 }
 
 async function checkAuthentication() {
