@@ -98,4 +98,8 @@ button.btn:hover {
 
 #checkoutContainer {
   background-color: var(--background-color);
+  color: var(--text-color);
+}
+.input-custom {
+  background-color: var(--background);
 }
