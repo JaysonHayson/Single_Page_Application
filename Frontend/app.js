@@ -443,24 +443,31 @@ function createRegisterForm() {
   registerForm.innerHTML = `
     <h2 id="formTitle" class="text-2xl font-semibold text-center mb-4">Register</h2>
     
-      
-    <div class="mb-4 w-full sm:w-full lg:w-full">
-      <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-      <input id="firstNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your first name" autocomplete="given-name">
+    <div class="flex">  
+      <div class="mb-4 w-1/2 sm:w-1/2 lg:w-1/2">
+        <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
+        <input id="firstNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your first name" autocomplete="given-name">
+      </div>
+      <div class="mb-4 ml-4 w-1/2 sm:w-1/2 lg:w-1/2">
+        <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
+        <input id="lastNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your last name" autocomplete="family-name">
+      </div>
     </div>
-    <div class="mb-4 w-full sm:w-full lg:w-full">
-      <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-      <input id="lastNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your last name" autocomplete="family-name">
+
+    <div class ="mb-4 w-full sm:w-full lg:w-full">
+      <label for="adressInput" class="block text-sm font-medium mb-1">Adress</label>
+      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your adress" autocomplete="adress">
     </div>
-      <div class="mb-4 w-full sm:w-full lg:w-full">
-    <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-    <input id="emailInput" type="email" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your email" autocomplete="email">
+
+    <div class="mb-4 w-full sm:w-full lg:w-full">
+      <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
+      <input id="emailInput" type="email" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your email" autocomplete="email">
     </div>
     
     <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
         <input id="userNameInput" name="userName" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your username" autocomplete="username" required>
-      </div>
+    </div>
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
       <input id="passwordInput" name="pw" type="password" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your password" autocomplete="current-password" required>
@@ -471,7 +478,7 @@ function createRegisterForm() {
     </div>
     <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
     
-    <div id="loginMessage" class="text-sm mb-4">
+    <div id="loginMessage" class="text-sm mb-2">
       If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
     </div>
   `;
