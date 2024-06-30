@@ -694,9 +694,16 @@ function createOrderConfirmation(userData, cartSummary) {
   const currentDate = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
 
+  // Check if userData is defined before accessing its properties
+  const firstName = userData ? userData.firstName : "";
+  const lastName = userData ? userData.lastName : "";
+  const address = userData ? userData.address : "";
+  const city = userData ? userData.city : "";
+  const country = userData ? userData.country : "";
+
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
-    <p>Dear ${userData.firstName} ${userData.lastName},</p>
+    <p>Dear ${firstName} ${lastName},</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
     <h2>Order Summary:</h2>
     <ul id="orderSummaryList">
@@ -707,9 +714,7 @@ function createOrderConfirmation(userData, cartSummary) {
     )}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${userData.firstName} ${userData.lastName}<br>${userData.address}<br>${
-    userData.city
-  }<br>${userData.country}</p>
+    <p>${firstName} ${lastName}<br>${address}<br>${city}<br>${country}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -743,7 +748,7 @@ function createOrderConfirmation(userData, cartSummary) {
         format: "a4",
       });
 
-      // Temporarily change styles for PDF generation
+      // Temporarily change styles for PDF generation (-> Could be with a solution that doesnt show up on screen maybe in future)
       orderForm.style.backgroundColor = "white";
       orderForm.style.color = "black";
       orderForm.style.padding = "20px";
@@ -780,8 +785,8 @@ function createOrderConfirmation(userData, cartSummary) {
 
 function renderOrderConfirmation(userData, cartSummary) {
   const container = document.getElementById("orderConfirmation");
-  container.innerHTML = ""; // Clear existing content
-  container.appendChild(createOrderConfirmation());
+  container.innerHTML = "";
+  container.appendChild(createOrderConfirmation(userData, cartSummary));
 }
 
 function handleUserData() {
@@ -808,7 +813,7 @@ function handleUserData() {
       const lastName = userData.lastName;
       const address = userData.adress;
       const email = userData.email;
-      renderOrderConfirmation();
+      renderOrderConfirmation(userData, cartSummary);
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
     });
