@@ -472,7 +472,7 @@ function createRegisterForm() {
     <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
     
     <div id="loginMessage" class="text-sm mb-4">
-      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Register</a>
+      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
     </div>
   `;
 
@@ -711,7 +711,7 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const adress = userData ? userData.adress : "";
+  const address = userData ? userData.address : "";
   const city = userData ? userData.city : "";
   const country = userData ? userData.country : "";
 
@@ -740,7 +740,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${adress}</p>
+    <p>${firstName} ${lastName}<br>${address}<br>${city}, ${country}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -748,54 +748,52 @@ function createOrderConfirmation(userData, cartSummary) {
   // Set order date
   const orderDateElement = document.createElement("span");
   orderDateElement.id = "orderDate";
-  orderDateElement.textContent = currentDate.toLocaleDateString(
-    "en-US",
-    options
-  );
+  orderDateElement.textContent = currentDate.toLocaleDateString("en-US", options);
   orderForm.insertBefore(orderDateElement, orderForm.firstChild);
 
   // Add event listener for PDF download
-  orderForm
-    .querySelector("#downloadButton")
-    .addEventListener("click", function () {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "pt",
-        format: "a4",
-      });
-
-      // Temporarily change styles for PDF generation
-      orderForm.style.backgroundColor = "white";
-      orderForm.style.color = "black";
-      orderForm.style.padding = "20px";
-      orderForm.style.width = "100%";
-      orderForm.className =
-        "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
-
-      const downloadButton = orderForm.querySelector("#downloadButton");
-      downloadButton.style.display = "none"; // Hide the download button
-
-      html2canvas(orderForm, {
-        scale: 2,
-        useCORS: true,
-      }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = doc.internal.pageSize.getWidth();
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("OrderConfirmation.pdf");
-
-        // Revert styles back after PDF generation
-        orderForm.style.backgroundColor = "";
-        orderForm.style.color = "";
-        orderForm.style.padding = "";
-        orderForm.style.width = "";
-        downloadButton.style.display = "";
-        orderForm.className =
-          "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
-      });
+  orderForm.querySelector("#downloadButton").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "pt",
+      format: "a4",
     });
+
+    // Temporarily change styles for PDF generation
+    orderForm.style.backgroundColor = "white";
+    orderForm.style.color = "black";
+    orderForm.style.padding = "20px";
+    orderForm.style.width = "100%";
+    orderForm.className =
+      "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20 pdf-style"; // Apply PDF styling
+
+    const downloadButton = orderForm.querySelector("#downloadButton");
+    downloadButton.style.display = "none"; // Hide the download button
+
+    html2canvas(orderForm, {
+      scale: 2,
+      useCORS: true,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = doc.internal.pageSize.getWidth();
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      doc.save("OrderConfirmation.pdf");
+
+      // Revert styles back after PDF generation
+      orderForm.style.backgroundColor = "";
+      orderForm.style.color = "";
+      orderForm.style.padding = "";
+      orderForm.style.width = "";
+      downloadButton.style.display = "";
+      orderForm.className =
+        "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+
+      // Remove PDF styling class after generating PDF
+      orderForm.classList.remove("pdf-style");
+    });
+  });
 
   return orderForm;
 }
@@ -909,4 +907,66 @@ async function handleLogout() {
   } catch (error) {
     console.error("There was a problem with the login request:", error);
   }
+}
+
+function showAboutUs() {
+  const aboutUsContainer = document.getElementById("aboutUsContainer");
+  aboutUsContainer.className = ("text-center mx-auto mt-20");
+  aboutUsContainer.innerHTML = ""; 
+
+
+  const heading = document.createElement('h2');
+  heading.textContent = 'Dev Team';
+  heading.classList.add('about-heading');
+  aboutUsContainer.appendChild(heading);
+
+  const members = [
+    { name: 'Andre', description: 'Databaseking' },
+    { name: 'Elias', description: 'Talented Allrounder' },
+    { name: 'Jesse', description: 'UIX/UI Design' },
+    { name: 'Alex', description: 'Ein talentierter Koch und Feinschmecker.' },
+    { name: 'Otto', description: 'Backend-Artist' },
+    { name: 'Fatih', description: 'Engaging And Motivated' },
+    { name: 'Robert', description: 'Silent Artist'},
+    { name: 'Tom', description: 'Busy Student'},
+  ];
+
+  const container = document.createElement('div');
+  container.className = 'about-card-container';
+
+  members.forEach((member, index) => {
+    const aboutCard = createAboutCard(member);
+    container.appendChild(aboutCard);
+    setTimeout(() => {
+      aboutCard.classList.add('show');
+    }, index * 100);
+  });
+
+  aboutUsContainer.appendChild(container);
+}
+
+function createAboutCard(member) {
+  const card = document.createElement('div');
+  card.className = 'about-card';
+
+  const front = document.createElement('div');
+  front.className = 'about-card-front';
+  const name = document.createElement('h3');
+  name.textContent = member.name;
+  front.appendChild(name);
+
+  const back = document.createElement('div');
+  back.className = 'about-card-back';
+  const description = document.createElement('p');
+  description.textContent = member.description;
+  back.appendChild(description);
+
+  card.appendChild(front);
+  card.appendChild(back);
+
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+
+  return card;
 }
