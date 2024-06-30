@@ -910,3 +910,65 @@ async function handleLogout() {
     console.error("There was a problem with the login request:", error);
   }
 }
+
+function showAboutUs() {
+  const aboutUsContainer = document.getElementById("aboutUsContainer");
+  aboutUsContainer.className = ("text-center mx-auto mt-20");
+  aboutUsContainer.innerHTML = ""; 
+
+
+  const heading = document.createElement('h2');
+  heading.textContent = 'Dev Team';
+  heading.classList.add('about-heading');
+  aboutUsContainer.appendChild(heading);
+
+  const members = [
+    { name: 'Andre', description: 'Databaseking' },
+    { name: 'Elias', description: 'Talented Allrounder' },
+    { name: 'Jesse', description: 'UIX/UI Design' },
+    { name: 'Alex', description: 'Ein talentierter Koch und Feinschmecker.' },
+    { name: 'Otto', description: 'Backend-Artist' },
+    { name: 'Fatih', description: 'Engaging And Motivated' },
+    { name: 'Robert', description: 'Silent Artist'},
+    { name: 'Tom', description: 'Busy Student'},
+  ];
+
+  const container = document.createElement('div');
+  container.className = 'about-card-container';
+
+  members.forEach((member, index) => {
+    const aboutCard = createAboutCard(member);
+    container.appendChild(aboutCard);
+    setTimeout(() => {
+      aboutCard.classList.add('show');
+    }, index * 100);
+  });
+
+  aboutUsContainer.appendChild(container);
+}
+
+function createAboutCard(member) {
+  const card = document.createElement('div');
+  card.className = 'about-card';
+
+  const front = document.createElement('div');
+  front.className = 'about-card-front';
+  const name = document.createElement('h3');
+  name.textContent = member.name;
+  front.appendChild(name);
+
+  const back = document.createElement('div');
+  back.className = 'about-card-back';
+  const description = document.createElement('p');
+  description.textContent = member.description;
+  back.appendChild(description);
+
+  card.appendChild(front);
+  card.appendChild(back);
+
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+
+  return card;
+}
