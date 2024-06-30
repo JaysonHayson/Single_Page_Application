@@ -851,8 +851,9 @@ function switchToLogoutButton(){
                   >`;
   const loggedInAs = document.getElementById('loggedInAs');
   const actualUser = sessionManager.getUserN();
-  loggedInAs.innerHTML = `<div class="flex-col p1"><p>Currently logged in as: </p>
-                          <p class="actualUser">${actualUser}</p>
+  loggedInAs.innerHTML = `<div class="flex-col p1">
+                            <p id="p1" class="text-sm">Currently logged in as: </p>
+                            <p id="p1" class="italic font-bold">${actualUser}</p>
                           </div>
                           `;
 
