@@ -819,6 +819,7 @@ function handleUserData() {
       return response.json();
     })
     .then((data) => {
+      console.log("Server respone:", data);
       const userData = data[1]; // Assuming userData is at index 1
       renderOrderConfirmation(userData, cartSummary);
       const firstName = userData.firstName || "";
