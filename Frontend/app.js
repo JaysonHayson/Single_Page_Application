@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storedCart) {
     cart = storedCart;
   }
-  //checkAuthentication();
+  checkAuthentication();
   renderCart();
   renderHero();
 });
@@ -473,10 +473,10 @@ function createRegisterForm() {
       <input type="checkbox" class="checkbox mr-2">
       <label class="text-sm">Remember me</label>
     </div>
-    <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Login</button>
+    <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
     
     <div id="loginMessage" class="text-sm mb-4">
-      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
+      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Register</a>
     </div>
   `;
 
@@ -707,7 +707,7 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const address = userData ? userData.address : "";
+  const adress = userData ? userData.adress : "";
   const city = userData ? userData.city : "";
   const country = userData ? userData.country : "";
 
@@ -736,7 +736,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${address}<br>${city}<br>${country}</p>
+    <p>${firstName} ${lastName}<br>${adress}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -802,11 +802,11 @@ function renderOrderConfirmation(userData, cartSummary) {
   container.appendChild(createOrderConfirmation(userData, cartSummary));
 }
 
-function handleUserData(){
-  const userName = sessionManager.getToken();
-  const userToken = sessionManager.getUserN();
+function handleUserData() {
+  const userName = sessionManager.getUserN();
+  const userToken = sessionManager.getToken();
   fetch("../Backend/index.php", {
-    method:"POST",
+    method: "POST",
     body: new URLSearchParams({
       Command: "getUserData",
       userName: userName,
@@ -814,32 +814,91 @@ function handleUserData(){
     }),
   })
     .then((response) => {
-      if(!response.ok){
+      if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then((data) =>{
+    .then((data) => {
       console.log("Server Response:", data);
       const userData = data[1];
       //data 1 should be the user data
       const firstName = userData.firstName;
       const lastName = userData.lastName;
-      const address = userData.adress;
-      const email = userData.email; 
-
-      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+      const adress = userData.adress;
+      const email = userData.email;
+      renderOrderConfirmation(userData, cartSummary);
+      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${adress}, Email: ${email}`;
       console.log(userDetails);
-    })
+    });
 }
 
 async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     xInnerHtmlAndCallback(renderHero);
-    console.log("authenticated content");
+    switchToLogoutButton();
   } else {
     console.log("Not authenticated for content");
+    switchToLoginButton();
     xInnerHtmlAndCallback(fetchCategories);
+  }
+}
+function switchToLogoutButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="handleLogout()"
+                    >Logout</a
+                  >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  const actualUser = sessionManager.getUserN();
+  loggedInAs.innerHTML = `<p>Currently logged in as: ${actualUser}`;
+
+}
+function switchToLoginButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="xInnerHtmlAndCallback(renderLoginForm)"
+                    >Login</a
+                  >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  loggedInAs.innerHTML = '';
+
+}
+async function handleLogout() {
+  const token = sessionManager.getToken();
+  const username = sessionManager.getUserN();
+  
+  try {
+    const response = await fetch("../Backend/index.php", {
+      method: "POST",
+      body: new URLSearchParams({
+        Command: "logoutUser",
+        userName: username,
+        SessionID: token,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    if (data[0]) {
+      console.log("Logged out successfully");
+      sessionManager.clearTokenAndUsername(); //clear storage
+      await checkAuthentication();
+    } else {
+      sessionManager.clearTokenAndUsername();
+      await checkAuthentication();
+      console.log("Error with response. Watch " + data[1]);
+    }
+  } catch (error) {
+    console.error("There was a problem with the login request:", error);
   }
 }
