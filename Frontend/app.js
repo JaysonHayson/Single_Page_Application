@@ -694,7 +694,6 @@ function renderCheckout() {
 let cartItems = [];
 
 function createOrderConfirmation(userData, cartSummary) {
-  const product = cartSummary[productName];
   const orderForm = document.createElement("div");
   orderForm.id = "orderConfirmation";
   orderForm.className =
@@ -711,17 +710,29 @@ function createOrderConfirmation(userData, cartSummary) {
   const city = userData ? userData.city : "";
   const country = userData ? userData.country : "";
 
+  // Populate order summary list
+  const orderSummaryList = document.createElement("ul");
+  orderSummaryList.id = "orderSummaryList";
+  let totalAmount = 0; // Variable to calculate total amount
+
+  Object.keys(cartSummary).forEach((productName) => {
+    const product = cartSummary[productName];
+    const listItem = document.createElement("li");
+    const productPrice = product.price * product.quantity;
+    listItem.innerHTML = `${productName} - Quantity: ${
+      product.quantity
+    } - Price: ${productPrice.toFixed(2)}€`;
+    orderSummaryList.appendChild(listItem);
+    totalAmount += productPrice; // Accumulate total amount
+  });
+
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
     <p>Dear ${firstName} ${lastName},</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
     <h2>Order Summary:</h2>
-    <ul id="orderSummaryList">
-      <!-- Items will be dynamically inserted here -->
-    </ul>
-    <p><strong>Total Amount:</strong> ${(
-      product.price * product.quantity
-    ).toFixed(2)}€</p>
+    ${orderSummaryList.outerHTML}
+    <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
     <p>${firstName} ${lastName}<br>${address}<br>${city}<br>${country}</p>
@@ -729,23 +740,14 @@ function createOrderConfirmation(userData, cartSummary) {
     <button id="downloadButton">Download PDF</button>
   `;
 
-  // Populate order summary list
-  const orderSummaryList = orderForm.querySelector("#orderSummaryList");
-  Object.keys(cartSummary).forEach((productName) => {
-    const product = cartSummary[productName];
-    const listItem = document.createElement("li");
-    listItem.innerHTML = `${productName} - Quantity: ${
-      product.quantity
-    } - Price: ${(product.price * product.quantity).toFixed(2)}€`;
-    orderSummaryList.appendChild(listItem);
-  });
-
   // Set order date
-  const orderDateElement = orderForm.querySelector("#orderDate");
+  const orderDateElement = document.createElement("span");
+  orderDateElement.id = "orderDate";
   orderDateElement.textContent = currentDate.toLocaleDateString(
     "en-US",
     options
   );
+  orderForm.insertBefore(orderDateElement, orderForm.firstChild);
 
   // Add event listener for PDF download
   orderForm
@@ -758,7 +760,7 @@ function createOrderConfirmation(userData, cartSummary) {
         format: "a4",
       });
 
-      // Temporarily change styles for PDF generation (-> Could be with a solution that doesnt show up on screen maybe in future)
+      // Temporarily change styles for PDF generation
       orderForm.style.backgroundColor = "white";
       orderForm.style.color = "black";
       orderForm.style.padding = "20px";
@@ -817,15 +819,17 @@ function handleUserData() {
       return response.json();
     })
     .then((data) => {
-      const userData = data[1];
-      //data 1 should be the user data
-      const firstName = userData.firstName;
-      const lastName = userData.lastName;
-      const address = userData.adress;
-      const email = userData.email;
+      const userData = data[1]; // Assuming userData is at index 1
       renderOrderConfirmation(userData, cartSummary);
+      const firstName = userData.firstName || "";
+      const lastName = userData.lastName || "";
+      const address = userData.address || "";
+      const email = userData.email || "";
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
+    })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
     });
 }
 
