@@ -700,7 +700,35 @@ let cartItems = [];
 //   renderCheckout();
 // }
 
+function handleUserData(){
+  const userName = sessionManager.getToken();
+  const userToken = sessionManager.getUserN();
+  fetch("../Backend/index.php", {
+    method:"POST",
+    body: new URLSearchParams({
+      Command: "getUserData",
+      userName: userName,
+      authToken: userToken,
+    }),
+  })
+    .then((response) => {
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) =>{
+      const userData = data[1];
+      //data 1 should be the user data
+      const firstName = userData.firstName;
+      const lastName = userData.lastName;
+      const address = userData.adress;
+      const email = userData.email; 
 
+      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+      console.log(userDetails);
+    })
+}
 
 // document.addEventListener("DOMContentLoaded", InitializeCart);
 
