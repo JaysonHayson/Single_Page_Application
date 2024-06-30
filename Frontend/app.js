@@ -607,31 +607,32 @@ function getCartItems() {
 function createCheckout() {
   const checkoutHeader = document.createElement("div");
 
-  checkoutHeader.innerHTML = `<h2 class="checkoutHeading">Checkout</h2>`;
+  checkoutHeader.innerHTML = `<h2 class="text-2xl font-bold mb-4">Checkout</h2>`;
 
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer";
-  checkout.className = "table w-96";
+  checkout.className = "p-4 bg-gray-100 rounded-lg shadow-lg";
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
-    checkout.innerHTML = "<p>Ihr Warenkorb ist leer.</p>";
+    checkout.innerHTML = "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
   } else {
     const formHeader = document.createElement("thead");
     formHeader.innerHTML = `
-    <tr>
-      <th></th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
+    <tr class="border-b-2 border-gray-200 text-white">
+      <th class="p-2"></th>
+      <th class="p-2 text-left">Product</th>
+      <th class="p-2 text-left">Quantity</th>
+      <th class="p-2 text-left">Price</th>
     </tr>`;
+    formHeader.className = "bg-gray-700";
 
     checkout.appendChild(formHeader);
 
     Object.keys(cartSummary).forEach((productName) => {
       const product = cartSummary[productName];
       const itemDiv = document.createElement("tr");
-      itemDiv.className = "checkout-item ";
+      itemDiv.className = "checkout-item border-b border-gray-200 text-white";
 
       itemDiv.innerHTML = `
         
@@ -641,27 +642,27 @@ function createCheckout() {
                 <div class="mask mask-squircle h-12 w-12">
                   <img
                     src="${product.image}"
-                    alt="item photo" />
+                    alt="item photo" class="object-cover rounded-full" />
                 </div>
               </div>
           </td>
 
 
-          <td>
+          <td class="p-2">
               <div class="font-bold">${productName}</div>
           </td>
 
-          <td>
+          <td class="p-2">
             ${product.quantity}
           </td>
 
-          <td>${(product.price * product.quantity).toFixed(2)}€</td>`;
+          <td class="p-2">${(product.price * product.quantity).toFixed(2)}€</td>`;
       checkout.appendChild(itemDiv);
     });
 
     const totalContainer = document.createElement("div");
     totalContainer.innerHTML = `
-    <p>Gesamtpreis: ${total.toFixed(2)}€</p>`;
+    <p class= "text-right text-lg font-bold mt-4 text-white">Gesamtpreis: ${total.toFixed(2)}€</p>`;
     checkout.appendChild(totalContainer);
   }
   const checkoutContainer = document.createElement("div");

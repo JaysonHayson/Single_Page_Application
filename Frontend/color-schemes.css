@@ -100,6 +100,27 @@ button.btn:hover {
   background-color: var(--background-color);
   color: var(--text-color);
 }
+
+#checkoutContainer .product {
+  color: var(--text-color);
+}
+
+#checkoutContainer .quantity {
+  color: var (--text-color);
+}
+
+#checkoutContainer .price {
+  color: var(--text-color2);
+}
+
+#checkoutContainer .total {
+  color: var(--text-color2);
+}
+
+#checkoutContainer .button:hover {
+  background-color: var(--button-bg-hover);
+}
+
 .input-custom {
   background-color: var(--background-color);
   color: var(--text-color);
