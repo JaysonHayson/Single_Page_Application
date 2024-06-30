@@ -134,3 +134,7 @@ button.btn:hover {
 #p1 {
   color: var(--text-color);
 }
+
+.checkouttext {
+  color: var(--text-color);
+}

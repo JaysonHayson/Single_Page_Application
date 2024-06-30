@@ -607,7 +607,7 @@ function getCartItems() {
 function createCheckout() {
   const checkoutHeader = document.createElement("div");
 
-  checkoutHeader.innerHTML = `<h2 class="text-lg md:text-4xl font-bold mb-4 text-center">Checkout</h2>`;
+  checkoutHeader.innerHTML = `<h2 class=" checkouttext text-lg md:text-4xl font-bold mb-4 text-center">Checkout</h2>`;
 
   const checkout = document.createElement("table");
   checkout.id = "checkoutContainer";
@@ -663,7 +663,7 @@ function createCheckout() {
   }
   const totalContainer = document.createElement("div");
     totalContainer.innerHTML = `
-    <p class= "text-right text-lg font-bold mt-4 text-white underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
+    <p class= "checkouttext text-right text-lg font-bold mt-4 text-white underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
 
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
