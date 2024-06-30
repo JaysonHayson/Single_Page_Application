@@ -424,8 +424,13 @@ function handleLogin(event) {
         messageDiv.textContent = "Login successful!";
         sessionManager.setTokenAndUsername(data[1], username); // save token
       } else {
+<<<<<<< HEAD
         // Login failed
         messageDiv.textContent = "Login failed! " + data[1];
+=======
+        alert("User or Password doesn't exist");
+        console.error("Login failed: ", data[1]);
+>>>>>>> 92c25e9ba1d63dcebf2e7d75838152042a7997d0
       }
       const mainContainer = document.querySelector(".spaConfig");
       mainContainer.appendChild(messageDiv);
@@ -738,9 +743,8 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const address = userData ? userData.address : "";
-  const city = userData ? userData.city : "";
-  const country = userData ? userData.country : "";
+  const adress = userData ? userData.adress : "";
+
 
   // Populate order summary list
   const orderSummaryList = document.createElement("ul");
@@ -767,7 +771,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${address}</p>
+    <p>${firstName} ${lastName}<br>${adress}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
