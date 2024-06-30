@@ -801,35 +801,47 @@ function renderOrderConfirmation(userData, cartSummary) {
   container.appendChild(createOrderConfirmation(userData, cartSummary));
 }
 
-function handleUserData(){
+function handleUserData() {
   const userName = sessionManager.getToken();
   const userToken = sessionManager.getUserN();
+
   fetch("../Backend/index.php", {
-    method:"POST",
+    method: "POST",
     body: new URLSearchParams({
-      Command: "getUserData",
+      Command: "getCombinedUserData",
       userName: userName,
       authToken: userToken,
     }),
   })
     .then((response) => {
-      if(!response.ok){
+      if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then((data) =>{
-      console.log("Server Response:", data);
-      const userData = data[1];
-      //data 1 should be the user data
-      const firstName = userData.firstName;
-      const lastName = userData.lastName;
-      const address = userData.adress;
-      const email = userData.email; 
+    .then((data) => {
+      const success = data[0];
+      if (success) {
+        const userData = data[1];
+        const firstName = userData.firstName;
+        const lastName = userData.lastName;
+        const address = userData.address;
+        const email = userData.email;
 
-      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
-      console.log(userDetails);
+        renderOrderConfirmation(userData, cartSummary);
+
+        const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+        console.log(userDetails);
+      } else {
+        const errorMessage = data[1];
+        console.error("Error fetching user data:", errorMessage);
+        // Handle error case appropriately, e.g., display an error message to the user
+      }
     })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
+      // Handle network errors or other exceptions here
+    });
 }
 
 async function checkAuthentication() {
