@@ -886,6 +886,7 @@ async function checkAuthentication() {
     switchToLogoutButton();
   } else {
     xInnerHtmlAndCallback(renderHero);
+    switchToLoginButton();
   }
 }
 function switchToLogoutButton() {
