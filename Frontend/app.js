@@ -888,6 +888,7 @@ async function handleLogout() {
       sessionManager.clearTokenAndUsername(); //clear storage
       await checkAuthentication();
     } else {
+      sessionManager.clearTokenAndUsername();
       await checkAuthentication();
       console.log("Error with response. Watch " + data[1]);
     }
