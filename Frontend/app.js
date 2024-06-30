@@ -473,10 +473,10 @@ function createRegisterForm() {
       <input type="checkbox" class="checkbox mr-2">
       <label class="text-sm">Remember me</label>
     </div>
-    <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Login</button>
+    <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
     
     <div id="loginMessage" class="text-sm mb-4">
-      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
+      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Register</a>
     </div>
   `;
 
