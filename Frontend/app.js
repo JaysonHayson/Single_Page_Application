@@ -802,8 +802,8 @@ function renderOrderConfirmation(userData, cartSummary) {
 }
 
 function handleUserData() {
-  const userName = sessionManager.getToken();
-  const userToken = sessionManager.getUserN();
+  const userName = sessionManager.getUserN();
+  const userToken = sessionManager.getToken();
   fetch("../Backend/index.php", {
     method: "POST",
     body: new URLSearchParams({
