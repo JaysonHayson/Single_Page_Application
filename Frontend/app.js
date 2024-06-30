@@ -851,6 +851,9 @@ function switchToLogoutButton(){
                     onclick="handleLogout()"
                     >Logout</a
                   >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  const actualUser = sessionManager.getUserN();
+  loggedInAs.innerHTML = `<p>Currently logged in as: ${actualUser}`;
 
 }
 function switchToLoginButton(){
@@ -861,6 +864,8 @@ function switchToLoginButton(){
                     onclick="xInnerHtmlAndCallback(renderLoginForm)"
                     >Login</a
                   >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  loggedInAs.innerHTML = '';
 
 }
 async function handleLogout() {
