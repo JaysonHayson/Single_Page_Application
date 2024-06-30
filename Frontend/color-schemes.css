@@ -101,6 +101,6 @@ button.btn:hover {
   color: var(--text-color);
 }
 .input-custom {
-  background-color: var(--background);
+  background-color: var(--background-color);
   color: var(--text-color);
 }
