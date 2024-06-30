@@ -819,18 +819,16 @@ function handleUserData() {
       return response.json();
     })
     .then((data) => {
-      console.log("Server respone:", data);
-      const userData = data[1]; // Assuming userData is at index 1
-      renderOrderConfirmation(userData, cartSummary);
-      const firstName = userData.firstName || "";
-      const lastName = userData.lastName || "";
-      const address = userData.address || "";
-      const email = userData.email || "";
+      console.log("Server Response:", data);
+      const userData = data[1];
+      //data 1 should be the user data
+      const firstName = userData.firstName;
+      const lastName = userData.lastName;
+      const address = userData.adress;
+      const email = userData.email;
+
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
     });
 }
 
