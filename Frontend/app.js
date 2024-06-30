@@ -721,9 +721,8 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const address = userData ? userData.address : "";
-  const city = userData ? userData.city : "";
-  const country = userData ? userData.country : "";
+  const adress = userData ? userData.adress : "";
+
 
   // Populate order summary list
   const orderSummaryList = document.createElement("ul");
@@ -750,7 +749,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${address}</p>
+    <p>${firstName} ${lastName}<br>${adress}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
