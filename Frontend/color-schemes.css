@@ -104,3 +104,9 @@ button.btn:hover {
   background-color: var(--background-color);
   color: var(--text-color);
 }
+#p1{
+  color: var(--text-color);
+}
+#actualUser{
+  color: var(--primary-color);
+}
