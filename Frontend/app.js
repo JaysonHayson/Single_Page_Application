@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storedCart) {
     cart = storedCart;
   }
-  //checkAuthentication();
+  checkAuthentication();
   renderCart();
   renderHero();
 });
