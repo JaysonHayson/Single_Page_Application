@@ -778,7 +778,7 @@ function createOrderConfirmation(userData, cartSummary) {
   return orderForm;
 }
 
-function renderOrderConfirmation() {
+function renderOrderConfirmation(userData, cartSummary) {
   const container = document.getElementById("orderConfirmation");
   container.innerHTML = ""; // Clear existing content
   container.appendChild(createOrderConfirmation());
