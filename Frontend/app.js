@@ -804,11 +804,10 @@ function renderOrderConfirmation(userData, cartSummary) {
 function handleUserData() {
   const userName = sessionManager.getToken();
   const userToken = sessionManager.getUserN();
-
   fetch("../Backend/index.php", {
     method: "POST",
     body: new URLSearchParams({
-      Command: "getCombinedUserData",
+      Command: "getUserData",
       userName: userName,
       authToken: userToken,
     }),
@@ -820,27 +819,16 @@ function handleUserData() {
       return response.json();
     })
     .then((data) => {
-      const success = data[0];
-      if (success) {
-        const userData = data[1];
-        const firstName = userData.firstName;
-        const lastName = userData.lastName;
-        const address = userData.address;
-        const email = userData.email;
-
-        renderOrderConfirmation(userData, cartSummary);
-
-        const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
-        console.log(userDetails);
-      } else {
-        const errorMessage = data[1];
-        console.error("Error fetching user data:", errorMessage);
-        // Handle error case appropriately, e.g., display an error message to the user
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-      // Handle network errors or other exceptions here
+      console.log("Server Response:", data);
+      const userData = data[1];
+      //data 1 should be the user data
+      const firstName = userData.firstName;
+      const lastName = userData.lastName;
+      const address = userData.adress;
+      const email = userData.email;
+      renderOrderConfirmation(userData, cartSummary);
+      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+      console.log(userDetails);
     });
 }
 
