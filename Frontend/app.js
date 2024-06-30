@@ -494,6 +494,7 @@ function handleRegister(event) {
   const username = document.getElementById("userNameInput").value;
   const email = document.getElementById("emailInput").value;
   const pw = document.getElementById("passwordInput").value;
+  const adress = document.getElementById("adressInput").value;
 
   fetch("../Backend/index.php", {
     method: "POST",
@@ -501,6 +502,7 @@ function handleRegister(event) {
       Command: "registerNewUser",
       userFirstName: firstName,
       userLastName: lastName,
+      userAdress: adress,
       userName: username,
       userEmail: email,
       userPW: pw,
