@@ -367,12 +367,12 @@ function createLoginForm() {
     
     <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-        <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full" placeholder="Enter your username" autocomplete="username" required>
+        <input id="userNameInput" name="userName" type="text" class="input-bordered w-full" placeholder="  Enter your username" autocomplete="username" required>
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-      <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full" placeholder="Enter your password" autocomplete="current-password" required>
+      <input id="passwordInput" name="pw" type="password" class="input-bordered w-full" placeholder="  Enter your password" autocomplete="current-password" required>
     </div>
 
     <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
@@ -446,27 +446,27 @@ function createRegisterForm() {
       
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-      <input id="firstNameInput" type="text" class="input input-bordered w-full input-custom" placeholder="Enter your first name" autocomplete="given-name">
+      <input id="firstNameInput" type="text" class="bg-black-600 input-bordered w-full" placeholder="  Enter your first name" autocomplete="given-name">
     </div>
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-      <input id="lastNameInput" type="text" class="input input-bordered w-full input-custom" placeholder="Enter your last name" autocomplete="family-name">
+      <input id="lastNameInput" type="text" class="bg-black-600 input-bordered w-full" placeholder="  Enter your last name" autocomplete="family-name">
     </div>
       <div class="mb-4 w-full sm:w-full lg:w-full">
     <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-    <input id="emailInput" type="email" class="input input-bordered w-full input-custom" placeholder="Enter your email" autocomplete="email">
+    <input id="emailInput" type="email" class="bg-black-600 input-bordered w-full" placeholder="  Enter your email" autocomplete="email">
     </div>
     
     <div class="mb-4 w-full sm:w-full lg:w-full">
         <label for="userNameInput" class="block text-sm font-medium mb-1">Username</label>
-        <input id="userNameInput" name="userName" type="text" class="input input-bordered w-full input-custom" placeholder="Enter your username" autocomplete="username" required>
+        <input id="userNameInput" name="userName" type="text" class="bg-black-600 input-bordered w-full" placeholder="  Enter your username" autocomplete="username" required>
       </div>
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="passwordInput" class="block text-sm font-medium mb-1">Password</label>
-      <input id="passwordInput" name="pw" type="password" class="input input-bordered w-full input-custom" placeholder="Enter your password" autocomplete="current-password" required>
+      <input id="passwordInput" name="pw" type="password" class="bg-black-600 input-bordered w-full" placeholder="  Enter your password" autocomplete="current-password" required>
     </div>
     <div class="flex items-center mb-4 mt-4" id="rememberMeSection">
-      <input type="checkbox" class="checkbox mr-2 input-custom">
+      <input type="checkbox" class="checkbox mr-2">
       <label class="text-sm">Remember me</label>
     </div>
     <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
