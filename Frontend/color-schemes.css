@@ -103,7 +103,7 @@ button.btn:hover {
 }
 
 #checkoutContainer {
-  background-color: var(--background-color);
+  background-color: #312f30;
   color: var(--text-color);
 }
 
