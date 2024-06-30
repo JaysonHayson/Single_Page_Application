@@ -808,7 +808,7 @@ function handleUserData() {
       const lastName = userData.lastName;
       const address = userData.adress;
       const email = userData.email;
-
+      renderOrderConfirmation();
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
     });
