@@ -625,10 +625,11 @@ function createCheckout() {
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
-    checkout.innerHTML = "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
+    checkout.innerHTML =
+      "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
   } else {
     const formHeader = document.createElement("thead");
-    formHeader.className="w-full bg-gray-700";
+    formHeader.className = "w-full bg-gray-700";
     formHeader.innerHTML = `
     <tr class="w-full text-white">
       <th class="p-2"></th>
@@ -667,18 +668,22 @@ function createCheckout() {
             ${product.quantity}
           </td>
 
-          <td class="p-2">${(product.price * product.quantity).toFixed(2)}€</td>`;
+          <td class="p-2">${(product.price * product.quantity).toFixed(
+            2
+          )}€</td>`;
       checkout.appendChild(itemDiv);
     });
   }
   const totalContainer = document.createElement("div");
-    totalContainer.className="checkouttext";
-    totalContainer.innerHTML = `
-    <p class= "text-right text-lg font-bold mt-4 underline">Total price: ${total.toFixed(2)}€</p>`;
+  totalContainer.className = "checkouttext";
+  totalContainer.innerHTML = `
+    <p class= "text-right text-lg font-bold mt-4 underline">Total price: ${total.toFixed(
+      2
+    )}€</p>`;
 
   const button = document.createElement("div");
-  button.className="checkoutbutton text-right";
-  button.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(handleUserData)">Order Now!</button>`
+  button.className = "checkoutbutton text-right";
+  button.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="checkAuthentication()">Order Now!</button>`;
 
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
@@ -723,7 +728,6 @@ function createOrderConfirmation(userData, cartSummary) {
   const lastName = userData ? userData.lastName : "";
   const adress = userData ? userData.adress : "";
 
-
   // Populate order summary list
   const orderSummaryList = document.createElement("ul");
   orderSummaryList.id = "orderSummaryList";
@@ -757,52 +761,57 @@ function createOrderConfirmation(userData, cartSummary) {
   // Set order date
   const orderDateElement = document.createElement("span");
   orderDateElement.id = "orderDate";
-  orderDateElement.textContent = currentDate.toLocaleDateString("en-US", options);
+  orderDateElement.textContent = currentDate.toLocaleDateString(
+    "en-US",
+    options
+  );
   orderForm.insertBefore(orderDateElement, orderForm.firstChild);
 
   // Add event listener for PDF download
-  orderForm.querySelector("#downloadButton").addEventListener("click", function () {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({
-      orientation: "portrait",
-      unit: "pt",
-      format: "a4",
-    });
+  orderForm
+    .querySelector("#downloadButton")
+    .addEventListener("click", function () {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "pt",
+        format: "a4",
+      });
 
-    // Temporarily change styles for PDF generation
-    orderForm.style.backgroundColor = "white";
-    orderForm.style.color = "black";
-    orderForm.style.padding = "20px";
-    orderForm.style.width = "100%";
-    orderForm.className =
-      "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20 pdf-style"; // Apply PDF styling
-
-    const downloadButton = orderForm.querySelector("#downloadButton");
-    downloadButton.style.display = "none"; // Hide the download button
-
-    html2canvas(orderForm, {
-      scale: 2,
-      useCORS: true,
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = doc.internal.pageSize.getWidth();
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      doc.save("OrderConfirmation.pdf");
-
-      // Revert styles back after PDF generation
-      orderForm.style.backgroundColor = "";
-      orderForm.style.color = "";
-      orderForm.style.padding = "";
-      orderForm.style.width = "";
-      downloadButton.style.display = "";
+      // Temporarily change styles for PDF generation
+      orderForm.style.backgroundColor = "white";
+      orderForm.style.color = "black";
+      orderForm.style.padding = "20px";
+      orderForm.style.width = "100%";
       orderForm.className =
-        "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+        "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20 pdf-style"; // Apply PDF styling
 
-      // Remove PDF styling class after generating PDF
-      orderForm.classList.remove("pdf-style");
+      const downloadButton = orderForm.querySelector("#downloadButton");
+      downloadButton.style.display = "none"; // Hide the download button
+
+      html2canvas(orderForm, {
+        scale: 2,
+        useCORS: true,
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = doc.internal.pageSize.getWidth();
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.save("OrderConfirmation.pdf");
+
+        // Revert styles back after PDF generation
+        orderForm.style.backgroundColor = "";
+        orderForm.style.color = "";
+        orderForm.style.padding = "";
+        orderForm.style.width = "";
+        downloadButton.style.display = "";
+        orderForm.className =
+          "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+
+        // Remove PDF styling class after generating PDF
+        orderForm.classList.remove("pdf-style");
+      });
     });
-  });
 
   return orderForm;
 }
@@ -847,15 +856,14 @@ function handleUserData() {
 async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
-    xInnerHtmlAndCallback(renderHero);
+    xInnerHtmlAndCallback(handleUserData);
     switchToLogoutButton();
   } else {
-    console.log("Not authenticated for content");
-    switchToLoginButton();
-    xInnerHtmlAndCallback(fetchCategories);
+    alert("You need to login first");
+    xInnerHtmlAndCallback(renderLoginForm);
   }
 }
-function switchToLogoutButton(){
+function switchToLogoutButton() {
   const button = document.getElementById("logInOrOutButton");
   button.innerHTML = "";
   button.innerHTML = `<a
@@ -863,16 +871,15 @@ function switchToLogoutButton(){
                     onclick="handleLogout()"
                     >Logout</a
                   >`;
-  const loggedInAs = document.getElementById('loggedInAs');
+  const loggedInAs = document.getElementById("loggedInAs");
   const actualUser = sessionManager.getUserN();
   loggedInAs.innerHTML = `<div class="flex-col p1">
                             <p id="p1" class="text-sm">Currently logged in as: </p>
                             <p id="p1" class="italic font-bold">${actualUser}</p>
                           </div>
                           `;
-
 }
-function switchToLoginButton(){
+function switchToLoginButton() {
   const button = document.getElementById("logInOrOutButton");
   button.innerHTML = "";
   button.innerHTML = `<a
@@ -880,14 +887,13 @@ function switchToLoginButton(){
                     onclick="xInnerHtmlAndCallback(renderLoginForm)"
                     >Login</a
                   >`;
-  const loggedInAs = document.getElementById('loggedInAs');
-  loggedInAs.innerHTML = '';
-
+  const loggedInAs = document.getElementById("loggedInAs");
+  loggedInAs.innerHTML = "";
 }
 async function handleLogout() {
   const token = sessionManager.getToken();
   const username = sessionManager.getUserN();
-  
+
   try {
     const response = await fetch("../Backend/index.php", {
       method: "POST",
@@ -920,34 +926,33 @@ async function handleLogout() {
 
 function showAboutUs() {
   const aboutUsContainer = document.getElementById("aboutUsContainer");
-  aboutUsContainer.className = ("text-center mx-auto mt-20");
-  aboutUsContainer.innerHTML = ""; 
+  aboutUsContainer.className = "text-center mx-auto mt-20";
+  aboutUsContainer.innerHTML = "";
 
-
-  const heading = document.createElement('h2');
-  heading.textContent = 'Dev Team';
-  heading.classList.add('about-heading');
+  const heading = document.createElement("h2");
+  heading.textContent = "Dev Team";
+  heading.classList.add("about-heading");
   aboutUsContainer.appendChild(heading);
 
   const members = [
-    { name: 'Andre', description: 'Databaseking' },
-    { name: 'Elias', description: 'Talented Allrounder' },
-    { name: 'Jesse', description: 'UIX/UI Design' },
-    { name: 'Alex', description: 'Ein talentierter Koch und Feinschmecker.' },
-    { name: 'Otto', description: 'Backend-Artist' },
-    { name: 'Fatih', description: 'Engaging And Motivated' },
-    { name: 'Robert', description: 'Silent Artist'},
-    { name: 'Tom', description: 'Busy Student'},
+    { name: "Andre", description: "Databaseking" },
+    { name: "Elias", description: "Talented Allrounder" },
+    { name: "Jesse", description: "UIX/UI Design" },
+    { name: "Alex", description: "Ein talentierter Koch und Feinschmecker." },
+    { name: "Otto", description: "Backend-Artist" },
+    { name: "Fatih", description: "Engaging And Motivated" },
+    { name: "Robert", description: "Silent Artist" },
+    { name: "Tom", description: "Busy Student" },
   ];
 
-  const container = document.createElement('div');
-  container.className = 'about-card-container';
+  const container = document.createElement("div");
+  container.className = "about-card-container";
 
   members.forEach((member, index) => {
     const aboutCard = createAboutCard(member);
     container.appendChild(aboutCard);
     setTimeout(() => {
-      aboutCard.classList.add('show');
+      aboutCard.classList.add("show");
     }, index * 100);
   });
 
@@ -955,26 +960,26 @@ function showAboutUs() {
 }
 
 function createAboutCard(member) {
-  const card = document.createElement('div');
-  card.className = 'about-card';
+  const card = document.createElement("div");
+  card.className = "about-card";
 
-  const front = document.createElement('div');
-  front.className = 'about-card-front';
-  const name = document.createElement('h3');
+  const front = document.createElement("div");
+  front.className = "about-card-front";
+  const name = document.createElement("h3");
   name.textContent = member.name;
   front.appendChild(name);
 
-  const back = document.createElement('div');
-  back.className = 'about-card-back';
-  const description = document.createElement('p');
+  const back = document.createElement("div");
+  back.className = "about-card-back";
+  const description = document.createElement("p");
   description.textContent = member.description;
   back.appendChild(description);
 
   card.appendChild(front);
   card.appendChild(back);
 
-  card.addEventListener('click', () => {
-    card.classList.toggle('flipped');
+  card.addEventListener("click", () => {
+    card.classList.toggle("flipped");
   });
 
   return card;
