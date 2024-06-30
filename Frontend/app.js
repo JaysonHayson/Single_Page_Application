@@ -836,9 +836,48 @@ async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     xInnerHtmlAndCallback(renderHero);
-    console.log("authenticated content");
+    switchToLogoutButton();
   } else {
     console.log("Not authenticated for content");
     xInnerHtmlAndCallback(fetchCategories);
   }
+}
+function switchToLogoutButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="handleLogout"
+                    >Logout</a
+                  >`;
+
+}
+function handleLogout(){
+  const token = sessionManager.getToken();
+  const username = sessionManager.getUserN();
+  fetch("../Backend/index.php", {
+    method: "POST",
+    body: new URLSearchParams({
+      Command: "logoutUser",
+      userName: username,
+      SessionID: token,
+    }),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    if(data[0]){
+      console.log("Logged out succesfully");
+      checkAuthentication();
+    }else{
+      console.log("Error with response. Watch " + data[1]);
+    }
+  })
+  .catch((error) => {
+    console.error("There was a problem with the login request:", error);
+  });
 }
