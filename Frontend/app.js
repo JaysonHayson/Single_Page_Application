@@ -711,7 +711,7 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const adress = userData ? userData.adress : "";
+  const address = userData ? userData.address : "";
   const city = userData ? userData.city : "";
   const country = userData ? userData.country : "";
 
@@ -740,7 +740,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${adress}</p>
+    <p>${firstName} ${lastName}<br>${address}<br>${city}, ${country}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -748,54 +748,52 @@ function createOrderConfirmation(userData, cartSummary) {
   // Set order date
   const orderDateElement = document.createElement("span");
   orderDateElement.id = "orderDate";
-  orderDateElement.textContent = currentDate.toLocaleDateString(
-    "en-US",
-    options
-  );
+  orderDateElement.textContent = currentDate.toLocaleDateString("en-US", options);
   orderForm.insertBefore(orderDateElement, orderForm.firstChild);
 
   // Add event listener for PDF download
-  orderForm
-    .querySelector("#downloadButton")
-    .addEventListener("click", function () {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "pt",
-        format: "a4",
-      });
-
-      // Temporarily change styles for PDF generation
-      orderForm.style.backgroundColor = "white";
-      orderForm.style.color = "black";
-      orderForm.style.padding = "20px";
-      orderForm.style.width = "100%";
-      orderForm.className =
-        "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
-
-      const downloadButton = orderForm.querySelector("#downloadButton");
-      downloadButton.style.display = "none"; // Hide the download button
-
-      html2canvas(orderForm, {
-        scale: 2,
-        useCORS: true,
-      }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = doc.internal.pageSize.getWidth();
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("OrderConfirmation.pdf");
-
-        // Revert styles back after PDF generation
-        orderForm.style.backgroundColor = "";
-        orderForm.style.color = "";
-        orderForm.style.padding = "";
-        orderForm.style.width = "";
-        downloadButton.style.display = "";
-        orderForm.className =
-          "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
-      });
+  orderForm.querySelector("#downloadButton").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "pt",
+      format: "a4",
     });
+
+    // Temporarily change styles for PDF generation
+    orderForm.style.backgroundColor = "white";
+    orderForm.style.color = "black";
+    orderForm.style.padding = "20px";
+    orderForm.style.width = "100%";
+    orderForm.className =
+      "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20 pdf-style"; // Apply PDF styling
+
+    const downloadButton = orderForm.querySelector("#downloadButton");
+    downloadButton.style.display = "none"; // Hide the download button
+
+    html2canvas(orderForm, {
+      scale: 2,
+      useCORS: true,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = doc.internal.pageSize.getWidth();
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      doc.save("OrderConfirmation.pdf");
+
+      // Revert styles back after PDF generation
+      orderForm.style.backgroundColor = "";
+      orderForm.style.color = "";
+      orderForm.style.padding = "";
+      orderForm.style.width = "";
+      downloadButton.style.display = "";
+      orderForm.className =
+        "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+
+      // Remove PDF styling class after generating PDF
+      orderForm.classList.remove("pdf-style");
+    });
+  });
 
   return orderForm;
 }
