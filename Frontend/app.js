@@ -666,10 +666,15 @@ function createCheckout() {
     totalContainer.innerHTML = `
     <p class= "text-right text-lg font-bold mt-4 underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
 
+  const button = document.createElement("div");
+  button.className="checkoutbutton text-right";
+  button.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xInnerHtmlAndCallback(handleUserData)">Order Now!</button>`
+
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
   checkoutContainer.appendChild(checkout);
   checkoutContainer.appendChild(totalContainer);
+  checkoutContainer.appendChild(button);
   return checkoutContainer;
 }
 
