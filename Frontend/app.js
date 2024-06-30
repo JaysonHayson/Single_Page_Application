@@ -472,7 +472,7 @@ function createRegisterForm() {
     <button onclick="handleRegister(event)" id="registerButton" class="btn btn-primary w-full mb-4">Register</button>
     
     <div id="loginMessage" class="text-sm mb-4">
-      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Register</a>
+      If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
     </div>
   `;
 
