@@ -609,7 +609,7 @@ function createCheckout() {
 
   checkoutHeader.innerHTML = `<h2 class="text-lg md:text-4xl font-bold mb-4 text-center">Checkout</h2>`;
 
-  const checkout = document.createElement("div");
+  const checkout = document.createElement("table");
   checkout.id = "checkoutContainer";
   checkout.className = "p-4 bg-gray-100 rounded-lg shadow-lg";
 
@@ -618,8 +618,9 @@ function createCheckout() {
     checkout.innerHTML = "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
   } else {
     const formHeader = document.createElement("thead");
+    formHeader.className="w-full bg-gray-700";
     formHeader.innerHTML = `
-    <tr class="border-b-2 border-gray-200 text-white">
+    <tr class="w-full text-white">
       <th class="p-2"></th>
       <th class="p-2 text-left">Product</th>
       <th class="p-2 text-left">Quantity</th>
@@ -659,15 +660,15 @@ function createCheckout() {
           <td class="p-2">${(product.price * product.quantity).toFixed(2)}€</td>`;
       checkout.appendChild(itemDiv);
     });
-
-    const totalContainer = document.createElement("div");
+  }
+  const totalContainer = document.createElement("div");
     totalContainer.innerHTML = `
     <p class= "text-right text-lg font-bold mt-4 text-white underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
-    checkout.appendChild(totalContainer);
-  }
+
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
   checkoutContainer.appendChild(checkout);
+  checkoutContainer.appendChild(totalContainer);
   return checkoutContainer;
 }
 
