@@ -1,5 +1,3 @@
-
-
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -216,9 +214,6 @@ function renderCart() {
 
   cartList.innerHTML = "";
 
-  
-
-  
   total = 0;
   cartSummary = {};
 
@@ -365,8 +360,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-
 //loginform
 function createLoginForm() {
   const loginForm = document.createElement("div");
@@ -401,7 +394,6 @@ function createLoginForm() {
   return loginForm;
 }
 
-
 function handleLogin(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -415,24 +407,29 @@ function handleLogin(event) {
       userName: username,
       userPW: pw,
     }),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error("Login response failed");
-    }
-    return response.json();
-  }).then((data) => {
-    if (data[0]) {
-      console.log("Login successful: ", data[1]);
-      sessionManager.setTokenAndUsername(data[1], username); //save token
-      
-      console.log("username in handle Login: "+ username+ " and token: "+  data[1]);
-      checkAuthentication();
-    } else {
-      console.error("Login failed: ", data[1]);
-    }
-  }).catch((error) => {
-    console.error("There was a problem with the login request:", error);
-  });
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Login response failed");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data[0]) {
+        console.log("Login successful: ", data[1]);
+        sessionManager.setTokenAndUsername(data[1], username); //save token
+
+        console.log(
+          "username in handle Login: " + username + " and token: " + data[1]
+        );
+        checkAuthentication();
+      } else {
+        console.error("Login failed: ", data[1]);
+      }
+    })
+    .catch((error) => {
+      console.error("There was a problem with the login request:", error);
+    });
 }
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
@@ -440,9 +437,6 @@ function renderLoginForm() {
   const loginFormItem = createLoginForm();
   loginForm.appendChild(loginFormItem);
 }
-
-
-
 
 function createRegisterForm() {
   const registerForm = document.createElement("div");
@@ -519,7 +513,8 @@ function handleRegister(event) {
       // Remove existing content
       xInnerHtmlAndCallback(() => {
         const messageDiv = document.createElement("div");
-        messageDiv.className = "px-4 py-2 rounded shadow text-system m-auto bg-system z-50";
+        messageDiv.className =
+          "px-4 py-2 rounded shadow text-system m-auto bg-system z-50";
 
         if (data[0]) {
           // Registration successful
@@ -532,9 +527,9 @@ function handleRegister(event) {
         mainContainer.appendChild(messageDiv);
 
         setTimeout(() => {
-          if (data[1]== "User and customer successfully registered.") {
+          if (data[1] == "User and customer successfully registered.") {
             xInnerHtmlAndCallback(renderLoginForm);
-          } else if(data[1] == "Username or email already in use."){
+          } else if (data[1] == "Username or email already in use.") {
             xInnerHtmlAndCallback(renderRegisterForm);
           }
         }, 2000);
@@ -548,7 +543,7 @@ function handleRegister(event) {
     });
 }
 
-function renderRegisterForm(){
+function renderRegisterForm() {
   const registerForm = document.getElementById("registerForm");
   registerForm.innerHTML = "";
   const registerFormItem = createRegisterForm();
@@ -614,16 +609,13 @@ function getCartItems() {
 }
 
 function createCheckout() {
-  
   const checkoutHeader = document.createElement("div");
 
-  checkoutHeader.innerHTML = 
-  `<h2 class="checkoutHeading">Checkout</h2>`;
+  checkoutHeader.innerHTML = `<h2 class="checkoutHeading">Checkout</h2>`;
 
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer";
-  checkout.className="table w-96";
-
+  checkout.className = "table w-96";
 
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
@@ -640,13 +632,11 @@ function createCheckout() {
 
     checkout.appendChild(formHeader);
 
-
     Object.keys(cartSummary).forEach((productName) => {
       const product = cartSummary[productName];
       const itemDiv = document.createElement("tr");
       itemDiv.className = "checkout-item ";
-    
-    
+
       itemDiv.innerHTML = `
         
           <td>
@@ -672,12 +662,10 @@ function createCheckout() {
       checkout.appendChild(itemDiv);
     });
 
-
     const totalContainer = document.createElement("div");
-    totalContainer.innerHTML =`
+    totalContainer.innerHTML = `
     <p>Gesamtpreis: ${total.toFixed(2)}€</p>`;
     checkout.appendChild(totalContainer);
-    
   }
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
@@ -695,15 +683,98 @@ function renderCheckout() {
   checkout.appendChild(checkoutItem);
 }
 let cartItems = [];
-// function InitializeCart() {
-//   cartItems = loadCartItems();
-//   renderCheckout();
-// }
 
+function createOrderConfirmation() {
+  const orderForm = document.createElement("div");
+  orderForm.id = "orderConfirmation";
+  orderForm.className =
+    "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
+  orderForm.innerHTML = `
+  <h1>Order Confirmation</h1>
+    <p>Dear Customer,</p>
+    <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
 
-// document.addEventListener("DOMContentLoaded", InitializeCart);
+    <h2>Order Summary:</h2>
+    <ul>
+      <li><strong>Order Date:</strong> <span id="orderDate"></span></li>
+      <li><strong>Items:</strong>
+        <ul>
+          <li>Product Name 1 - Quantity: 2 - Price: $29.99</li>
+          <li>Product Name 2 - Quantity: 1 - Price: $19.99</li>
+          <li>Product Name 3 - Quantity: 3 - Price: $9.99</li>
+        </ul>
+      </li>
+    </ul>
 
+    <p><strong>Total Amount:</strong> $99.94</p>
+
+    <h2>Shipping Address:</h2>
+    <p>[Your Name]<br>[Sample Street 1]<br>[12345 Sample City]<br>[Country]</p>
+
+  <button id="downloadButton">Download PDF</button>
+  `;
+
+  // Set order date dynamically
+  const orderDateElement = orderForm.querySelector("#orderDate");
+  const currentDate = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  orderDateElement.textContent = currentDate.toLocaleDateString(
+    "en-US",
+    options
+  );
+
+  // Add event listener for PDF download
+  orderForm
+    .querySelector("#downloadButton")
+    .addEventListener("click", function () {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "pt",
+        format: "a4",
+      });
+
+      // Temporarily change styles for PDF generation
+      orderForm.style.backgroundColor = "white";
+      orderForm.style.color = "black";
+      orderForm.style.padding = "20px";
+      orderForm.style.width = "100%";
+      orderForm.className =
+        "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+
+      const downloadButton = orderForm.querySelector("#downloadButton");
+      downloadButton.style.display = "none"; // Hide the download button
+
+      html2canvas(orderForm, {
+        scale: 2,
+        useCORS: true,
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const imgWidth = doc.internal.pageSize.getWidth();
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.save("OrderConfirmation.pdf");
+
+        // Revert styles back after PDF generation
+        orderForm.style.backgroundColor = "";
+        orderForm.style.color = "";
+        orderForm.style.padding = "";
+        orderForm.style.width = "";
+        downloadButton.style.display = "";
+        orderForm.className =
+          "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
+      });
+    });
+
+  return orderForm;
+}
+
+function renderOrderConfirmation() {
+  const container = document.getElementById("orderConfirmation");
+  container.innerHTML = ""; // Clear existing content
+  container.appendChild(createOrderConfirmation());
+}
 
 async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
