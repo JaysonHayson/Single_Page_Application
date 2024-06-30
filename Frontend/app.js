@@ -863,34 +863,35 @@ function switchToLoginButton(){
                   >`;
 
 }
-function handleLogout(){
+async function handleLogout() {
   const token = sessionManager.getToken();
   const username = sessionManager.getUserN();
-  fetch("../Backend/index.php", {
-    method: "POST",
-    body: new URLSearchParams({
-      Command: "logoutUser",
-      userName: username,
-      SessionID: token,
-    }),
-  })
-  .then((response) => {
+  
+  try {
+    const response = await fetch("../Backend/index.php", {
+      method: "POST",
+      body: new URLSearchParams({
+        Command: "logoutUser",
+        userName: username,
+        SessionID: token,
+      }),
+    });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return response.json();
-  })
-  .then((data) => {
-    if(data[0]){
-      console.log("Logged out succesfully");
 
-      checkAuthentication();
-    }else{
-      checkAuthentication();
+    const data = await response.json();
+
+    if (data[0]) {
+      console.log("Logged out successfully");
+      sessionManager.clearTokenAndUsername(); //clear storage
+      await checkAuthentication();
+    } else {
+      await checkAuthentication();
       console.log("Error with response. Watch " + data[1]);
     }
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error("There was a problem with the login request:", error);
-  });
+  }
 }
