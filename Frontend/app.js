@@ -684,41 +684,49 @@ function renderCheckout() {
 }
 let cartItems = [];
 
-
-function createOrderConfirmation() {
+function createOrderConfirmation(userData, cartSummary) {
   const orderForm = document.createElement("div");
   orderForm.id = "orderConfirmation";
   orderForm.className =
     "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
-  orderForm.innerHTML = `
-  <h1>Order Confirmation</h1>
-    <p>Dear Customer,</p>
-    <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
-    <h2>Order Summary:</h2>
-    <ul>
-      <li><strong>Order Date:</strong> <span id="orderDate"></span></li>
-      <li><strong>Items:</strong>
-        <ul>
-          <li>Product Name 1 - Quantity: 2 - Price: $29.99</li>
-          <li>Product Name 2 - Quantity: 1 - Price: $19.99</li>
-          <li>Product Name 3 - Quantity: 3 - Price: $9.99</li>
-        </ul>
-      </li>
-    </ul>
-
-    <p><strong>Total Amount:</strong> $99.94</p>
-
-    <h2>Shipping Address:</h2>
-    <p>[Your Name]<br>[Sample Street 1]<br>[12345 Sample City]<br>[Country]</p>
-
-  <button id="downloadButton">Download PDF</button>
-  `;
-
   // Set order date dynamically
-  const orderDateElement = orderForm.querySelector("#orderDate");
   const currentDate = new Date();
   const options = { year: "numeric", month: "long", day: "numeric" };
+
+  orderForm.innerHTML = `
+    <h1>Order Confirmation</h1>
+    <p>Dear ${userData.firstName} ${userData.lastName},</p>
+    <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
+    <h2>Order Summary:</h2>
+    <ul id="orderSummaryList">
+      <!-- Items will be dynamically inserted here -->
+    </ul>
+    <p><strong>Total Amount:</strong> ${calculateTotal(cartSummary).toFixed(
+      2
+    )}€</p>
+
+    <h2>Shipping Address:</h2>
+    <p>${userData.firstName} ${userData.lastName}<br>${userData.address}<br>${
+    userData.city
+  }<br>${userData.country}</p>
+
+    <button id="downloadButton">Download PDF</button>
+  `;
+
+  // Populate order summary list
+  const orderSummaryList = orderForm.querySelector("#orderSummaryList");
+  Object.keys(cartSummary).forEach((productName) => {
+    const product = cartSummary[productName];
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `${productName} - Quantity: ${
+      product.quantity
+    } - Price: ${(product.price * product.quantity).toFixed(2)}€`;
+    orderSummaryList.appendChild(listItem);
+  });
+
+  // Set order date
+  const orderDateElement = orderForm.querySelector("#orderDate");
   orderDateElement.textContent = currentDate.toLocaleDateString(
     "en-US",
     options
@@ -776,11 +784,11 @@ function renderOrderConfirmation() {
   container.appendChild(createOrderConfirmation());
 }
 
-function handleUserData(){
+function handleUserData() {
   const userName = sessionManager.getToken();
   const userToken = sessionManager.getUserN();
   fetch("../Backend/index.php", {
-    method:"POST",
+    method: "POST",
     body: new URLSearchParams({
       Command: "getUserData",
       userName: userName,
@@ -788,22 +796,22 @@ function handleUserData(){
     }),
   })
     .then((response) => {
-      if(!response.ok){
+      if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then((data) =>{
+    .then((data) => {
       const userData = data[1];
       //data 1 should be the user data
       const firstName = userData.firstName;
       const lastName = userData.lastName;
       const address = userData.adress;
-      const email = userData.email; 
+      const email = userData.email;
 
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
-    })
+    });
 }
 
 async function checkAuthentication() {
@@ -815,25 +823,4 @@ async function checkAuthentication() {
     console.log("Not authentificated for content");
     xInnerHtmlAndCallback(fetchCategories);
   }
-}
-// TODO: Functions to be implemented
-
-function showLogin() {
-  alert("Login functionality to be implemented.");
-}
-
-function showRegister() {
-  alert("Register functionality to be implemented.");
-}
-
-function showImpressum() {
-  alert("Impressum functionality to be implemented.");
-}
-
-function showAGB() {
-  alert("AGB functionality to be implemented.");
-}
-
-function showContact() {
-  alert("Contact functionality to be implemented.");
 }
