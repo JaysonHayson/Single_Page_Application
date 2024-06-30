@@ -848,7 +848,7 @@ function switchToLogoutButton(){
   button.innerHTML = "";
   button.innerHTML = `<a
                     class="btn btn-ghost rounded-btn"
-                    onclick="handleLogout()"
+                    onclick="handleLogout(event)"
                     >Logout</a
                   >`;
 
@@ -858,7 +858,7 @@ function switchToLoginButton(){
   button.innerHTML = "";
   button.innerHTML = `<a
                     class="btn btn-ghost rounded-btn"
-                    onclick="handleLogin()"
+                    onclick="handleLogin(event)"
                     >Login</a
                   >`;
 
