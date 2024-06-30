@@ -885,7 +885,6 @@ async function checkAuthentication() {
     xInnerHtmlAndCallback(renderHero);
     switchToLogoutButton();
   } else {
-    alert("You need to login first");
     xInnerHtmlAndCallback(renderHero);
   }
 }
