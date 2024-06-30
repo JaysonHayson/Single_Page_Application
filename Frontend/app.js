@@ -637,7 +637,7 @@ function createCheckout() {
       itemDiv.innerHTML = `
         
           <td class="p-4">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center gap-3">
               <div class="avatar">
                 <div class="mask mask-squircle h-12 w-12">
                   <img
