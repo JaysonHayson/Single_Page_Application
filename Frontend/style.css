@@ -329,3 +329,7 @@ body {
 .show {
   opacity: 1;
 }
+
+.pdf-style {
+  font-size: 14pt; /* Increase font size for PDF */
+}
