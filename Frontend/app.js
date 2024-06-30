@@ -420,6 +420,7 @@ function handleLogin(event) {
         );
         checkAuthentication();
       } else {
+        alert("User or Password doesn't exist");
         console.error("Login failed: ", data[1]);
       }
     })
