@@ -747,7 +747,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${address}<br>${city}, ${country}</p>
+    <p>${firstName} ${lastName}<br>${address}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
