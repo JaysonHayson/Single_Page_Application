@@ -685,6 +685,7 @@ function renderCheckout() {
 let cartItems = [];
 
 function createOrderConfirmation(userData, cartSummary) {
+  const product = cartSummary[productName];
   const orderForm = document.createElement("div");
   orderForm.id = "orderConfirmation";
   orderForm.className =
@@ -709,9 +710,9 @@ function createOrderConfirmation(userData, cartSummary) {
     <ul id="orderSummaryList">
       <!-- Items will be dynamically inserted here -->
     </ul>
-    <p><strong>Total Amount:</strong> ${calculateTotal(cartSummary).toFixed(
-      2
-    )}€</p>
+    <p><strong>Total Amount:</strong> ${(
+      product.price * product.quantity
+    ).toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
     <p>${firstName} ${lastName}<br>${address}<br>${city}<br>${country}</p>
