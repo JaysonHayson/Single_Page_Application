@@ -80,16 +80,6 @@ button.btn:hover {
   color: var(--text-color);
 }
 
-.hover-effect {
-  border-radius: 16px;
-}
-
-.hover-effect:hover {
-  box-shadow: 0 10px 20px rgba(140, 90, 255, 0.3),
-    0 6px 6px rgba(255, 255, 255, 0.2);
-  transition: box-shadow 0.1s ease-in-out;
-}
-
 .hero h1 {
   color: var(--hero-color);
 }

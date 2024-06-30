@@ -291,10 +291,6 @@ function toggleColorInversion() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("darkMode") === "enabled") {
-    document.body.classList.add("dark-mode");
-  }
-
   // Retrieve cart from localStorage
   const storedCart = JSON.parse(localStorage.getItem("cart"));
   if (storedCart) {
