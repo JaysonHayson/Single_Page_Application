@@ -400,7 +400,7 @@ function handleLogin(event) {
   fetch("../Backend/index.php", {
     method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
       Command: "loginUser",
@@ -442,7 +442,6 @@ function handleLogin(event) {
 }
 //test
 // Remove existing content
-
 
 //test
 function renderLoginForm() {
@@ -700,7 +699,7 @@ function createCheckout() {
 
   const button = document.createElement("div");
   button.className = "checkoutbutton text-right";
-  button.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="checkAuthentication()">Order Now!</button>`;
+  button.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="checkAuthenticationOrder()">Order Now!</button>`;
 
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
@@ -708,6 +707,16 @@ function createCheckout() {
   checkoutContainer.appendChild(totalContainer);
   checkoutContainer.appendChild(button);
   return checkoutContainer;
+}
+
+function checkAuthenticationOrder() {
+  if (sessionManager.isAuthenticated()) {
+    alert("Order successful!");
+    setTimeout(xInnerHtmlAndCallback(handleUserData), 1000);
+  } else {
+    alert("You need to login!");
+    setTimeout(xInnerHtmlAndCallback(renderLoginForm));
+  }
 }
 
 function calculateTotal(cartSummary) {
@@ -873,11 +882,11 @@ function handleUserData() {
 async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
-    xInnerHtmlAndCallback(handleUserData);
+    xInnerHtmlAndCallback(renderHero);
     switchToLogoutButton();
   } else {
     alert("You need to login first");
-    xInnerHtmlAndCallback(renderLoginForm);
+    xInnerHtmlAndCallback(renderHero);
   }
 }
 function switchToLogoutButton() {
