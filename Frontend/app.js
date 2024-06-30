@@ -662,8 +662,9 @@ function createCheckout() {
     });
   }
   const totalContainer = document.createElement("div");
+    totalContainer.className="checkouttext";
     totalContainer.innerHTML = `
-    <p class= "checkouttext text-right text-lg font-bold mt-4 text-white underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
+    <p class= "text-right text-lg font-bold mt-4 text-white underline">Gesamtpreis: ${total.toFixed(2)}€</p>`;
 
   const checkoutContainer = document.createElement("div");
   checkoutContainer.appendChild(checkoutHeader);
