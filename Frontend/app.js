@@ -712,10 +712,14 @@ function createCheckout() {
 function checkAuthenticationOrder() {
   if (sessionManager.isAuthenticated()) {
     alert("Order successful!");
-    setTimeout(xInnerHtmlAndCallback(handleUserData), 1000);
+    setTimeout(function() {
+      xInnerHtmlAndCallback(handleUserData);
+    }, 1000);
   } else {
     alert("You need to login!");
-    setTimeout(xInnerHtmlAndCallback(renderLoginForm));
+    setTimeout(function() {
+      xInnerHtmlAndCallback(renderLoginForm);
+    });
   }
 }
 
