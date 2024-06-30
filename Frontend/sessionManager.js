@@ -9,8 +9,9 @@ window.sessionManager = {
     getUserN: function(){
       return localStorage.getItem('userN');
     },
-    clearToken: function() {
+    clearTokenAndUsername: function() {
       localStorage.removeItem('authToken');
+      localStorage.removeItem('userN');
     },
     isAuthenticated: async function() {
       const token = localStorage.getItem('authToken');

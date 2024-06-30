@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storedCart) {
     cart = storedCart;
   }
-  //checkAuthentication();
+  checkAuthentication();
   renderCart();
   renderHero();
 });
@@ -621,8 +621,8 @@ function createCheckout() {
     formHeader.innerHTML = `
     <tr>
       <th></th>
-      <th>Quantity</th>
       <th>Product</th>
+      <th>Quantity</th>
       <th>Price</th>
     </tr>`;
 
@@ -646,12 +646,13 @@ function createCheckout() {
               </div>
           </td>
 
-          <td>
-            ${product.quantity}
-          </td>
 
           <td>
               <div class="font-bold">${productName}</div>
+          </td>
+
+          <td>
+            ${product.quantity}
           </td>
 
           <td>${(product.price * product.quantity).toFixed(2)}€</td>`;
@@ -832,9 +833,68 @@ async function checkAuthentication() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     xInnerHtmlAndCallback(renderHero);
-    console.log("authenticated content");
+    switchToLogoutButton();
   } else {
     console.log("Not authenticated for content");
+    switchToLoginButton();
     xInnerHtmlAndCallback(fetchCategories);
+  }
+}
+function switchToLogoutButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="handleLogout()"
+                    >Logout</a
+                  >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  const actualUser = sessionManager.getUserN();
+  loggedInAs.innerHTML = `<p>Currently logged in as: ${actualUser}`;
+
+}
+function switchToLoginButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="xInnerHtmlAndCallback(renderLoginForm)"
+                    >Login</a
+                  >`;
+  const loggedInAs = document.getElementById('loggedInAs');
+  loggedInAs.innerHTML = '';
+
+}
+async function handleLogout() {
+  const token = sessionManager.getToken();
+  const username = sessionManager.getUserN();
+  
+  try {
+    const response = await fetch("../Backend/index.php", {
+      method: "POST",
+      body: new URLSearchParams({
+        Command: "logoutUser",
+        userName: username,
+        SessionID: token,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    if (data[0]) {
+      console.log("Logged out successfully");
+      sessionManager.clearTokenAndUsername(); //clear storage
+      await checkAuthentication();
+    } else {
+      sessionManager.clearTokenAndUsername();
+      await checkAuthentication();
+      console.log("Error with response. Watch " + data[1]);
+    }
+  } catch (error) {
+    console.error("There was a problem with the login request:", error);
   }
 }
