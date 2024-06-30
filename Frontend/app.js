@@ -625,8 +625,8 @@ function createCheckout() {
     formHeader.innerHTML = `
     <tr>
       <th></th>
-      <th>Quantity</th>
       <th>Product</th>
+      <th>Quantity</th>
       <th>Price</th>
     </tr>`;
 
@@ -650,12 +650,13 @@ function createCheckout() {
               </div>
           </td>
 
-          <td>
-            ${product.quantity}
-          </td>
 
           <td>
               <div class="font-bold">${productName}</div>
+          </td>
+
+          <td>
+            ${product.quantity}
           </td>
 
           <td>${(product.price * product.quantity).toFixed(2)}€</td>`;
