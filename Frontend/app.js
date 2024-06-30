@@ -709,8 +709,9 @@ function createCheckout() {
   return checkoutContainer;
 }
 
-function checkAuthenticationOrder() {
-  if (sessionManager.isAuthenticated()) {
+async function checkAuthenticationOrder() {
+  const isAuthenticated = await sessionManager.isAuthenticated();
+  if (isAuthenticated) {
     alert("Order successful!");
     setTimeout(function() {
       xInnerHtmlAndCallback(handleUserData);
