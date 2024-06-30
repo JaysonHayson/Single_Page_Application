@@ -607,7 +607,7 @@ function getCartItems() {
 function createCheckout() {
   const checkoutHeader = document.createElement("div");
 
-  checkoutHeader.innerHTML = `<h2 class="text-2xl font-bold mb-4">Checkout</h2>`;
+  checkoutHeader.innerHTML = `<h2 class="text-lg md:text-4xl font-bold mb-4 text-center">Checkout</h2>`;
 
   const checkout = document.createElement("div");
   checkout.id = "checkoutContainer";
