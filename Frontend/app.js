@@ -396,8 +396,12 @@ function handleLogin(event) {
 
   const username = document.getElementsByName("userName")[0].value;
   const pw = document.getElementsByName("pw")[0].value;
+
   fetch("../Backend/index.php", {
     method: "POST",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
     body: new URLSearchParams({
       Command: "loginUser",
       userName: username,
@@ -411,23 +415,41 @@ function handleLogin(event) {
       return response.json();
     })
     .then((data) => {
-      if (data[0]) {
-        console.log("Login successful: ", data[1]);
-        sessionManager.setTokenAndUsername(data[1], username); //save token
+      const messageDiv = document.createElement("div");
+      messageDiv.className =
+        "px-4 py-2 rounded shadow text-system m-auto bg-system z-50";
 
-        console.log(
-          "username in handle Login: " + username + " and token: " + data[1]
-        );
-        checkAuthentication();
+      if (data[0]) {
+        // Login successful
+        messageDiv.textContent = "Login successful!";
+        sessionManager.setTokenAndUsername(data[1], username); // save token
       } else {
+<<<<<<< HEAD
+        // Login failed
+        messageDiv.textContent = "Login failed! " + data[1];
+=======
         alert("User or Password doesn't exist");
         console.error("Login failed: ", data[1]);
+>>>>>>> 92c25e9ba1d63dcebf2e7d75838152042a7997d0
       }
+      const mainContainer = document.querySelector(".spaConfig");
+      mainContainer.appendChild(messageDiv);
+
+      setTimeout(() => {
+        if (data[0]) {
+          checkAuthentication();
+        }
+      }, 2000);
     })
     .catch((error) => {
       console.error("There was a problem with the login request:", error);
     });
 }
+//test
+// Remove existing content
+
+
+//test
 function renderLoginForm() {
   const loginForm = document.getElementById("loginForm");
   loginForm.innerHTML = "";
