@@ -424,13 +424,8 @@ function handleLogin(event) {
         messageDiv.textContent = "Login successful!";
         sessionManager.setTokenAndUsername(data[1], username); // save token
       } else {
-<<<<<<< HEAD
-        // Login failed
-        messageDiv.textContent = "Login failed! " + data[1];
-=======
         alert("User or Password doesn't exist");
         console.error("Login failed: ", data[1]);
->>>>>>> 92c25e9ba1d63dcebf2e7d75838152042a7997d0
       }
       const mainContainer = document.querySelector(".spaConfig");
       mainContainer.appendChild(messageDiv);
