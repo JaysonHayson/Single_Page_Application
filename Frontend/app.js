@@ -839,6 +839,7 @@ async function checkAuthentication() {
     switchToLogoutButton();
   } else {
     console.log("Not authenticated for content");
+    switchToLoginButton();
     xInnerHtmlAndCallback(fetchCategories);
   }
 }
@@ -849,6 +850,16 @@ function switchToLogoutButton(){
                     class="btn btn-ghost rounded-btn"
                     onclick="handleLogout()"
                     >Logout</a
+                  >`;
+
+}
+function switchToLoginButton(){
+  const button = document.getElementById("logInOrOutButton");
+  button.innerHTML = "";
+  button.innerHTML = `<a
+                    class="btn btn-ghost rounded-btn"
+                    onclick="handleLogin()"
+                    >Login</a
                   >`;
 
 }
@@ -872,8 +883,10 @@ function handleLogout(){
   .then((data) => {
     if(data[0]){
       console.log("Logged out succesfully");
+
       checkAuthentication();
     }else{
+      checkAuthentication();
       console.log("Error with response. Watch " + data[1]);
     }
   })
