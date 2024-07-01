@@ -774,6 +774,23 @@ function createOrderConfirmation(userData, cartSummary) {
     orderSummaryList.appendChild(listItem);
     totalAmount += productPrice; // Accumulate total amount
   });
+  //Tax Calculated with 19%
+  const taxRate = 0.19; // 19% tax
+  const taxAmount = totalAmount * taxRate;
+  const totalAmountWithTax = totalAmount + taxAmount;
+
+  //Shipping Costs calculated if totalAmountWithTax < 1000
+  let shippingCost = 0;
+  if (totalAmountWithTax < 1000) {
+    shippingCost = totalAmountWithTax * 0.01;
+  }
+
+  const totalAmountWithShipping = totalAmountWithTax + shippingCost;
+
+  const shippingMessage = shippingCost > 0
+    ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+    : "<p><strong>Shipping Costs:</strong> Free</p>";
+
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
@@ -782,6 +799,11 @@ function createOrderConfirmation(userData, cartSummary) {
     <h2>Order Summary:</h2>
     ${orderSummaryList.outerHTML}
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
+    <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
+    <p><strong>Total Amount:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    ${shippingMessage}
+    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
+    
 
     <h2>Shipping Address:</h2>
     <p>${firstName} ${lastName}<br>${adress}</p>
