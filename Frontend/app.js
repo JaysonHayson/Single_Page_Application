@@ -845,7 +845,7 @@ function createOrderConfirmation(userData, cartSummary) {
       downloadButton.style.display = "none"; // Hide the download button
 
       html2canvas(orderForm, {
-        scale: 2,
+        scale: 0.5,
         useCORS: true,
       }).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
