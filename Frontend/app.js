@@ -472,8 +472,8 @@ function createRegisterForm() {
     </div>
 
     <div class ="mb-4 w-full sm:w-full lg:w-full">
-      <label for="adressInput" class="block text-sm font-medium mb-1">Adress</label>
-      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your adress" autocomplete="adress">
+      <label for="adressInput" class="block text-sm font-medium mb-1">Address</label>
+      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="adress">
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
