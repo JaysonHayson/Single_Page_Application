@@ -642,7 +642,7 @@ function createCheckout() {
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
     checkout.innerHTML =
-      "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
+      "<p class='text-center text-gray-400'>Your shopping cart is empty.</p>";
   } else {
     const formHeader = document.createElement("thead");
     formHeader.className = "w-full bg-gray-700";
