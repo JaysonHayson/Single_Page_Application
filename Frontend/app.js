@@ -794,18 +794,20 @@ function createOrderConfirmation(userData, cartSummary) {
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
-    <p>Dear ${firstName} ${lastName},</p>
+    <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
     <h2>Order Summary:</h2>
     ${orderSummaryList.outerHTML}
+    <br>
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
     <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
-    <p><strong>Total Amount:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    <br>
     ${shippingMessage}
     <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
-    
-
+    <br>
     <h2>Shipping Address:</h2>
+    <br>
     <p>${firstName} ${lastName}<br>${adress}</p>
 
     <button id="downloadButton">Download PDF</button>
