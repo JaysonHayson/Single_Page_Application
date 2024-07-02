@@ -739,9 +739,19 @@ function createCheckout() {
   return checkoutContainer;
 }
 
+function playSound() {
+  const audio = document.getElementById("myAudio");
+  if (!audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  audio.play();
+}
+
 async function checkAuthenticationOrder() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
+    playSound();
     alert("Order successful!");
     setTimeout(function () {
       xInnerHtmlAndCallback(handleUserData);
