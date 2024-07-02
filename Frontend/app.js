@@ -471,8 +471,13 @@ function createRegisterForm() {
     </div>
 
     <div class ="mb-4 w-full sm:w-full lg:w-full">
+<<<<<<< HEAD
       <label for="addressInput" class="block text-sm font-medium mb-1">Address</label>
       <input id="addressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="address">
+=======
+      <label for="adressInput" class="block text-sm font-medium mb-1">Address</label>
+      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="adress">
+>>>>>>> 0d86d6183bdc2837284603671272ef40369ac255
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -658,7 +663,7 @@ function createCheckout() {
   const cartItems = getCartItems();
   if (cartItems.length === 0) {
     checkout.innerHTML =
-      "<p class='text-center text-gray-400'>Ihr Warenkorb ist leer.</p>";
+      "<p class='text-center text-gray-400'>Your shopping cart is empty.</p>";
   } else {
     const formHeader = document.createElement("thead");
     formHeader.className = "w-full bg-gray-700";
@@ -790,17 +795,45 @@ function createOrderConfirmation(userData, cartSummary) {
     orderSummaryList.appendChild(listItem);
     totalAmount += productPrice; // Accumulate total amount
   });
+  //Tax Calculated with 19%
+  const taxRate = 0.19; // 19% tax
+  const taxAmount = totalAmount * taxRate;
+  const totalAmountWithTax = totalAmount + taxAmount;
+
+  //Shipping Costs calculated if totalAmountWithTax < 1000
+  let shippingCost = 0;
+  if (totalAmountWithTax < 1000) {
+    shippingCost = totalAmountWithTax * 0.01;
+  }
+
+  const totalAmountWithShipping = totalAmountWithTax + shippingCost;
+
+  const shippingMessage = shippingCost > 0
+    ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+    : "<p><strong>Shipping Costs:</strong> Free</p>";
+
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
-    <p>Dear ${firstName} ${lastName},</p>
+    <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
     <h2>Order Summary:</h2>
     ${orderSummaryList.outerHTML}
+    <br>
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
-
+    <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
+    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    <br>
+    ${shippingMessage}
+    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
+    <br>
     <h2>Shipping Address:</h2>
+<<<<<<< HEAD
     <p>${firstName} ${lastName}<br>${address}</p>
+=======
+    <br>
+    <p>${firstName} ${lastName}<br>${adress}</p>
+>>>>>>> 0d86d6183bdc2837284603671272ef40369ac255
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -836,15 +869,17 @@ function createOrderConfirmation(userData, cartSummary) {
       const downloadButton = orderForm.querySelector("#downloadButton");
       downloadButton.style.display = "none"; // Hide the download button
 
+      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`;
+
       html2canvas(orderForm, {
-        scale: 2,
+        scale: 0.5,
         useCORS: true,
       }).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
         const imgWidth = doc.internal.pageSize.getWidth();
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("OrderConfirmation.pdf");
+        doc.save(fileName);
 
         // Revert styles back after PDF generation
         orderForm.style.backgroundColor = "";
