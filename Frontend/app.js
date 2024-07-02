@@ -832,12 +832,15 @@ function createOrderConfirmation(userData, cartSummary) {
       // Clone the orderForm
       const clonedOrderForm = orderForm.cloneNode(true);
 
-      // Apply temporary styles to the cloned element
-      clonedOrderForm.style.backgroundColor = "white";
-      clonedOrderForm.style.color = "black";
-      clonedOrderForm.style.padding = "20px";
-      clonedOrderForm.style.width = "555pt"; // A4 width in points
-      clonedOrderForm.style.maxWidth = "100%";
+      // Remove download button from cloned form (optional)
+      const downloadButton = clonedOrderForm.querySelector("#downloadButton");
+      if (downloadButton) {
+        downloadButton.parentNode.removeChild(downloadButton);
+      }
+
+      // Apply necessary styles for PDF generation
+      clonedOrderForm.style.backgroundColor = "white"; // Example of necessary style
+      clonedOrderForm.style.color = "black"; // Example of necessary style
 
       // Append the cloned element to the body
       document.body.appendChild(clonedOrderForm);
