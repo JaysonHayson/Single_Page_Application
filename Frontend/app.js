@@ -453,7 +453,6 @@ function renderLoginForm() {
 
 function createRegisterForm() {
   const registerForm = document.createElement("div");
-  registerForm.id = "loginContainer";
   registerForm.className =
     "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
@@ -472,8 +471,8 @@ function createRegisterForm() {
     </div>
 
     <div class ="mb-4 w-full sm:w-full lg:w-full">
-      <label for="adressInput" class="block text-sm font-medium mb-1">Adress</label>
-      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your adress" autocomplete="adress">
+      <label for="addressInput" class="block text-sm font-medium mb-1">Address</label>
+      <input id="addressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="address">
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -499,8 +498,23 @@ function createRegisterForm() {
       If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
     </div>
   `;
+  
 
   return registerForm;
+}
+function eventListenerForRegisterInput() {
+  const registerForm = document.getElementById("registerForm");
+  const inputFields = registerForm.querySelectorAll("input");
+
+  function handleEnterKey(event) {
+      if (event.key === 'Enter' || event.keyCode === 13) {
+          handleRegister(event);
+      }
+  }
+
+  inputFields.forEach(inputField => {
+      inputField.addEventListener('keypress', handleEnterKey);
+  });
 }
 function handleRegister(event) {
   event.preventDefault();
@@ -511,15 +525,16 @@ function handleRegister(event) {
   const username = document.getElementById("userNameInput").value;
   const email = document.getElementById("emailInput").value;
   const pw = document.getElementById("passwordInput").value;
-  const adress = document.getElementById("adressInput").value;
+  const address = document.getElementById("addressInput").value;
 
+  
   fetch("../Backend/index.php", {
     method: "POST",
     body: new URLSearchParams({
       Command: "registerNewUser",
       userFirstName: firstName,
       userLastName: lastName,
-      userAdress: adress,
+      userAddress: address,
       userName: username,
       userEmail: email,
       userPW: pw,
@@ -570,6 +585,7 @@ function renderRegisterForm() {
   registerForm.innerHTML = "";
   const registerFormItem = createRegisterForm();
   registerForm.appendChild(registerFormItem);
+  eventListenerForRegisterInput();
 }
 //loginform end
 //hero
@@ -757,7 +773,7 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const adress = userData ? userData.adress : "";
+  const address = userData ? userData.address : "";
 
   // Populate order summary list
   const orderSummaryList = document.createElement("ul");
@@ -784,7 +800,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
 
     <h2>Shipping Address:</h2>
-    <p>${firstName} ${lastName}<br>${adress}</p>
+    <p>${firstName} ${lastName}<br>${address}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -876,10 +892,10 @@ function handleUserData() {
       //data 1 should be the user data
       const firstName = userData.firstName;
       const lastName = userData.lastName;
-      const adress = userData.adress;
+      const address = userData.address;
       const email = userData.email;
       renderOrderConfirmation(userData, cartSummary);
-      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${adress}, Email: ${email}`;
+      const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
       console.log(userDetails);
     });
 }

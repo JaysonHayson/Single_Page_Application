@@ -30,7 +30,7 @@
             $reqEmail       = $requestArray['userEmail'];
             $reqFirstName   = $requestArray['userFirstName'];
             $reqLastName    = $requestArray['userLastName'];
-            $reqAdress      = $requestArray['userAdress'];
+            $reqAddress      = $requestArray['userAddress'];
 
             if (
                 (!is_string($reqUser)       || strlen($reqUser)<1)      //Frontend may provide an Empty string, make sure it doesn't;
@@ -43,14 +43,14 @@
                 ||
                 !is_string($reqLastName)
                 ||
-                !is_string($reqAdress)
+                !is_string($reqAddress)
                 )
             {
                 header("HTTP/1.0 400 Bad Request");
                 echo json_encode(['error' => 'Recieved Empty Values.']);
                 return;
             }
-            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, $reqFirstName, $reqLastName, $reqAdress);
+            $db_results=registerNewUser($pdo, $reqUser, $reqPass, $reqEmail, $reqFirstName, $reqLastName, $reqAddress);
             //$db_resultsCustomer = registerNewCustomer(...
             echo json_encode($db_results);
             break;

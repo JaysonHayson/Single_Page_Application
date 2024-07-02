@@ -220,7 +220,7 @@
      * @return Array    Array of (Bool, Message)
      */
 
-     function registerNewUser(&$pdo, $userName, $userPW, $userEmail, $userFirstName, $userLastName, $userAdress) {
+     function registerNewUser(&$pdo, $userName, $userPW, $userEmail, $userFirstName, $userLastName, $userAddress) {
         $returnVar = [true, ""];
     
         try {
@@ -237,9 +237,9 @@
                 $userId = $pdo->lastInsertId();
     
                 // Second statement: Insert into 'customers' table
-                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, adress) VALUES (:userId, :firstName, :lastName, :email, :adress)";
+                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, adress) VALUES (:userId, :firstName, :lastName, :email, :address)";
                 $stmt2 = $pdo->prepare($sql2);
-                $success2 = $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail, 'adress' => $userAdress]);
+                $success2 = $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail, 'address' => $userAddress]);
     
                 if ($success2) {
                     // Commit the transaction if both inserts were successful
