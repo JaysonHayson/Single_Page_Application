@@ -395,7 +395,7 @@ function eventListenerForLoginInput() {
 
   function handleEnterKey(event) {
       if (event.key === 'Enter' || event.keyCode === 13) {
-          handleRegister(event);
+          handleLogin(event);
       }
   }
 
@@ -486,8 +486,8 @@ function createRegisterForm() {
     </div>
 
     <div class ="mb-4 w-full sm:w-full lg:w-full">
-      <label for="adressInput" class="block text-sm font-medium mb-1">Address</label>
-      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="adress" required>
+      <label for="addressInput" class="block text-sm font-medium mb-1">Address</label>
+      <input id="addressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="address" required>
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -839,12 +839,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
     <br>
     <h2>Shipping Address:</h2>
-<<<<<<< HEAD
     <p>${firstName} ${lastName}<br>${address}</p>
-=======
-    <br>
-    <p>${firstName} ${lastName}<br>${adress}</p>
->>>>>>> 0d86d6183bdc2837284603671272ef40369ac255
 
     <button id="downloadButton">Download PDF</button>
   `;
