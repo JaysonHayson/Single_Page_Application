@@ -394,13 +394,13 @@ function eventListenerForLoginInput() {
   const inputFields = loginForm.querySelectorAll("input");
 
   function handleEnterKey(event) {
-      if (event.key === 'Enter' || event.keyCode === 13) {
-          handleLogin(event);
-      }
+    if (event.key === "Enter" || event.keyCode === 13) {
+      handleLogin(event);
+    }
   }
 
-  inputFields.forEach(inputField => {
-      inputField.addEventListener('keypress', handleEnterKey);
+  inputFields.forEach((inputField) => {
+    inputField.addEventListener("keypress", handleEnterKey);
   });
 }
 function handleLogin(event) {
@@ -463,7 +463,6 @@ function renderLoginForm() {
   const loginFormItem = createLoginForm();
   loginForm.appendChild(loginFormItem);
   eventListenerForLoginInput();
-
 }
 
 function createRegisterForm() {
@@ -513,7 +512,6 @@ function createRegisterForm() {
       If you are registered! <a href="#" onclick= "xInnerHtmlAndCallback(renderLoginForm)" id="loginLink" class="text-blue-600">Login</a>
     </div>
   `;
-  
 
   return registerForm;
 }
@@ -522,13 +520,13 @@ function eventListenerForRegisterInput() {
   const inputFields = registerForm.querySelectorAll("input");
 
   function handleEnterKey(event) {
-      if (event.key === 'Enter' || event.keyCode === 13) {
-          handleRegister(event);
-      }
+    if (event.key === "Enter" || event.keyCode === 13) {
+      handleRegister(event);
+    }
   }
 
-  inputFields.forEach(inputField => {
-      inputField.addEventListener('keypress', handleEnterKey);
+  inputFields.forEach((inputField) => {
+    inputField.addEventListener("keypress", handleEnterKey);
   });
 }
 
@@ -543,7 +541,6 @@ function handleRegister(event) {
   const pw = document.getElementById("passwordInput").value;
   const address = document.getElementById("addressInput").value;
 
-  
   fetch("../Backend/index.php", {
     method: "POST",
     body: new URLSearchParams({
@@ -664,8 +661,8 @@ function getCartItems() {
 
 function createCheckout() {
   const checkoutHeader = document.createElement("div");
-  
-  checkoutHeader.className ="mt-20 w-3/4"
+
+  checkoutHeader.className = "mt-20";
   checkoutHeader.innerHTML = `<h2 class=" checkouttext text-lg md:text-4xl font-bold mb-4 text-center">Checkout</h2>`;
 
   const checkout = document.createElement("table");
@@ -746,12 +743,12 @@ async function checkAuthenticationOrder() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     alert("Order successful!");
-    setTimeout(function() {
+    setTimeout(function () {
       xInnerHtmlAndCallback(handleUserData);
     }, 1000);
   } else {
     alert("You need to login!");
-    setTimeout(function() {
+    setTimeout(function () {
       xInnerHtmlAndCallback(renderLoginForm);
     });
   }
@@ -820,10 +817,10 @@ function createOrderConfirmation(userData, cartSummary) {
 
   const totalAmountWithShipping = totalAmountWithTax + shippingCost;
 
-  const shippingMessage = shippingCost > 0
-    ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
-    : "<p><strong>Shipping Costs:</strong> Free</p>";
-
+  const shippingMessage =
+    shippingCost > 0
+      ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+      : "<p><strong>Shipping Costs:</strong> Free</p>";
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
@@ -834,10 +831,14 @@ function createOrderConfirmation(userData, cartSummary) {
     <br>
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
     <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
-    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(
+      2
+    )}€</p>
     <br>
     ${shippingMessage}
-    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
+    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(
+      2
+    )}€</p>
     <br>
     <h2>Shipping Address:</h2>
     <p>${firstName} ${lastName}<br>${address}</p>
@@ -876,7 +877,20 @@ function createOrderConfirmation(userData, cartSummary) {
       const downloadButton = orderForm.querySelector("#downloadButton");
       downloadButton.style.display = "none"; // Hide the download button
 
-      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`;
+      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(
+        currentDate.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}${currentDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}_${currentDate
+        .getHours()
+        .toString()
+        .padStart(2, "0")}${currentDate
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}.pdf`;
 
       html2canvas(orderForm, {
         scale: 0.5,
