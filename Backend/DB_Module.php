@@ -237,7 +237,7 @@
                 $userId = $pdo->lastInsertId();
     
                 // Second statement: Insert into 'customers' table
-                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, adress) VALUES (:userId, :firstName, :lastName, :email, :address)";
+                $sql2 = "INSERT INTO customers (user_ID, firstName, lastName, email, address) VALUES (:userId, :firstName, :lastName, :email, :address)";
                 $stmt2 = $pdo->prepare($sql2);
                 $success2 = $stmt2->execute(['userId' => $userId, 'firstName' => $userFirstName, 'lastName' => $userLastName, 'email' => $userEmail, 'address' => $userAddress]);
     
@@ -412,7 +412,7 @@
             $stmt           = $pdo -> prepare($grabIDSQL);
             $stmt           -> execute();
             $result         = $stmt -> fetch(PDO::FETCH_ASSOC);
-            $customerSQL    = "SELECT `firstName`,`lastName`,`adress`,`email` from `customers` WHERE user_ID = ".$result['user_ID'];
+            $customerSQL    = "SELECT `firstName`,`lastName`,`address`,`email` from `customers` WHERE user_ID = ".$result['user_ID'];
             $custStmt       = $pdo -> prepare($customerSQL);
             $custStmt       -> execute();
             $customerResult = $custStmt -> fetch(PDO::FETCH_ASSOC);
