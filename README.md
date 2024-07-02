@@ -4,9 +4,9 @@ This project is a Single Page Application (SPA) for an Online-Shop.
 
 ## Features
 - Single URL with dynamic changing Content
-- User registration and Login
-- Sessions by token for User-authentication
-- Content consists in a Database for scalability
+- User registration and login
+- Sessions managed by token for user-authentication
+- Content consists of a database(MariaDB) for scalability
 
 ## Technologies Used
 
@@ -14,6 +14,8 @@ This project is a Single Page Application (SPA) for an Online-Shop.
 - **Vanilla PHP**: Used for implementing a custom API to handle server-side operations, such as form submissions and data storage.
 - **Tailwind CSS**: Used for styling the user interface with utility-first classes.
 - **DaisyUI**: A Tailwind CSS component library used to extend the styling capabilities.
+- **HTML**: Used as placeholders for dynamic content.
+- **CSS**: Used to define styles and color schemes.
 
 ## About Us
 
