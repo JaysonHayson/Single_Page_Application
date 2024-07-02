@@ -834,13 +834,12 @@ function createOrderConfirmation(userData, cartSummary) {
       // Clone the orderForm
       const clonedOrderForm = orderForm.cloneNode(true);
 
-      // Apply temporary styles to the cloned element
+      // Apply temporary styles to fit within the A4 format
       clonedOrderForm.style.backgroundColor = "white";
       clonedOrderForm.style.color = "black";
       clonedOrderForm.style.padding = "20px";
-      clonedOrderForm.style.width = "555pt"; // A4 width in pixels
-      clonedOrderForm.style.maxWidth = "555pt";
-      clonedOrderForm.style.boxSizing = "border-box";
+      clonedOrderForm.style.width = "555pt"; // A4 width in points
+      clonedOrderForm.style.maxWidth = "100%";
 
       // Append the cloned element to the body
       document.body.appendChild(clonedOrderForm);
@@ -851,18 +850,20 @@ function createOrderConfirmation(userData, cartSummary) {
         unit: "pt",
         format: "a4",
       });
+      
+      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`;
 
       // Use html method to convert HTML to PDF
       doc.html(clonedOrderForm, {
         callback: function (doc) {
-          doc.save("OrderConfirmation.pdf");
+          doc.save(fileName);
 
-          // Remove the cloned element after PDF generation
+          // Remove the clone after PDF generation
           document.body.removeChild(clonedOrderForm);
         },
         x: 10,
         y: 10,
-        width: 555, // Adjust width and height as needed
+        width: 555, // A4 width in points
       });
     });
 
