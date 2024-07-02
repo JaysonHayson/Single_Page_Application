@@ -757,7 +757,7 @@ function createOrderConfirmation(userData, cartSummary) {
   // Check if userData is defined before accessing its properties
   const firstName = userData ? userData.firstName : "";
   const lastName = userData ? userData.lastName : "";
-  const address = userData ? userData.address : "";
+  const adress = userData ? userData.adress : "";
 
   // Populate order summary list
   let orderSummaryHTML = "<ul id='orderSummaryList'>";
@@ -806,7 +806,7 @@ function createOrderConfirmation(userData, cartSummary) {
     <br>
     <h2>Shipping Address:</h2>
     <br>
-    <p>${firstName} ${lastName}<br>${address}</p>
+    <p>${firstName} ${lastName}<br>${adress}</p>
 
     <button id="downloadButton">Download PDF</button>
   `;
@@ -826,6 +826,18 @@ function createOrderConfirmation(userData, cartSummary) {
     .addEventListener("click", function () {
       const { jsPDF } = window.jspdf;
 
+      // Clone the orderForm
+      const clonedOrderForm = orderForm.cloneNode(true);
+
+      // Apply temporary styles to the cloned element
+      clonedOrderForm.style.backgroundColor = "white";
+      clonedOrderForm.style.color = "black";
+      clonedOrderForm.style.padding = "20px";
+      clonedOrderForm.style.width = "100%";
+
+      // Append the cloned element to the body
+      document.body.appendChild(clonedOrderForm);
+
       // Create a new jsPDF instance
       const doc = new jsPDF({
         orientation: "portrait",
@@ -834,9 +846,12 @@ function createOrderConfirmation(userData, cartSummary) {
       });
 
       // Use html method to convert HTML to PDF
-      doc.html(orderForm, {
+      doc.html(clonedOrderForm, {
         callback: function (doc) {
           doc.save("OrderConfirmation.pdf");
+
+          // Remove the cloned element after PDF generation
+          document.body.removeChild(clonedOrderForm);
         },
         x: 10,
         y: 10,
