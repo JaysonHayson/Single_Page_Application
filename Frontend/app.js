@@ -410,6 +410,11 @@ function handleLogin(event) {
   const username = document.getElementsByName("userName")[0].value;
   const pw = document.getElementsByName("pw")[0].value;
 
+  if (!username || !pw) {
+    alert("Both username and password are required!");
+    return;
+  }
+
   fetch("../Backend/index.php", {
     method: "POST",
     headers: {
@@ -541,6 +546,10 @@ function handleRegister(event) {
   const pw = document.getElementById("passwordInput").value;
   const address = document.getElementById("addressInput").value;
 
+  if (!firstName || !lastName || !username || !email || !address ||!pw) {
+    alert("Please fill out all formfields to register!");
+    return;
+  }
   fetch("../Backend/index.php", {
     method: "POST",
     body: new URLSearchParams({
