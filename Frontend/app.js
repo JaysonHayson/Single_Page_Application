@@ -854,7 +854,7 @@ function createOrderConfirmation(userData, cartSummary) {
         const imgWidth = doc.internal.pageSize.getWidth();
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("fileName.pdf");
+        doc.save(fileName);
 
         // Revert styles back after PDF generation
         orderForm.style.backgroundColor = "";
