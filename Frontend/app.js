@@ -833,7 +833,9 @@ function createOrderConfirmation(userData, cartSummary) {
       clonedOrderForm.style.backgroundColor = "white";
       clonedOrderForm.style.color = "black";
       clonedOrderForm.style.padding = "20px";
-      clonedOrderForm.style.width = "100%";
+      clonedOrderForm.style.width = "595px"; // A4 width in pixels
+      clonedOrderForm.style.maxWidth = "100%";
+      clonedOrderForm.style.boxSizing = "border-box";
 
       // Append the cloned element to the body
       document.body.appendChild(clonedOrderForm);
