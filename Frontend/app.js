@@ -748,8 +748,16 @@ function createCheckout() {
   return checkoutContainer;
 }
 
-function playSound() {
-  const audio = document.getElementById("myAudio");
+function playJobsDone() {
+  const audio = document.getElementById("jobsDone");
+  if (!audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  audio.play();
+}
+function playNoGold() {
+  const audio = document.getElementById("noGold");
   if (!audio.paused) {
     audio.pause();
     audio.currentTime = 0;
@@ -760,12 +768,13 @@ function playSound() {
 async function checkAuthenticationOrder() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
-    playSound();
+    playJobsDone();
     alert("Order successful!");
     setTimeout(function () {
       xInnerHtmlAndCallback(handleUserData);
     }, 1000);
   } else {
+    playNoGold();
     alert("You need to login!");
     setTimeout(function () {
       xInnerHtmlAndCallback(renderLoginForm);
