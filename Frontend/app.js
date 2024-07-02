@@ -713,12 +713,12 @@ async function checkAuthenticationOrder() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     alert("Order successful!");
-    setTimeout(function () {
+    setTimeout(function() {
       xInnerHtmlAndCallback(handleUserData);
     }, 1000);
   } else {
     alert("You need to login!");
-    setTimeout(function () {
+    setTimeout(function() {
       xInnerHtmlAndCallback(renderLoginForm);
     });
   }
@@ -760,25 +760,26 @@ function createOrderConfirmation(userData, cartSummary) {
   const adress = userData ? userData.adress : "";
 
   // Populate order summary list
-  let orderSummaryHTML = "<ul id='orderSummaryList'>";
+  const orderSummaryList = document.createElement("ul");
+  orderSummaryList.id = "orderSummaryList";
   let totalAmount = 0; // Variable to calculate total amount
 
   Object.keys(cartSummary).forEach((productName) => {
     const product = cartSummary[productName];
+    const listItem = document.createElement("li");
     const productPrice = product.price * product.quantity;
-    orderSummaryHTML += `<li>${productName} - Quantity: ${
+    listItem.innerHTML = `${productName} - Quantity: ${
       product.quantity
-    } - Price: ${productPrice.toFixed(2)}€</li>`;
+    } - Price: ${productPrice.toFixed(2)}€`;
+    orderSummaryList.appendChild(listItem);
     totalAmount += productPrice; // Accumulate total amount
   });
-  orderSummaryHTML += "</ul>";
-
-  // Tax Calculated with 19%
+  //Tax Calculated with 19%
   const taxRate = 0.19; // 19% tax
   const taxAmount = totalAmount * taxRate;
   const totalAmountWithTax = totalAmount + taxAmount;
 
-  // Shipping Costs calculated if totalAmountWithTax < 1000
+  //Shipping Costs calculated if totalAmountWithTax < 1000
   let shippingCost = 0;
   if (totalAmountWithTax < 1000) {
     shippingCost = totalAmountWithTax * 0.01;
@@ -786,28 +787,24 @@ function createOrderConfirmation(userData, cartSummary) {
 
   const totalAmountWithShipping = totalAmountWithTax + shippingCost;
 
-  const shippingMessage =
-    shippingCost > 0
-      ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
-      : "<p><strong>Shipping Costs:</strong> Free</p>";
+  const shippingMessage = shippingCost > 0
+    ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+    : "<p><strong>Shipping Costs:</strong> Free</p>";
+
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
     <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
     <p>Thank you for your order! We are pleased to inform you that your order has been successfully processed.</p>
     <h2>Order Summary:</h2>
-    ${orderSummaryHTML}
+    ${orderSummaryList.outerHTML}
     <br>
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
     <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
-    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(
-      2
-    )}€</p>
+    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
     <br>
     ${shippingMessage}
-    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(
-      2
-    )}€</p>
+    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
     <br>
     <h2>Shipping Address:</h2>
     <br>
@@ -829,41 +826,47 @@ function createOrderConfirmation(userData, cartSummary) {
   orderForm
     .querySelector("#downloadButton")
     .addEventListener("click", function () {
-      // Clone the orderForm
-      const clonedOrderForm = orderForm.cloneNode(true);
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "pt",
+        format: "a4",
+      });
 
-      // Remove download button from cloned form (optional)
-      const downloadButton = clonedOrderForm.querySelector("#downloadButton");
-      if (downloadButton) {
-        downloadButton.parentNode.removeChild(downloadButton);
-      }
+      // Temporarily change styles for PDF generation
+      orderForm.style.backgroundColor = "white";
+      orderForm.style.color = "black";
+      orderForm.style.padding = "20px";
+      orderForm.style.width = "100%";
+      orderForm.className =
+        "p-6 shadow-lg h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20 pdf-style"; // Apply PDF styling
 
-      // Apply necessary styles for PDF generation
-      clonedOrderForm.style.backgroundColor = "white"; // Example of necessary style
-      clonedOrderForm.style.color = "black"; // Example of necessary style
+      const downloadButton = orderForm.querySelector("#downloadButton");
+      downloadButton.style.display = "none"; // Hide the download button
 
-      // Append the cloned element to the body
-      document.body.appendChild(clonedOrderForm);
+      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`;
 
-      // Use html2canvas to render the clonedOrderForm
-      html2canvas(clonedOrderForm, {
-        scale: 0.8, // Adjust scale as needed
+      html2canvas(orderForm, {
+        scale: 0.5,
+        useCORS: true,
       }).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF({
-          orientation: "portrait",
-          unit: "pt",
-          format: "a4",
-        });
+        const imgWidth = doc.internal.pageSize.getWidth();
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.save("fileName.pdf");
 
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        // Revert styles back after PDF generation
+        orderForm.style.backgroundColor = "";
+        orderForm.style.color = "";
+        orderForm.style.padding = "";
+        orderForm.style.width = "";
+        downloadButton.style.display = "";
+        orderForm.className =
+          "p-6 rounded-lg shadow-lg border-2 card h-auto gap-4 mx-auto w-3/4 lg:w-3/4 mt-20";
 
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`);
-
-        // Remove the clone after PDF generation
-        document.body.removeChild(clonedOrderForm);
+        // Remove PDF styling class after generating PDF
+        orderForm.classList.remove("pdf-style");
       });
     });
 
