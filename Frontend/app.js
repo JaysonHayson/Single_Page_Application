@@ -389,7 +389,20 @@ function createLoginForm() {
 
   return loginForm;
 }
+function eventListenerForLoginInput() {
+  const loginForm = document.getElementById("loginForm");
+  const inputFields = loginForm.querySelectorAll("input");
 
+  function handleEnterKey(event) {
+      if (event.key === 'Enter' || event.keyCode === 13) {
+          handleRegister(event);
+      }
+  }
+
+  inputFields.forEach(inputField => {
+      inputField.addEventListener('keypress', handleEnterKey);
+  });
+}
 function handleLogin(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -449,6 +462,8 @@ function renderLoginForm() {
   loginForm.innerHTML = "";
   const loginFormItem = createLoginForm();
   loginForm.appendChild(loginFormItem);
+  eventListenerForLoginInput();
+
 }
 
 function createRegisterForm() {
@@ -462,27 +477,22 @@ function createRegisterForm() {
     <div class="flex">  
       <div class="mb-4 w-1/2 sm:w-1/2 lg:w-1/2">
         <label for="firstNameInput" class="block text-sm font-medium mb-1">First Name</label>
-        <input id="firstNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your first name" autocomplete="given-name">
+        <input id="firstNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your first name" autocomplete="given-name" required>
       </div>
       <div class="mb-4 ml-4 w-1/2 sm:w-1/2 lg:w-1/2">
         <label for="lastNameInput" class="block text-sm font-medium mb-1">Last Name</label>
-        <input id="lastNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your last name" autocomplete="family-name">
+        <input id="lastNameInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your last name" autocomplete="family-name" required>
       </div>
     </div>
 
     <div class ="mb-4 w-full sm:w-full lg:w-full">
-<<<<<<< HEAD
-      <label for="addressInput" class="block text-sm font-medium mb-1">Address</label>
-      <input id="addressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="address">
-=======
       <label for="adressInput" class="block text-sm font-medium mb-1">Address</label>
-      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="adress">
->>>>>>> 0d86d6183bdc2837284603671272ef40369ac255
+      <input id="adressInput" type="text" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your address" autocomplete="adress" required>
     </div>
 
     <div class="mb-4 w-full sm:w-full lg:w-full">
       <label for="emailInput" class="block text-sm font-medium mb-1">E-mail</label>
-      <input id="emailInput" type="email" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your email" autocomplete="email">
+      <input id="emailInput" type="email" class="bg-black-600 input-bordered w-full pl-4" placeholder="Enter your email" autocomplete="email" required>
     </div>
     
     <div class="mb-4 w-full sm:w-full lg:w-full">
@@ -521,6 +531,7 @@ function eventListenerForRegisterInput() {
       inputField.addEventListener('keypress', handleEnterKey);
   });
 }
+
 function handleRegister(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
