@@ -829,12 +829,10 @@ function createOrderConfirmation(userData, cartSummary) {
   orderForm
     .querySelector("#downloadButton")
     .addEventListener("click", function () {
-      const { jsPDF } = window.jspdf;
-
       // Clone the orderForm
       const clonedOrderForm = orderForm.cloneNode(true);
 
-      // Apply temporary styles to fit within the A4 format
+      // Apply temporary styles to the cloned element
       clonedOrderForm.style.backgroundColor = "white";
       clonedOrderForm.style.color = "black";
       clonedOrderForm.style.padding = "20px";
@@ -844,26 +842,25 @@ function createOrderConfirmation(userData, cartSummary) {
       // Append the cloned element to the body
       document.body.appendChild(clonedOrderForm);
 
-      // Create a new jsPDF instance
-      const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "pt",
-        format: "a4",
-      });
-      
-      const fileName = `OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`;
+      // Use html2canvas to render the clonedOrderForm
+      html2canvas(clonedOrderForm, {
+        scale: 0.8, // Adjust scale as needed
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "pt",
+          format: "a4",
+        });
 
-      // Use html method to convert HTML to PDF
-      doc.html(clonedOrderForm, {
-        callback: function (doc) {
-          doc.save(fileName);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-          // Remove the clone after PDF generation
-          document.body.removeChild(clonedOrderForm);
-        },
-        x: 10,
-        y: 10,
-        width: 555, // A4 width in points
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`OrderConfirmation_${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, '0')}${currentDate.getDate().toString().padStart(2, '0')}_${currentDate.getHours().toString().padStart(2, '0')}${currentDate.getMinutes().toString().padStart(2, '0')}.pdf`);
+
+        // Remove the clone after PDF generation
+        document.body.removeChild(clonedOrderForm);
       });
     });
 
