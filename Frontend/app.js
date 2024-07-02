@@ -713,12 +713,12 @@ async function checkAuthenticationOrder() {
   const isAuthenticated = await sessionManager.isAuthenticated();
   if (isAuthenticated) {
     alert("Order successful!");
-    setTimeout(function() {
+    setTimeout(function () {
       xInnerHtmlAndCallback(handleUserData);
     }, 1000);
   } else {
     alert("You need to login!");
-    setTimeout(function() {
+    setTimeout(function () {
       xInnerHtmlAndCallback(renderLoginForm);
     });
   }
@@ -786,9 +786,10 @@ function createOrderConfirmation(userData, cartSummary) {
 
   const totalAmountWithShipping = totalAmountWithTax + shippingCost;
 
-  const shippingMessage = shippingCost > 0
-    ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
-    : "<p><strong>Shipping Costs:</strong> Free</p>";
+  const shippingMessage =
+    shippingCost > 0
+      ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+      : "<p><strong>Shipping Costs:</strong> Free</p>";
 
   orderForm.innerHTML = `
     <h1>Order Confirmation</h1>
@@ -799,10 +800,14 @@ function createOrderConfirmation(userData, cartSummary) {
     <br>
     <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
     <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
-    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(2)}€</p>
+    <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(
+      2
+    )}€</p>
     <br>
     ${shippingMessage}
-    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(2)}€</p>
+    <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(
+      2
+    )}€</p>
     <br>
     <h2>Shipping Address:</h2>
     <br>
@@ -857,7 +862,7 @@ function createOrderConfirmation(userData, cartSummary) {
         },
         x: 10,
         y: 10,
-        width: 190, // Adjust width and height as needed
+        width: 555, // Adjust width and height as needed
       });
     });
 
