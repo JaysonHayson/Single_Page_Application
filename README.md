@@ -1,4 +1,4 @@
-SPA
+## SPA
 
 This project is a Single Page Application (SPA) for an Online-Shop.
 
