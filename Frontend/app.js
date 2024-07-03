@@ -56,6 +56,10 @@ function fetchProductsForCategory(catNr) {
       return response.json();
     })
     .then((data) => {
+      console.log("Fetched data:", data);
+
+      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
       if (Array.isArray(data)) {
         //return data;
         renderProducts(data);
@@ -98,6 +102,7 @@ function renderCategories(data) {
   categoryList.innerHTML = "";
 
   data.forEach((identifier) => {
+    console.log(identifier);
     const categoryCard = createCategoryCard(identifier);
     categoryList.appendChild(categoryCard);
   });
@@ -116,6 +121,10 @@ function fetchCategories() {
       return response.json();
     })
     .then((data) => {
+      console.log("Fetched data:", data);
+
+      console.log("Fetched data (JSON format):", JSON.stringify(data, null, 2));
+
       if (Array.isArray(data)) {
         renderCategories(data);
       } else {
@@ -141,6 +150,8 @@ function addToCart(itemId, itemName, itemPrice, itemImage) {
     console.error("Invalid product data:", product);
     return;
   }
+
+  console.log("Adding to cart:", product);
   cart.push(product);
   updateCart();
   renderCart();
@@ -227,6 +238,8 @@ function renderCart() {
       "div",
       "cart-item grid grid-cols-4 gap-4 mb-2"
     );
+    console.log(product);
+    console.log(productName);
     cartItem.innerHTML = `
       <div>
         <img src="${
@@ -262,6 +275,7 @@ function renderCart() {
   }
 
   // Update the total price
+  console.log(total);
   cartTotal.textContent = total.toFixed(2);
 }
 
@@ -957,6 +971,7 @@ function handleUserData() {
       return response.json();
     })
     .then((data) => {
+      console.log("Server Response:", data);
       const userData = data[1];
       //data 1 should be the user data
       const firstName = userData.firstName;
@@ -965,6 +980,7 @@ function handleUserData() {
       const email = userData.email;
       renderOrderConfirmation(userData, cartSummary);
       const userDetails = `First Name: ${firstName}, Last Name: ${lastName}, Address: ${address}, Email: ${email}`;
+      console.log(userDetails);
     });
 }
 
@@ -1026,11 +1042,13 @@ async function handleLogout() {
     const data = await response.json();
 
     if (data[0]) {
+      console.log("Logged out successfully");
       sessionManager.clearTokenAndUsername(); //clear storage
       await checkAuthentication();
     } else {
       sessionManager.clearTokenAndUsername();
       await checkAuthentication();
+      console.log("Error with response. Watch " + data[1]);
     }
   } catch (error) {
     console.error("There was a problem with the login request:", error);
