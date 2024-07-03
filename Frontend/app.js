@@ -725,7 +725,7 @@ function createCheckout() {
 
           <td class="p-2">${(product.price * product.quantity).toFixed(
             2
-          )}€</td>`;
+          )}$</td>`;
       checkout.appendChild(itemDiv);
     });
   }
@@ -734,7 +734,7 @@ function createCheckout() {
   totalContainer.innerHTML = `
     <p class= "text-right text-lg font-bold mt-4 underline">Total price: ${total.toFixed(
       2
-    )}€</p>`;
+    )}$</p>`;
 
   const button = document.createElement("div");
   button.className = "checkoutbutton text-right";
@@ -828,7 +828,7 @@ function createOrderConfirmation(userData, cartSummary) {
     const productPrice = product.price * product.quantity;
     listItem.innerHTML = `${productName} - Quantity: ${
       product.quantity
-    } - Price: ${productPrice.toFixed(2)}€`;
+    } - Price: ${productPrice.toFixed(2)}$`;
     orderSummaryList.appendChild(listItem);
     totalAmount += productPrice; // Accumulate total amount
   });
@@ -847,7 +847,7 @@ function createOrderConfirmation(userData, cartSummary) {
 
   const shippingMessage =
     shippingCost > 0
-      ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}€</p>`
+      ? `<p><strong>Shipping Costs:</strong> ${shippingCost.toFixed(2)}$</p>`
       : "<p><strong>Shipping Costs:</strong> Free</p>";
 
   orderForm.innerHTML = `
@@ -857,16 +857,16 @@ function createOrderConfirmation(userData, cartSummary) {
     <h2>Order Summary:</h2>
     ${orderSummaryList.outerHTML}
     <br>
-    <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}€</p>
-    <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}€</p>
+    <p><strong>Total Amount:</strong> ${totalAmount.toFixed(2)}$</p>
+    <p><strong>Tax (19%):</strong> ${taxAmount.toFixed(2)}$</p>
     <p><strong>Total Amount including tax:</strong> ${totalAmountWithTax.toFixed(
       2
-    )}€</p>
+    )}$</p>
     <br>
     ${shippingMessage}
     <p><strong>Total Amount with Shipping:</strong> ${totalAmountWithShipping.toFixed(
       2
-    )}€</p>
+    )}$</p>
     <br>
     <h2>Shipping Address:</h2>
     <p>${firstName} ${lastName}<br>${address}</p>
