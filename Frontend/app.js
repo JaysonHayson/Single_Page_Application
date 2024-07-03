@@ -32,8 +32,12 @@ function createProductCard(item) {
 
 function renderProducts(data) {
   const productList = document.getElementById("productList");
-  console.log("Product list element:", productList); // Debugging
+  console.log("Product list element:", productList); 
   productList.innerHTML = "";
+  const backButton = document.createElement("button");
+  backButton.textContent = "Back";
+  backButton.addEventListener("click", xInnerHtmlAndCallback(renderCategories));
+  productList.appendChild(backButton);
   data.forEach((item) => {
     console.log("Creating product card for item:", item); // Debugging
     const productCard = createProductCard(item);
