@@ -32,14 +32,10 @@ function createProductCard(item) {
 
 function renderProducts(data) {
   const productList = document.getElementById("productList");
-  console.log("Product list element:", productList); 
   productList.innerHTML = "";
-  const backButton = document.createElement("button");
-  backButton.textContent = "Back";
-  backButton.addEventListener("click", xInnerHtmlAndCallback(renderCategories));
-  productList.appendChild(backButton);
+  const backButton = document.getElementById("backButton");
+  backButton.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xinnerHtmlAndCallback(fetchCategories)">Categories</button>`;
   data.forEach((item) => {
-    console.log("Creating product card for item:", item); // Debugging
     const productCard = createProductCard(item);
     productList.appendChild(productCard);
   });
