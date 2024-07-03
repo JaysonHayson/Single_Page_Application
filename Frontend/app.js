@@ -32,11 +32,17 @@ function createProductCard(item) {
 
 function renderProducts(data) {
   const productList = document.getElementById("productList");
-  productList.innerHTML = "";
+  productList.innerHTML = ""; // Clear productList content
+
   const backButton = document.getElementById("backButton");
-  backButton.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded" onclick="xinnerHtmlAndCallback(fetchCategories)">Categories</button>`;
+  backButton.innerHTML = `<button class="btn bg-blue-500 text-white px-4 py-2 rounded mt-60 ml-20" onclick="fetchCategories()">Categories</button>`;
+
+  // Append backButton to productList
+  productList.appendChild(backButton);
+
+  // Iterate through data and create product cards
   data.forEach((item) => {
-    const productCard = createProductCard(item);
+    const productCard = createProductCard(item); // Assuming createProductCard is defined elsewhere
     productList.appendChild(productCard);
   });
 }
