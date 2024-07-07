@@ -921,7 +921,7 @@ function createOrderConfirmation(userData, cartSummary) {
         .padStart(2, "0")}.pdf`;
 
       html2canvas(orderForm, {
-        scale: 0.8,
+        scale: 1,
         useCORS: true,
       }).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
